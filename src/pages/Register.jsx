@@ -14,6 +14,7 @@ const Register = () => {
     const navigate = useNavigate();
 
     const onSubmit = (data) => {
+        
         createUser(data.email, data.password)
             .then(result =>{
                 if(result.user?.email){
@@ -29,6 +30,7 @@ const Register = () => {
             })
     };
 
+    
     const handleGoole = () =>{
         GoogleLogin()
             .then(result =>{
@@ -55,7 +57,7 @@ const Register = () => {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-        {/* Name Field */}
+        
         <div>
           <label className="block text-lg font-medium mb-1">Name</label>
           <input
@@ -67,7 +69,7 @@ const Register = () => {
             })}
           />
         </div>
-        {/* Email Field */}
+        
         <div>
           <label className="block text-lg font-medium mb-1">Email</label>
           <input
@@ -87,7 +89,7 @@ const Register = () => {
           )}
         </div>
 
-        {/* Password Field with Show/Hide */}
+        
         <div>
           <label className="block text-lg font-medium mb-1">Password</label>
           <div className="relative">
@@ -120,7 +122,7 @@ const Register = () => {
           )}
         </div>
 
-        {/* Submit Button */}
+       
         <button
           type="submit"
           className="w-full py-3 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-xl transition-all duration-300"
