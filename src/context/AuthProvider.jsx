@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { AuthContext } from './AuthContext';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
-import { auth } from '../firebase/firebase.init';
+import { auth } from './../firebase/firebase.init';
+import { AuthContext } from './AuthContext';
 
 const AuthProvider = ({children}) => {
 
@@ -59,9 +59,9 @@ const AuthProvider = ({children}) => {
 
 
     return (
-      <AuthContext value={authInfo}>
-            {children}
-      </AuthContext>
+        <AuthContext.Provider value={authInfo}>
+        {children}
+        </AuthContext.Provider>
     );
 };
 
