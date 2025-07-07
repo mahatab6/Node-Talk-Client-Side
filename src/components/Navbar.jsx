@@ -1,8 +1,16 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router';
+import { Link, NavLink, useNavigate } from 'react-router';
 import PetLogo from './PetLogo';
+import useAuth from '../hooks/useAuth';
+import { FaRegUserCircle } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 
 const Navbar = () => {
+
+    const { user, LogOut } = useAuth();
+      const navigate = useNavigate();
+
+
     const link = (
         <>
         <li>
@@ -13,6 +21,17 @@ const Navbar = () => {
         </li>
         </>
     )
+
+
+    const handleLogout = () =>{
+        LogOut()
+        .then(()=>{
+            toast.success('Logged out successfully!');
+            navigate('/')
+        })
+
+    }
+
     return (
         <div className=' bg-base-100 shadow-sm'>
            <div className="navbar w-11/12 mx-auto">
@@ -35,7 +54,39 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to='/login' className='btn'>Login</Link>
+
+                    {
+                        user?.email? 
+                        
+                        <div className="dropdown dropdown-end">
+                            <div tabIndex={0} role="button" className=" m-1">
+                                <div className="avatar avatar-placeholder">
+                                    <div className="bg-neutral text-neutral-content w-12 rounded-full">
+                                        {
+                                            user?.photoURL? <img src={user?.photoURL} alt="" /> : <FaRegUserCircle size={35}/>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                                <div className="space-y-1">
+                                    <h2 className='text-xl font-bold'>{user?.displayName}</h2>
+                                    <p className=' border-b pb-1'>{user?.email}</p>
+                                </div>
+                                <li><a>Item 1</a></li>
+                                <li><Link onClick={handleLogout}>Logout </Link></li>
+                                
+                            </ul>
+                        </div>
+
+                        
+                        
+                        :<Link to='/login' className='btn'>Login</Link>
+
+                    }
+
+
+                    
                 </div>
             </div>
         </div>
