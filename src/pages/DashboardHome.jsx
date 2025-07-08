@@ -22,7 +22,7 @@ const DashboardHome = () => {
           </ul>
         </div>
       ) : (
-        <div className="p-4 rounded shadow">
+        <div className="p-4 rounded shadow bg-[#202338]">
           <h2 className="text-xl font-semibold mb-2">User Quick Guide</h2>
           <ul className="list-disc list-inside">
             <li>View your profile</li>

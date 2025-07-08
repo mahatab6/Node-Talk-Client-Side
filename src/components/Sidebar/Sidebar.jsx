@@ -3,9 +3,9 @@ import UserSidebarItems from './UserSidebarItems';
 
 const Sidebar = () => {
     return (
-        <div className="drawer-side">
+        <div className="drawer-side ">
             <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-            <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+            <ul className="menu bg-[#202338] text-white items-center min-h-full w-60 lg:w-80 p-4">
                 {/* Sidebar content here */}
                 <UserSidebarItems/>
                 <li><a>Sidebar Item 2</a></li>
