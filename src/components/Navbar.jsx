@@ -19,7 +19,7 @@ const Navbar = () => {
             <NavLink to='/' className={({isActive}) => isActive?" font-semibold border-b-1":""}>Home</NavLink>
         </li>
         <li>
-            <NavLink to="/all-pets" className={({isActive}) => isActive?" font-semibold border-b-1":""}>All Pets</NavLink>
+            <NavLink to="/membership" className={({isActive}) => isActive?" font-semibold border-b-1":""}>Membership</NavLink>
         </li>
         </>
     )
@@ -35,8 +35,8 @@ const Navbar = () => {
     }
 
     return (
-        <div className=' bg-base-100 shadow-sm'>
-           <div className="navbar w-11/12 mx-auto">
+        <div className=' bg-base-100 shadow-sm '>
+           <div className="navbar w-11/12 mx-auto ">
                 <div className="navbar-start">
                     <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

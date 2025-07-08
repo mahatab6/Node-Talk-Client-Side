@@ -4,14 +4,8 @@ import { FaAngleDown, FaAngleUp, FaRegComments } from "react-icons/fa";
 
 const Post = () => {
     return (
-        <div className='flex gap-3 bg-amber-400 p-5 rounded-2xl'>
-            {/* Vote section */}
-            <div className='text-center space-y-1'>
-                <p className='btn rounded-full p-2 hover:bg-green-500'><FaAngleUp  size={25} /></p>
-                <p className=' font-bold text-xl'>25</p>
-                <p className='btn rounded-full p-2 hover:bg-red-500'><FaAngleDown size={25} /></p>
-            </div>
-
+        <div className=' bg-amber-400 p-5 rounded-2xl'>
+            
             <div className='flex-col space-y-2'>
                 {/* author info */}
                 <div className='flex items-center space-x-3'>

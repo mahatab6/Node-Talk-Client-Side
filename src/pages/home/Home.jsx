@@ -7,7 +7,7 @@ import Announcements from './homecomponents/left side/Announcements';
 
 const Home = () => {
     return (
-        <div>
+        <div className=''>
             <Banner/>
             <div className='grid lg:grid-cols-11 gap-5 w-11/12 mx-auto py-10'>
 

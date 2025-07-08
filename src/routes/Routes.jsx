@@ -6,6 +6,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Home from "../pages/home/Home";
 import PostDetails from "../pages/PostDetails";
+import Membership from "../pages/Membership";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
       {
         path: "post-details",
         element: <PostDetails/>
+      },
+      {
+        path: "membership",
+        element:<Membership/>
       }
     ]
   },
