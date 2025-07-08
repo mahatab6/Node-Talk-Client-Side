@@ -48,7 +48,7 @@ console.log(location)
 
 
   return (
-    <div className="max-w-md mx-auto p-6 rounded-xl">
+    <div className="max-w-md mx-auto p-6 rounded-xl bg-[#202237] text-white ">
         <div className="text-center justify-items-center mb-6 space-y-2">
             <PetLogo/>
             <h1 className="text-3xl font-bold">Welcome Back!</h1>

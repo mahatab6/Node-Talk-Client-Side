@@ -12,10 +12,11 @@ const PostDetails = () => {
 
 
     return (
-        <div className='py-10 w-9/12 mx-auto'>
-            <Link className='flex items-center gap-2 hover:text-blue-400 text-xl pb-10'><FaArrowLeft />Back to discussions</Link>
+        <div className='bg-[#191B2F] min-h-screen'>
+            <div className='py-10 w-9/12 mx-auto'>
+            <Link className='flex items-center text-white gap-2 hover:text-blue-400 text-xl pb-10'><FaArrowLeft />Back to discussions</Link>
 
-            <div className='flex gap-3 bg-amber-400 p-5 rounded-2xl mb-10'>
+            <div className='flex gap-3 bg-[#202237] text-white p-5 rounded-2xl mb-10'>
                 {/* Vote section */}
                 <div className='text-center space-y-1'>
                     <p className='btn rounded-full p-2 hover:bg-green-500'><FaAngleUp  size={25} /></p>
@@ -57,7 +58,7 @@ const PostDetails = () => {
             </div>
 
             {/* Comments section */}
-            <div className='bg-amber-300 p-5 rounded-2xl space-y-3 '>
+            <div className='bg-[#202237] text-white p-5 rounded-2xl space-y-3 '>
                 <h2 className='text-2xl font-bold'>Comments (0)</h2>
                 <div className='flex gap-5'>
                    <div >
@@ -82,6 +83,7 @@ const PostDetails = () => {
                 </div>
 
             </div>
+        </div>
         </div>
     );
 };
