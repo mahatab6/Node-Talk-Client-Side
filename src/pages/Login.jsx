@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import PetLogo from '../components/PetLogo';
-import { Link, useNavigate } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import useAuth from '../hooks/useAuth';
 import toast from 'react-hot-toast';
 
@@ -9,9 +9,11 @@ const Login = () => {
   const { register, handleSubmit, formState: { errors },} = useForm();
   const { signInUser, GoogleLogin } = useAuth();
   const navigate = useNavigate();
-  const from = '/';
+  const location = useLocation();
+  
+  const from = location.state?.from?.pathname || '/'; 
 
-
+console.log(location)
   const onSubmit = (data) => {
     signInUser(data.email, data.password)
         .then(result =>{
@@ -33,7 +35,7 @@ const Login = () => {
             .then(result =>{
                     if(result.user?.email){
                         toast.success('Account created successfully!');
-                        navigate('/');
+                        navigate(from);
                     }
             })
             .catch( (error) => {

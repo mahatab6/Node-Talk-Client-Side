@@ -7,6 +7,7 @@ import Register from "../pages/Register";
 import Home from "../pages/home/Home";
 import PostDetails from "../pages/PostDetails";
 import Membership from "../pages/Membership";
+import Privaterouter from "./Privaterouter";
 
 export const router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "membership",
-        element:<Membership/>
+        element:<Privaterouter><Membership/></Privaterouter>
       }
     ]
   },
