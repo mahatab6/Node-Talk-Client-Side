@@ -3,6 +3,7 @@ import Banner from './homecomponents/Banner';
 import TagsSection from './homecomponents/left side/TagsSection';
 import Post from './homecomponents/right side/Post';
 import SortPosts from './homecomponents/left side/SortPosts';
+import Announcements from './homecomponents/left side/Announcements';
 
 const Home = () => {
     return (
@@ -12,6 +13,7 @@ const Home = () => {
 
                 {/* left-side */}
                 <div className='lg:col-span-3 space-y-5'>
+                    <Announcements/>
                     <TagsSection/>
                     <SortPosts/>
                 </div>
