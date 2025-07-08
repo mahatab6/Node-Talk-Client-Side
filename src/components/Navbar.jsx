@@ -3,6 +3,8 @@ import { Link, NavLink, useNavigate } from 'react-router';
 import PetLogo from './PetLogo';
 import useAuth from '../hooks/useAuth';
 import { FaRegUserCircle } from 'react-icons/fa';
+import { IoNotifications } from "react-icons/io5";
+
 import toast from 'react-hot-toast';
 
 const Navbar = () => {
@@ -57,30 +59,36 @@ const Navbar = () => {
 
                     {
                         user?.email? 
-                        
-                        <div className="dropdown dropdown-end">
-                            <div tabIndex={0} role="button" className=" m-1">
-                                <div className="avatar avatar-placeholder hover:cursor-pointer">
-                                    <div className="bg-neutral text-neutral-content w-12 rounded-full">
-                                        {
-                                            user?.photoURL? <img src={user?.photoURL} alt="" /> : <FaRegUserCircle size={35}/>
-                                        }
+                        <>
+                            <div className="dropdown dropdown-end">
+                                <div tabIndex={0} role="button" className="m-1 p-2 bg-base-300 rounded-full hover:cursor-pointer"><IoNotifications size={30} /></div>
+                                <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                                    <li><a>Item 1</a></li>
+                                    <li><a>Item 2</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div className="dropdown dropdown-end">
+                                <div tabIndex={0} role="button" className=" m-1">
+                                    <div className="avatar avatar-placeholder hover:cursor-pointer">
+                                        <div className="bg-neutral text-neutral-content w-12 rounded-full">
+                                            {
+                                                user?.photoURL? <img src={user?.photoURL} alt="" /> : <FaRegUserCircle size={35}/>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
+                                <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                                    <div className="space-y-1">
+                                        <h2 className='text-xl font-bold'>{user?.displayName}</h2>
+                                        <p className=' border-b pb-1'>{user?.email}</p>
+                                    </div>
+                                    <li><a>Item 1</a></li>
+                                    <li><Link onClick={handleLogout}>Logout </Link></li>
+                                    
+                                </ul>
                             </div>
-                            <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-                                <div className="space-y-1">
-                                    <h2 className='text-xl font-bold'>{user?.displayName}</h2>
-                                    <p className=' border-b pb-1'>{user?.email}</p>
-                                </div>
-                                <li><a>Item 1</a></li>
-                                <li><Link onClick={handleLogout}>Logout </Link></li>
-                                
-                            </ul>
-                        </div>
-
-                        
-                        
+                        </>
                         :<Link to='/login' className='btn'>Login</Link>
 
                     }
