@@ -83,7 +83,7 @@ const Navbar = () => {
                                         <h2 className='text-xl font-bold'>{user?.displayName}</h2>
                                         <p className=' border-b pb-1'>{user?.email}</p>
                                     </div>
-                                    <li><a>Item 1</a></li>
+                                    <li><Link to='/dashboard'>Dashboard</Link></li>
                                     <li><Link onClick={handleLogout}>Logout </Link></li>
                                     
                                 </ul>

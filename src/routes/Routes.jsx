@@ -8,6 +8,9 @@ import Home from "../pages/home/Home";
 import PostDetails from "../pages/PostDetails";
 import Membership from "../pages/Membership";
 import Privaterouter from "./Privaterouter";
+import DashboardLayout from "../layout/DashboardLayout";
+import MyProfile from "../pages/userDashboard/MyProfile";
+import DashboardHome from "../pages/DashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +42,20 @@ export const router = createBrowserRouter([
       {
         path:"register",
         element: <Register/>
+      }
+    ]
+  },
+  {
+    path: "/dashboard",
+    element: <Privaterouter><DashboardLayout/></Privaterouter>,
+    children:[
+      {
+        index: true,
+        element:<DashboardHome/>
+      },
+      {
+        path:'my-profile',
+        element:<MyProfile/>
       }
     ]
   }
