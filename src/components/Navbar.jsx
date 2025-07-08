@@ -60,7 +60,7 @@ const Navbar = () => {
                         
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className=" m-1">
-                                <div className="avatar avatar-placeholder">
+                                <div className="avatar avatar-placeholder hover:cursor-pointer">
                                     <div className="bg-neutral text-neutral-content w-12 rounded-full">
                                         {
                                             user?.photoURL? <img src={user?.photoURL} alt="" /> : <FaRegUserCircle size={35}/>
