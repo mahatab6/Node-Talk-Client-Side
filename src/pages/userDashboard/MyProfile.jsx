@@ -7,6 +7,9 @@ import { CiMedal } from "react-icons/ci";
 import { BsFileEarmarkPostFill } from "react-icons/bs";
 import { FaRegComment } from "react-icons/fa";
 import { IoMdTrendingUp } from "react-icons/io";
+import { Link } from 'react-router';
+import { FaEye } from "react-icons/fa";
+
 
 
 
@@ -70,10 +73,24 @@ const MyProfile = () => {
 
                 </div>
             </div>
-
-
-
                 
+            <div className='mt-10 dashboard-card rounded-xl p-6 bg-[#202338]'>
+                <h2 className='text-xl font-semibold mb-4'>Recent Posts</h2>
+                <div className='flex items-center justify-between p-4 bg-white/5 rounded-lg'>
+                    <div>
+                        <h3 className=' text-base font-bold mb-1'>The Future of AI in Web Development</h3>
+                        <div className='flex items-center space-x-4 text-sm '>
+                            <span>0 votes</span>
+                            <span>0 comments</span>
+                            <span>7/8/2025</span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <Link><FaEye size={30}/></Link>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
