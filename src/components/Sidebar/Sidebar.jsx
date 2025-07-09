@@ -1,6 +1,7 @@
 import React from 'react';
 import UserSidebarItems from './UserSidebarItems';
 import { Link } from 'react-router';
+import AdminSidebarItems from './AdminSidebarItems';
 
 const Sidebar = () => {
     return (
@@ -10,7 +11,7 @@ const Sidebar = () => {
                 {/* Sidebar content here */}
                 <li><Link to='/'>Home</Link></li>
                 <UserSidebarItems/>
-                <li><a>Sidebar Item 2</a></li>
+                <AdminSidebarItems/>
             </ul>
         </div>
     );

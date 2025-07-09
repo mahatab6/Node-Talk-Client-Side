@@ -13,6 +13,7 @@ import MyProfile from "../pages/userDashboard/MyProfile";
 import DashboardHome from "../pages/DashboardHome";
 import AddPost from "../pages/userDashboard/AddPost";
 import MyPost from "../pages/userDashboard/MyPost";
+import AminDashboardHome from "../pages/adminDashboard/AminDashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -53,7 +54,7 @@ export const router = createBrowserRouter([
     children:[
       {
         index: true,
-        element:<DashboardHome/>
+        element:<AminDashboardHome/>
       },
       {
         path:'my-profile',
