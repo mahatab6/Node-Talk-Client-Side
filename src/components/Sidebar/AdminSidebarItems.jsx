@@ -13,7 +13,7 @@ const AdminSidebarItems = () => {
     <>
       
       <li>
-        <NavLink to="/dashboard/profile" className={linkClasses}>
+        <NavLink to="/dashboard/admin-profile" className={linkClasses}>
           <FaUserShield />
           Admin Profile
         </NavLink>

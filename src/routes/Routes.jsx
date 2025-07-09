@@ -15,6 +15,7 @@ import MyPost from "../pages/userDashboard/MyPost";
 import ManageUsers from "../pages/adminDashboard/ManageUsers";
 import Announcement from "../pages/adminDashboard/Announcement";
 import ReportedActivities from "../pages/adminDashboard/ReportedActivities";
+import AdminProfile from "../pages/adminDashboard/AdminProfile";
 
 export const router = createBrowserRouter([
   {
@@ -80,6 +81,10 @@ export const router = createBrowserRouter([
       {
         path: 'reported-activities',
         element:<ReportedActivities/>
+      },
+      {
+        path: 'admin-profile',
+        element: <AdminProfile/>
       }
     ]
   }
