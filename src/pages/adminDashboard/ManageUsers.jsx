@@ -1,7 +1,4 @@
 import React from 'react';
-import { FaRegComments } from 'react-icons/fa';
-import { MdDelete } from 'react-icons/md';
-import { Link } from 'react-router';
 import { FiUserPlus } from "react-icons/fi";
 
 

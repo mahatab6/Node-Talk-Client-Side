@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import MainLayout from "../layout/MainLayout";
 import AuthLayout from "../layout/AuthLayout";
-import { Component } from "react";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Home from "../pages/home/Home";
@@ -14,6 +13,7 @@ import DashboardHome from "../pages/DashboardHome";
 import AddPost from "../pages/userDashboard/AddPost";
 import MyPost from "../pages/userDashboard/MyPost";
 import ManageUsers from "../pages/adminDashboard/ManageUsers";
+import Announcement from "../pages/adminDashboard/Announcement";
 
 export const router = createBrowserRouter([
   {
@@ -62,15 +62,19 @@ export const router = createBrowserRouter([
       },
       {
         path: 'add-post',
-        element: <AddPost/>
+        element:<AddPost/>
       },
       {
         path: 'my-post',
-        element: <MyPost/>
+        element:<MyPost/>
       },
       {
         path:'manage-users',
-        element: <ManageUsers/>
+        element:<ManageUsers/>
+      },
+      {
+        path:'make-announcement',
+        element:<Announcement/>
       }
     ]
   }
