@@ -12,6 +12,7 @@ import DashboardLayout from "../layout/DashboardLayout";
 import MyProfile from "../pages/userDashboard/MyProfile";
 import DashboardHome from "../pages/DashboardHome";
 import AddPost from "../pages/userDashboard/AddPost";
+import MyPost from "../pages/userDashboard/MyPost";
 
 export const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
       {
         path: 'add-post',
         element: <AddPost/>
+      },
+      {
+        path: 'my-post',
+        element: <MyPost/>
       }
     ]
   }

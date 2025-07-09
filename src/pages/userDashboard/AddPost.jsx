@@ -8,8 +8,8 @@ const AddPost = () => {
 
     const {user} = useAuth();
     const { register, handleSubmit, control } = useForm();
-    const [upVote,setUpVote] =useState(0);
-    const [downVote ,setDownVote ] =useState(0);
+    const [upVote] =useState(0);
+    const [downVote ] =useState(0);
 
     const onSubmit = data => {
         const fullData = {

@@ -10,7 +10,7 @@ const UserSidebarItems = () => {
             <Link to='/dashboard/add-post'>Add Post</Link>
         </li>
         <li>
-            <Link>My Posts</Link>
+            <Link to='/dashboard/my-post'>My Posts</Link>
         </li>
         </>
     )
