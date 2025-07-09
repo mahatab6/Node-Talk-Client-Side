@@ -1,7 +1,8 @@
 import React from 'react';
 import UserSidebarItems from './UserSidebarItems';
-import { Link } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import AdminSidebarItems from './AdminSidebarItems';
+import { FaTachometerAlt } from 'react-icons/fa';
 
 const Sidebar = () => {
     return (
@@ -10,6 +11,14 @@ const Sidebar = () => {
             <ul className="menu bg-[#202338] text-white items-center min-h-full w-60 lg:w-80 p-4">
                 {/* Sidebar content here */}
                 <li><Link to='/'>Home</Link></li>
+                <li>
+                    <NavLink to="/dashboard" end className ={ ({ isActive }) =>
+                        `flex items-center gap-2 px-4 py-2 rounded-md transition-colors duration-200 
+                        ${isActive ? 'bg-[#1f2937] text-blue-500 font-semibold' : 'text-white hover:text-blue-400'}`}>
+                        <FaTachometerAlt />
+                        Dashboard
+                    </NavLink>
+                </li>
                 <UserSidebarItems/>
                 <AdminSidebarItems/>
             </ul>

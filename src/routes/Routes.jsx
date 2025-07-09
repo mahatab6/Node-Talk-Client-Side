@@ -13,7 +13,7 @@ import MyProfile from "../pages/userDashboard/MyProfile";
 import DashboardHome from "../pages/DashboardHome";
 import AddPost from "../pages/userDashboard/AddPost";
 import MyPost from "../pages/userDashboard/MyPost";
-import AminDashboardHome from "../pages/adminDashboard/AminDashboardHome";
+import ManageUsers from "../pages/adminDashboard/ManageUsers";
 
 export const router = createBrowserRouter([
   {
@@ -54,7 +54,7 @@ export const router = createBrowserRouter([
     children:[
       {
         index: true,
-        element:<AminDashboardHome/>
+        element:<DashboardHome/>
       },
       {
         path:'my-profile',
@@ -67,6 +67,10 @@ export const router = createBrowserRouter([
       {
         path: 'my-post',
         element: <MyPost/>
+      },
+      {
+        path:'manage-users',
+        element: <ManageUsers/>
       }
     ]
   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import useAuth from '../hooks/useAuth';
+import AminDashboardHome from './adminDashboard/AminDashboardHome';
 
 const DashboardHome = () => {
   const { user, role } = useAuth();
@@ -14,15 +15,7 @@ const DashboardHome = () => {
           <p className="text-lg mb-2">
             Welcome back! Here's what's happening with your platform.
           </p>
-
-          <div className=" p-4 rounded shadow">
-            <h2 className="text-xl font-semibold mb-2">Admin Quick Guide</h2>
-            <ul className="list-disc list-inside">
-              <li>Manage Users</li>
-              <li>View Reports</li>
-              <li>Handle System Settings</li>
-            </ul>
-          </div>
+          <AminDashboardHome/>
         
         </>
       ) : (

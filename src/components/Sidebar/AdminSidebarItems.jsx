@@ -1,27 +1,44 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { NavLink } from 'react-router';
+import { FaTachometerAlt, FaUserShield, FaUsers, FaFlag, FaBullhorn } from 'react-icons/fa';
+
+const linkClasses = ({ isActive }) =>
+  `flex items-center gap-2 px-4 py-2 rounded-md transition-colors duration-200 
+   ${isActive ? 'bg-[#1f2937] text-blue-500 font-semibold' : 'text-white hover:text-blue-400'}`;
 
 const AdminSidebarItems = () => {
-    return (
-        <>
-            <li>
-                <Link>Admin Profile</Link>
-            </li>
+  return (
+    <>
+      
+      <li>
+        <NavLink to="/admin/profile" className={linkClasses}>
+          <FaUserShield />
+          Admin Profile
+        </NavLink>
+      </li>
 
-            <li>
-                <Link>Manage Users</Link>
-            </li>
+      <li>
+        <NavLink to="/dashboard/manage-users" className={linkClasses}>
+          <FaUsers />
+          Manage Users
+        </NavLink>
+      </li>
 
-            <li>
-                <Link>Reported Comments/Activities</Link>
-            </li>
+      <li>
+        <NavLink to="/admin/reports" className={linkClasses}>
+          <FaFlag />
+          Reported Comments
+        </NavLink>
+      </li>
 
-            <li>
-                <Link>Make Announcement</Link>
-            </li>
-
-        </>
-    );
+      <li>
+        <NavLink to="/admin/announcement" className={linkClasses}>
+          <FaBullhorn />
+          Make Announcement
+        </NavLink>
+      </li>
+    </>
+  );
 };
 
 export default AdminSidebarItems;
