@@ -1,4 +1,9 @@
 import React from 'react';
+import { FaRegComments } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md';
+import { Link } from 'react-router';
+import { FiUserPlus } from "react-icons/fi";
+
 
 const ManageUsers = () => {
     return (
@@ -30,6 +35,55 @@ const ManageUsers = () => {
                 <div className='text-center p-6 bg-[#202338] rounded-2xl'>
                     <span className='text-xl font-bold'>5</span>
                     <p>Users Found</p>
+                </div>
+            </div>
+
+            <div className='p-10 bg-[#202338] rounded-2xl mb-10'>
+                <h2 className='text-3xl font-bold mb-6 inline-flex gap-2'><FiUserPlus /> All Users</h2>
+                <div>
+                    <div className="overflow-x-auto">
+                        <table className="table">
+                            {/* head */}
+                            <thead>
+                                <tr className='text-white font-bold text-xl'>
+                                    <th>User</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Subscription</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                            
+                                <tr className="hover:bg-white/5 font-bold bg-white/30">
+                                    <th>John Doe</th>
+                                    <td>john.doe@email.com</td>
+                                    <td>User</td>
+                                    <td>Premium</td>
+                                    <td>Make Admin</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+                <div className='text-center p-6 bg-[#202338] rounded-2xl'>
+                    <span className='text-xl font-bold'>5</span>
+                    <p>Admins</p>
+                </div>
+
+                <div className='text-center p-6 bg-[#202338] rounded-2xl'>
+                    <span className='text-xl font-bold'>5</span>
+                    <p>Premium Users</p>
+                </div>
+
+                <div className='text-center p-6 bg-[#202338] rounded-2xl'>
+                    <span className='text-xl font-bold'>5</span>
+                    <p>Free Users</p>
                 </div>
             </div>
 
