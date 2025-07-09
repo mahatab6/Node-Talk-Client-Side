@@ -18,7 +18,7 @@ import { FaEye } from "react-icons/fa";
 const MyProfile = () => {
     const {user} = useAuth();
     return (
-        <div className='px-6'>
+        <div className='px-6 mb-10'>
             <DashboardText/>
 
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
@@ -74,7 +74,7 @@ const MyProfile = () => {
                 </div>
             </div>
                 
-            <div className='mt-10 dashboard-card rounded-xl p-6 bg-[#202338]'>
+            <div className='mt-10  rounded-xl p-6 bg-[#202338]'>
                 <h2 className='text-xl font-semibold mb-4'>Recent Posts</h2>
                 <div className='flex items-center justify-between p-4 bg-white/5 rounded-lg'>
                     <div>
@@ -85,7 +85,7 @@ const MyProfile = () => {
                             <span>7/8/2025</span>
                         </div>
                     </div>
-                    
+
                     <div>
                         <Link><FaEye size={30}/></Link>
                     </div>

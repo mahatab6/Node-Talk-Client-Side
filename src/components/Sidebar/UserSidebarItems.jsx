@@ -7,7 +7,7 @@ const UserSidebarItems = () => {
             <Link to='/dashboard/my-profile'>My Profile</Link>
         </li>
         <li>
-            <Link>Add Post</Link>
+            <Link to='/dashboard/add-post'>Add Post</Link>
         </li>
         <li>
             <Link>My Posts</Link>

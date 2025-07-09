@@ -11,6 +11,7 @@ import Privaterouter from "./Privaterouter";
 import DashboardLayout from "../layout/DashboardLayout";
 import MyProfile from "../pages/userDashboard/MyProfile";
 import DashboardHome from "../pages/DashboardHome";
+import AddPost from "../pages/userDashboard/AddPost";
 
 export const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
       {
         path:'my-profile',
         element:<MyProfile/>
+      },
+      {
+        path: 'add-post',
+        element: <AddPost/>
       }
     ]
   }
