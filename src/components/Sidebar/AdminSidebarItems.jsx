@@ -27,7 +27,7 @@ const AdminSidebarItems = () => {
       </li>
 
       <li>
-        <NavLink to="/dashboard/reports" className={linkClasses}>
+        <NavLink to="/dashboard/reported-activities" className={linkClasses}>
           <FaFlag />
           Reported Comments
         </NavLink>
