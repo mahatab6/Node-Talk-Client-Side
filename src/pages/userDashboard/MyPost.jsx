@@ -23,7 +23,7 @@ const MyPost = () => {
     if(isLoading){
         return <p>Loading.........</p>
     }
-    console.log(data)
+  
 
     return (
         <div className='px-6 '>

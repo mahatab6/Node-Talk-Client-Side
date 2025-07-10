@@ -1,11 +1,29 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FaAngleDown, FaAngleUp, FaArrowLeft, FaRegComments } from 'react-icons/fa';
-import { Link } from 'react-router';
+import { Link, useParams } from 'react-router';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const PostDetails = () => {
 
+    const axiosSecure = useAxiosSecure();
+    const {id} = useParams();
     const { register, handleSubmit } = useForm();
+
+    
+
+    const{ data: postData } = useQuery({
+        queryKey: ['specific-data'],
+        queryFn: async () => {
+            const res =await axiosSecure.get(`/post-details/${id}`)
+            return res.data;
+        }
+    })
+
+    console.log(postData)
+
+
 
     const onSubmit = data => console.log(data);
 
@@ -14,7 +32,7 @@ const PostDetails = () => {
     return (
         <div className='bg-[#191B2F] min-h-screen'>
             <div className='py-10 w-9/12 mx-auto'>
-            <Link className='flex items-center text-white gap-2 hover:text-blue-400 text-xl pb-10'><FaArrowLeft />Back to discussions</Link>
+            <Link to='/' className='flex items-center text-white gap-2 hover:text-blue-400 text-xl pb-10'><FaArrowLeft />Back to discussions</Link>
 
             <div className='flex gap-3 bg-[#202237] text-white p-5 rounded-2xl mb-10'>
                 {/* Vote section */}
@@ -29,23 +47,19 @@ const PostDetails = () => {
                     <div className='flex items-center space-x-3'>
                         <div className="avatar avatar-placeholder">
                             <div className="bg-neutral text-neutral-content w-12 rounded-full">
-                                <span className="text-xs">UI</span>
+                                <img src={postData?.AuthorImage} alt="" />
                             </div>
                         </div>
-                        <h2 className='text-xl'>Michael Rodriguez</h2>
+                        <h2 className='text-xl'>{postData?.AuthorName}</h2>
                         <p>5h ago</p>
                     </div>
     
                     {/* author-post-heading */}
                     <div className=''>
-                        <h1 className='text-xl hover-grup font-semibold mb-2'>The Future of AI in Web Development</h1>
-                        <p className='hover-grup'>Artificial Intelligence is transforming how we approach web development. From automated testing to intelligent code completion, AI tools are becoming indispensable for modern developers.</p>
+                        <h1 className='text-xl lg:text-2xl hover-grup font-semibold mb-4'>{postData?.PostTitle}</h1>
+                        <p style={{ whiteSpace: 'pre-wrap' }} className='hover-grup '>{postData?.PostDescription}</p>
                     </div>
     
-                    {/* tags-section */}
-                    <div>
-                        <p>tag, hello, hihi</p>
-                    </div>
     
                     {/* total vote and comment section */}
                     <div className='flex space-x-2'>

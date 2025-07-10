@@ -25,8 +25,6 @@ const Post = () => {
     return <p>Error loading posts</p>;
     }
 
-    console.log(data);
-
     return (
         <div className=''>
             {
@@ -37,22 +35,22 @@ const Post = () => {
                         <div className='flex items-center space-x-3 '>
                             <div className="avatar avatar-placeholder">
                                 <div className="bg-neutral text-neutral-content w-12 rounded-full">
-                                    <span className="text-xs">UI</span>
+                                    <img src={post?.AuthorImage} alt="" />
                                 </div>
                             </div>
-                            <h2 className='text-xl'>{post.AuthorName}</h2>
+                            <h2 className='text-xl'>{post?.AuthorName}</h2>
                             <p>5h ago</p>
                         </div>
 
                         {/* author-post-heading */}
-                        <Link to='' className=' group hover:cursor-pointer'>
-                            <h1 className='text-xl hover-grup font-semibold mb-2 group-hover:font-bold'>{post.PostTitle}</h1>
-                            <p className='hover-grup'>{post.PostDescription.length > 350 ? post.PostDescription.slice(0,350)+'...read more' : post.PostDescription}</p>
+                        <Link to={`post-details/${post?._id}`} className=' group hover:cursor-pointer'>
+                            <h1 className='text-xl hover-grup font-semibold mb-2 group-hover:font-bold'>{post?.PostTitle}</h1>
+                            <p className='hover-grup'>{post?.PostDescription.length > 350 ? post.PostDescription.slice(0,350)+'...read more' : post.PostDescription}</p>
                         </Link>
 
                         {/* tags-section */}
                         <div className="flex gap-2 flex-wrap pt-2"> <p className='text-xl'>Tags:</p>
-                            {post.tags?.map((tag, index) => (
+                            {post?.tags?.map((tag, index) => (
                                 <span key={index} className="text-white px-3 py-1 rounded-full bg-violet-700 text-sm">
                                 {tag.value}
                                 </span>
@@ -63,8 +61,8 @@ const Post = () => {
                         {/* total vote and comment section */}
                         <div className='flex space-x-2 '>
                             <p className='flex items-center gap-2 '><FaRegComments /> 8 comments</p>
-                            <p className='flex items-center'><FaAngleUp className='text-green-500' />{post.upVote}</p>
-                            <p className='flex items-center'><FaAngleDown className='text-red-500' />{post.downVote}</p>
+                            <p className='flex items-center'><FaAngleUp className='text-green-500' />{post?.upVote}</p>
+                            <p className='flex items-center'><FaAngleDown className='text-red-500' />{post?.downVote}</p>
                         </div>
                     </div>
                 ))
