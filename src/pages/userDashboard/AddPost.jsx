@@ -3,6 +3,9 @@ import DashboardText from '../../components/DashboardText';
 import useAuth from '../../hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import TagDropdown from './TagDropdown';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router';
 
 const AddPost = () => {
 
@@ -10,6 +13,8 @@ const AddPost = () => {
     const { register, handleSubmit, control } = useForm();
     const [upVote] =useState(0);
     const [downVote ] =useState(0);
+    const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
 
     const onSubmit = data => {
         const fullData = {
@@ -18,7 +23,14 @@ const AddPost = () => {
             downVote,
         };
 
-        console.log(fullData);
+        axiosSecure.post("/add-user-post", fullData)
+            .then(res =>{
+                if(res.data.insertedId){
+                    toast.success('Your post has been added successfully!');
+                    navigate('/dashboard/my-post');
+                }
+            })
+        
     }
 
 
@@ -51,19 +63,19 @@ const AddPost = () => {
 
                     <div>
                         <label className=' block text-xl mb-2' htmlFor="">Post Title</label>
-                        <input className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" placeholder="Enter Your Post Title" {...register("Post Title", {required: true})} />
+                        <input required className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" placeholder="Enter Your Post Title" {...register("Post Title", {required: true})} />
                     </div>
 
                     <div>
                         <label className=' block text-xl mb-2' htmlFor="">Post Description</label>
-                        <textarea className='border w-full h-30 px-3 py-2 rounded-xl mb-2' placeholder='Enter Your Post Description' {...register("Post Description", {required: true})} />
+                        <textarea required className='border w-full h-30 px-3 py-2 rounded-xl mb-2' placeholder='Enter Your Post Description' {...register("Post Description", {required: true})} />
 
                     </div>
 
                     
                     <div>
                         <label className='block text-xl mb-2'>Post Tags</label>
-                        <TagDropdown control={control} name="tags" />
+                        <TagDropdown  control={control} name="tags" />
                     </div>
 
                     <input type="submit" className="mt-5 inline-flex hover:cursor-pointer items-center justify-center rounded-md text-xl font-medium  h-10 px-4 py-2 w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700" value="Create Post" />

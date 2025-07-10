@@ -7,19 +7,19 @@ import Announcements from './homecomponents/left side/Announcements';
 
 const Home = () => {
     return (
-        <div className='bg-[#191B2F]'>
+        <div className='bg-background'>
             <Banner/>
-            <div className='grid lg:grid-cols-11 gap-5 w-11/12 mx-auto py-10'>
+            <div className='grid lg:grid-cols-4 gap-5 w-11/12 mx-auto py-10'>
 
                 {/* left-side */}
-                <div className='lg:col-span-3 space-y-5'>
+                <div className='lg:col-span-1 space-y-5'>
                     <Announcements/>
                     <TagsSection/>
                     <SortPosts/>
                 </div>
 
                 {/* right side */}
-                <div className='lg:col-span-8'>
+                <div className='lg:col-span-3'>
                     <Post/>
                 </div>
             </div>

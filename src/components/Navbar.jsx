@@ -88,7 +88,13 @@ const Navbar = () => {
                                 </ul>
                             </div>
                         </>
-                        :<Link to='/login' className='btn bg-primary text-white border-black hover:font-bold'>Join US</Link>
+                        :
+                        <>
+                            <div tabIndex={0} role="button" className="m-1 p-2 bg-base-300 rounded-full hover:cursor-pointer"><IoNotifications size={30} /></div>
+                            <Link to='/login' className='btn bg-primary text-white border-black hover:font-bold'>Join US</Link>
+                            
+                        </>
+                        
 
                     }
 

@@ -32,6 +32,7 @@ const TagDropdown = ({ control, name }) => {
                 <Select
                 {...field}
                 isMulti
+                required
                 options={options}
                 placeholder="Select tags"
                 className="w-full"
