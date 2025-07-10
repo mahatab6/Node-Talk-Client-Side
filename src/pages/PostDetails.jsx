@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { FaAngleDown, FaAngleUp, FaArrowLeft, FaRegComments } from 'react-icons/fa';
 import { Link, useParams } from 'react-router';
 import useAxiosSecure from '../hooks/useAxiosSecure';
+import { Tooltip } from 'react-tooltip';
 
 const PostDetails = () => {
 
@@ -37,9 +38,10 @@ const PostDetails = () => {
             <div className='flex gap-3 bg-[#202237] text-white p-5 rounded-2xl mb-10'>
                 {/* Vote section */}
                 <div className='text-center space-y-1'>
-                    <p className='btn rounded-full p-2 hover:bg-green-500'><FaAngleUp  size={25} /></p>
+                    <p data-tooltip-id="my-tooltip" data-tooltip-content="UpVote" className='btn rounded-full p-2 hover:bg-green-500'><FaAngleUp  size={25} /></p>
                     <p className=' font-bold text-xl'>25</p>
-                    <p className='btn rounded-full p-2 hover:bg-red-500'><FaAngleDown size={25} /></p>
+                    <p data-tooltip-id="my-tooltip" data-tooltip-content="DownVote" className='btn rounded-full p-2 hover:bg-red-500'><FaAngleDown size={25} /></p>
+                    <Tooltip id='my-tooltip'/>
                 </div>
     
                 <div className='flex-col space-y-2'>
@@ -59,6 +61,14 @@ const PostDetails = () => {
                         <h1 className='text-xl lg:text-2xl hover-grup font-semibold mb-4'>{postData?.PostTitle}</h1>
                         <p style={{ whiteSpace: 'pre-wrap' }} className='hover-grup '>{postData?.PostDescription}</p>
                     </div>
+
+                    <div className="flex gap-2 flex-wrap pt-2"> <p className='text-xl'>Tags:</p>
+                            {postData?.tags?.map((tag, index) => (
+                                <span key={index} className="text-white px-3 py-1 rounded-full bg-violet-700 text-sm">
+                                {tag.value}
+                                </span>
+                            ))}
+                        </div>
     
     
                     {/* total vote and comment section */}
