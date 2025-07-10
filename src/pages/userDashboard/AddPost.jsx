@@ -47,28 +47,28 @@ const AddPost = () => {
                         <label className=' block text-xl mb-2' htmlFor="">Author Image</label>
                         <div className='flex items-center gap-3'>    
                             <img src={user?.photoURL} alt="" className='w-12 rounded-full'/>  
-                            <input className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" value={user?.photoURL} readOnly placeholder={user?.photoURL} {...register("Author Image", {required: true})} />
+                            <input className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" value={user?.photoURL} readOnly placeholder={user?.photoURL} {...register("AuthorImage", {required: true})} />
                         </div>
                     </div>
 
                     <div>
                         <label className=' block text-xl mb-2' htmlFor="">Author Name</label>
-                        <input className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" value={user?.displayName} readOnly placeholder={user?.displayName} {...register("Author Name", {required: true})} />
+                        <input className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" value={user?.displayName} readOnly placeholder={user?.displayName} {...register("AuthorName", {required: true})} />
                     </div>
 
                     <div>
                         <label className=' block text-xl mb-2' htmlFor="">Author Email</label>
-                        <input className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" value={user?.email} readOnly placeholder={user?.email} {...register("Author Email", {required: true})} />
+                        <input className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" value={user?.email} readOnly placeholder={user?.email} {...register("AuthorEmail", {required: true})} />
                     </div>
 
                     <div>
                         <label className=' block text-xl mb-2' htmlFor="">Post Title</label>
-                        <input required className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" placeholder="Enter Your Post Title" {...register("Post Title", {required: true})} />
+                        <input required className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" placeholder="Enter Your Post Title" {...register("PostTitle", {required: true})} />
                     </div>
 
                     <div>
                         <label className=' block text-xl mb-2' htmlFor="">Post Description</label>
-                        <textarea required className='border w-full h-30 px-3 py-2 rounded-xl mb-2' placeholder='Enter Your Post Description' {...register("Post Description", {required: true})} />
+                        <textarea required className='border w-full h-30 px-3 py-2 rounded-xl mb-2' placeholder='Enter Your Post Description' {...register("PostDescription", {required: true})} />
 
                     </div>
 

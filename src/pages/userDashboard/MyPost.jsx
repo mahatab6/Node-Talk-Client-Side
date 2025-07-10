@@ -7,6 +7,10 @@ import { MdDelete } from "react-icons/md";
 
 
 const MyPost = () => {
+
+    const {data} = useQuery
+
+
     return (
         <div className='px-6 '>
             <DashboardText/>
