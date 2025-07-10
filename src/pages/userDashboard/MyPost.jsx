@@ -32,7 +32,7 @@ const MyPost = () => {
             <div className='p-10 bg-[#202338] rounded-2xl mb-10'>
                 <h2 className='text-3xl font-bold mb-6'>My Posts {data.length}</h2>
                 <div>
-                    <div className="overflow-x-auto">
+                    <div className="overflow-x-auto ">
                         <table className="table">
                             {/* head */}
                             <thead>
