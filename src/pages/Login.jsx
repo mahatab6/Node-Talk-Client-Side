@@ -1,9 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import PetLogo from '../components/PetLogo';
 import { Link, useLocation, useNavigate } from 'react-router';
 import useAuth from '../hooks/useAuth';
 import toast from 'react-hot-toast';
+import NodeTalkLogo from '../components/NodeTalkLogo';
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors },} = useForm();
@@ -50,7 +50,7 @@ console.log(location)
   return (
     <div className="max-w-md mx-auto p-6 rounded-xl bg-[#202237] text-white ">
         <div className="text-center justify-items-center mb-6 space-y-2">
-            <PetLogo/>
+            <NodeTalkLogo/>
             <h1 className="text-3xl font-bold">Welcome Back!</h1>
             <p className="text-gray-600">Sign in to manage your pets</p>
         </div>

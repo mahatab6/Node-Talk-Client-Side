@@ -1,2 +1,31 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+
+html[data-theme="light"] {
+  --text: #000000;
+  --background: #d0d2e6;
+  --primary: #3a31d8;
+  --secondary: #020024;
+  --accent: #0600c2;
+}
+
+
+.bg-background {
+  background-color: var(--background);
+}
+.text-text {
+  color: var(--text);
+}
+.bg-primary {
+  background-color: var(--primary);
+}
+.text-primary {
+  color: var(--primary);
+}
+.bg-secondary {
+  background-color: var(--secondary);
+}
+.bg-accent {
+  background-color: var(--accent);
+}
