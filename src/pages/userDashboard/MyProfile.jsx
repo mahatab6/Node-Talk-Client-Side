@@ -1,7 +1,7 @@
 import React from 'react';
 import useAuth from '../../hooks/useAuth';
 import DashboardText from '../../components/DashboardText';
-import { FaRegUserCircle } from 'react-icons/fa';
+import { FaRegUserCircle, FaStar } from 'react-icons/fa';
 import Bronze from '../../assets/Bronze.png'
 import { CiMedal } from "react-icons/ci";
 import { BsFileEarmarkPostFill } from "react-icons/bs";
@@ -10,6 +10,8 @@ import { IoMdTrendingUp } from "react-icons/io";
 import { Link } from 'react-router';
 import { FaEye } from "react-icons/fa";
 import useUserRole from '../../hooks/useUserRole';
+import Gold from '../../assets/Gold.png'
+
 
 
 
@@ -19,6 +21,11 @@ import useUserRole from '../../hooks/useUserRole';
 const MyProfile = () => {
     const {user} = useAuth();
     const {role, isloading} = useUserRole();
+    
+    if(isloading){
+        <p>loading..............</p>
+    }
+
     console.log(role)
     return (
         <div className='px-6 mb-10'>
@@ -30,9 +37,20 @@ const MyProfile = () => {
                     <div className="flex flex-col">
                         <div className="flex flex-wrap gap-x-2 gap-y-2">
                             <div className="relative flex-shrink-0">
-                                <span className="absolute right-16 w-10 h-10 p-1 bg-white border rounded-full ">
-                                    <img src={Bronze} className='w-12' alt="" />
-                                </span>
+                                {
+                                    role?.role === 'user' && 
+                                    
+                                    <span className="absolute right-16 w-10 h-10 p-1 bg-white border rounded-full ">
+                                        <img src={Bronze} className='w-12' alt="" />
+                                    </span>
+                                }
+                                {
+                                    role?.role === 'paidmember' && 
+
+                                    <span className="absolute right-16 w-10 h-10 p-1 bg-white border rounded-full ">
+                                        <img src={Gold} className='w-12' alt="" />
+                                    </span>
+                                }
                                 {
                                     user?.photoURL? <img src={user?.photoURL} alt="" className="w-20 h-20 border rounded-full dark:bg-gray-500 dark:border-gray-300" /> : <FaRegUserCircle size={35}/>
                                 }
@@ -43,7 +61,16 @@ const MyProfile = () => {
                     <div className='flex-1'>
                         <h1 className='text-2xl font-bold mb-2'>{user?.displayName}</h1>
                         <p className=' mb-3'>{user?.email}</p>
-                        <p className='flex items-center gap-1 bg-[#CB802D] p-1 rounded-2xl text-base w-40 mb-3'><CiMedal /> BRONZE MEMBER</p>
+                        {
+                            role?.role === 'user' && <p className='flex items-center gap-1 bg-[#CB802D] p-1 rounded-2xl text-base w-40 mb-3'><CiMedal /> BRONZE MEMBER</p>
+                        }
+
+                        {
+                            role?.role === 'paidmember' && <div className='flex my-3 items-center justify-items-center gap-4'>
+                                <p className='flex items-center  gap-1 bg-yellow-400 text-black font-bold p-2 rounded-2xl text-base  '><CiMedal size={20} /> GOLD MEMBER </p> <p className='flex items-center bg-amber-500 text-black font-bold p-2 rounded-2xl text-base'> <FaStar size={20} />Premium</p>
+                            </div> 
+                        }
+                        
                         <p>Joined 7/8/2025</p>
                     </div>
                 </div>
