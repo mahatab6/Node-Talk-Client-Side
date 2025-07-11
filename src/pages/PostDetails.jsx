@@ -7,6 +7,8 @@ import useAxiosSecure from '../hooks/useAxiosSecure';
 import { Tooltip } from 'react-tooltip';
 import { FacebookIcon, FacebookShareButton, LinkedinShareButton, LinkedinIcon, TwitterShareButton, TwitterIcon, EmailShareButton, EmailIcon } from 'react-share';
 import useAuth from '../hooks/useAuth';
+import { FaUserAlt } from "react-icons/fa";
+
 
 
 const PostDetails = () => {
@@ -24,9 +26,6 @@ const PostDetails = () => {
             return res.data;
         }
     })
-
-    console.log(postData)
-
 
 
     const onSubmit = data => console.log(data);
@@ -134,7 +133,10 @@ const PostDetails = () => {
                    <div >
                         <div className=" avatar avatar-placeholder">
                             <div className="bg-neutral text-neutral-content w-14 rounded-full">
-                                <span className="text-xs">UI</span>
+                                {
+                                    (user)? <img src={user?.photoURL} alt="" /> : <FaUserAlt size={35} />
+                                }
+                                
                             </div>
                         </div>
                    </div>

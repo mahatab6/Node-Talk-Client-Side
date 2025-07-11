@@ -3,13 +3,12 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged,
 import { auth } from './../firebase/firebase.init';
 import { AuthContext } from './AuthContext';
 import useAxiosToken from '../hooks/useAxiosToken';
-import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const AuthProvider = ({children}) => {
 
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const axiosSecure = useAxiosSecure();
+    const axiosSecureJWT = useAxiosToken
 
     const createUser = (email, password) => {
         setLoading(false);
@@ -34,7 +33,7 @@ const AuthProvider = ({children}) => {
                 email: user.email,
                 role: "user",
             }
-            await axiosSecure.post('/users', userData);
+            await axiosSecureJWT.post('/users', userData);
         });
         return (()=>{
             unsubscribe();

@@ -32,7 +32,7 @@ const AddPost = () => {
             })
         
     }
-
+    console.log(user)
 
     return (
         <div className='px-6'>

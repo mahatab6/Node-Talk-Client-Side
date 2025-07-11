@@ -13,7 +13,7 @@ const Login = () => {
   
   const from = location.state?.from?.pathname || '/'; 
 
-console.log(location)
+
   const onSubmit = (data) => {
     signInUser(data.email, data.password)
         .then(result =>{

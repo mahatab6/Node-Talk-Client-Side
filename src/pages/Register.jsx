@@ -23,7 +23,7 @@ const Register = () => {
             .then(result =>{
                 if(result.user?.email){
                     toast.success('Account created successfully!');
-                    userProfile(data.name, disImage.image)
+                    userProfile(data.Name, disImage)
                     navigate('/');
                 }
             })
