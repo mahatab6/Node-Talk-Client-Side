@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { auth } from './../firebase/firebase.init';
 import { AuthContext } from './AuthContext';
-import useAxiosToken from '../hooks/useAxiosToken';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const AuthProvider = ({children}) => {
 
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const axiosSecureJWT = useAxiosToken
+    const axiosSecure = useAxiosSecure();
 
     const createUser = (email, password) => {
         setLoading(false);
@@ -33,7 +33,7 @@ const AuthProvider = ({children}) => {
                 email: user.email,
                 role: "user",
             }
-            await axiosSecureJWT.post('/users', userData);
+            await axiosSecure.post('/users', userData);
         });
         return (()=>{
             unsubscribe();

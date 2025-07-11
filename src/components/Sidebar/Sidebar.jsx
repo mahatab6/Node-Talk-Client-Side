@@ -3,8 +3,11 @@ import UserSidebarItems from './UserSidebarItems';
 import { Link, NavLink } from 'react-router';
 import AdminSidebarItems from './AdminSidebarItems';
 import { FaTachometerAlt } from 'react-icons/fa';
+import useUserRole from '../../hooks/useUserRole';
 
 const Sidebar = () => {
+    const {role} = useUserRole();
+
     return (
         <div className="drawer-side ">
             <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
@@ -19,8 +22,14 @@ const Sidebar = () => {
                         Dashboard
                     </NavLink>
                 </li>
-                <UserSidebarItems/>
-                <AdminSidebarItems/>
+                {
+                    role?.role === 'user' && <UserSidebarItems/>
+                }
+                {
+                    role?.role === 'admin' && <AdminSidebarItems/>
+                }
+                
+                
             </ul>
         </div>
     );

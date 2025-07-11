@@ -9,6 +9,7 @@ import { FaRegComment } from "react-icons/fa";
 import { IoMdTrendingUp } from "react-icons/io";
 import { Link } from 'react-router';
 import { FaEye } from "react-icons/fa";
+import useUserRole from '../../hooks/useUserRole';
 
 
 
@@ -17,6 +18,8 @@ import { FaEye } from "react-icons/fa";
 
 const MyProfile = () => {
     const {user} = useAuth();
+    const {role, isloading} = useUserRole();
+    console.log(role)
     return (
         <div className='px-6 mb-10'>
             <DashboardText/>
