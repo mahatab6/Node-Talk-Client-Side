@@ -5,6 +5,9 @@ import { Link, useNavigate } from 'react-router';
 import useAuth from '../hooks/useAuth';
 import toast from 'react-hot-toast';
 import NodeTalkLogo from '../components/NodeTalkLogo';
+import { IoMdCloudUpload } from "react-icons/io";
+import axios from 'axios';
+
 
 const Register = () => {
 
@@ -12,6 +15,7 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
     const {createUser, userProfile, GoogleLogin} = useAuth();
     const navigate = useNavigate();
+    const [disImage, setDisProfile] = useState();
 
     const onSubmit = (data) => {
         
@@ -19,7 +23,7 @@ const Register = () => {
             .then(result =>{
                 if(result.user?.email){
                     toast.success('Account created successfully!');
-                    userProfile(data.name)
+                    userProfile(data.name, disImage.image)
                     navigate('/');
                 }
             })
@@ -28,6 +32,7 @@ const Register = () => {
                     toast.error(`${error.message}`)
                 }
             })
+      
     };
 
     
@@ -46,15 +51,43 @@ const Register = () => {
             })
     }
 
+    const handleImageChange = async(e) =>{
+        const image = e.target.files[0]
+        const formData = new FormData();
+        formData.append("image",image)
+        const res =await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_Image_Api_key}`,formData)
+        setDisProfile(res.data.data.url)
+    }
 
 
   return (
-    <div className="max-w-md mx-auto p-6 rounded-xl bg-[#202237] text-white ">
+    <div className="max-w-md mx-auto p-6 rounded-xl bg-[#9292AB]  ">
       <div className="text-center justify-items-center mb-6 space-y-2">
         <NodeTalkLogo/>
         <h1 className="text-3xl font-bold">Join</h1>
         <p className="text-gray-600">Create an account to get started</p>
       </div>
+
+      
+
+          <div>
+            <label className="block text-lg font-medium mb-1">Photo</label>
+            <div className="dropdown dropdown-right">
+                <div tabIndex={0}>
+                    <div className="avatar ">
+                        <div className="ring-primary w-12 rounded-full ">
+                          {
+                            disImage? <img  src={disImage} /> : <IoMdCloudUpload size={35}/>
+                          }
+                        </div>
+                    </div>
+                </div>
+                <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                    <input onChange={handleImageChange} name='image' type="file"  />  
+                </ul>
+            </div>
+            
+          </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         
@@ -125,7 +158,7 @@ const Register = () => {
        
         <button
           type="submit"
-          className="w-full py-3 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-xl transition-all duration-300"
+          className="w-full py-3 bg-violet-600 hover:bg-violet-700  font-semibold rounded-xl transition-all duration-300"
         >
           Register
         </button>
@@ -133,7 +166,7 @@ const Register = () => {
 
       <div className="divider">OR</div>
 
-      <button onClick={handleGoole} className="btn w-full bg-white text-black border-[#e5e5e5]">
+      <button onClick={handleGoole} className="btn w-full bg-[#A6A8BF] text-black border-[#e5e5e5] hover:border-violet-700">
         <svg aria-label="Google logo" width="30" height="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g><path d="m0 0H512V512H0" fill="#fff"></path><path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path><path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"></path><path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"></path><path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path></g></svg>
         Login with Google
       </button>

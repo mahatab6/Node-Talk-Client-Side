@@ -84,7 +84,7 @@ const MyPost = () => {
                                         <tr className="hover:bg-white/5 font-bold">
                                             <th>{index + 1}</th>
                                             <td>
-                                                <Link className='hover:text-blue-400'>
+                                                <Link to={`/post-details/${post._id}`} className='hover:text-blue-400'>
                                                     {post.PostTitle}
                                                 </Link>
                                             </td>
