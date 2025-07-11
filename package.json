@@ -29,6 +29,7 @@
     "react-select": "^5.10.1",
     "react-share": "^5.2.2",
     "react-tooltip": "^5.29.1",
+    "sweetalert2": "^11.6.13",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {

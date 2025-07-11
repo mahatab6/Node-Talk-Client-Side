@@ -3,14 +3,16 @@ import DashboardText from '../../components/DashboardText';
 import { FaRegComments } from "react-icons/fa";
 import { Link } from 'react-router';
 import { MdDelete } from "react-icons/md";
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import useAxiosToken from '../../hooks/useAxiosToken';
+import Swal from 'sweetalert2';
 
 
 
 const MyPost = () => {
 
     const axiosSecureJWT = useAxiosToken();
+    const queryClient =useQueryClient();
 
     const {data, isLoading} = useQuery({
         queryKey: ['user-post'],
@@ -20,10 +22,41 @@ const MyPost = () => {
         }
     })
 
+    const { mutate } = useMutation({
+        mutationFn: async(id) => {
+            const res = await axiosSecureJWT.delete(`/user-post-remove/${id}`)
+            return res.data;
+        },
+        onSuccess: () =>{
+            queryClient.invalidateQueries(["user-post"]);
+            Swal.fire({
+                title: "Post Deleted!",
+                text: "The post has been successfully removed.",
+                icon: "success"
+            });
+        },
+    });
+
     if(isLoading){
         return <p>Loading.........</p>
     }
-  
+
+
+    const handleDelete = (id) =>{
+        Swal.fire({
+            title: "Are you sure you want to delete this post?",
+            text: "This action cannot be undone!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+            if (result.isConfirmed) {
+                mutate(id);
+            }
+            });
+    }
 
     return (
         <div className='px-6 '>
@@ -62,7 +95,7 @@ const MyPost = () => {
                                                 </Link>
                                             </td>
                                             <td>
-                                                <Link to='/'>
+                                                <Link onClick={()=>handleDelete(post._id)} className='flex items-center btn hover:bg-red-600'>Delete
                                                     <MdDelete className='text-[#C084FC]' size={30}/>
                                                 </Link>
                                             </td>
