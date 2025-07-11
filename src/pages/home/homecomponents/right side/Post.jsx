@@ -3,6 +3,7 @@ import React from 'react';
 import { FaAngleDown, FaAngleUp, FaRegComments } from "react-icons/fa";
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { Link } from 'react-router';
+import { formatDistanceToNow } from 'date-fns';
 
 
 const Post = () => {
@@ -39,7 +40,9 @@ const Post = () => {
                                 </div>
                             </div>
                             <h2 className='text-xl'>{post?.AuthorName}</h2>
-                            <p>5h ago</p>
+                            {post?.createdAt && (
+                                <p>{formatDistanceToNow(new Date(parseInt(post.createdAt)), { addSuffix: true })}</p>
+                                )}
                         </div>
 
                         {/* author-post-heading */}

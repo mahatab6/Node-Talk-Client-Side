@@ -23,7 +23,7 @@ const Sidebar = () => {
                     </NavLink>
                 </li>
                 {
-                    role?.role === 'user' && <UserSidebarItems/>
+                    (role?.role === 'user' || role?.role === "paidmember") && <UserSidebarItems/>
                 }
                 {
                     role?.role === 'admin' && <AdminSidebarItems/>

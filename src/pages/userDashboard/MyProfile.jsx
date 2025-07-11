@@ -22,6 +22,7 @@ const MyProfile = () => {
     const {user} = useAuth();
     const {role, isloading} = useUserRole();
     
+  
     if(isloading){
         <p>loading..............</p>
     }
@@ -71,7 +72,7 @@ const MyProfile = () => {
                             </div> 
                         }
                         
-                        <p>Joined 7/8/2025</p>
+                        <p>Joined {new Date(user?.metadata?.creationTime).toISOString().split('T')[0]}</p>
                     </div>
                 </div>
 

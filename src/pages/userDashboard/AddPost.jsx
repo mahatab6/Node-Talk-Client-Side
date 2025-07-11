@@ -21,6 +21,7 @@ const AddPost = () => {
             ...data,
             upVote,
             downVote,
+            createdAt: Date.now(),
         };
 
         axiosSecure.post("/add-user-post", fullData)

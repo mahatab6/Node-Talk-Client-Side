@@ -8,6 +8,8 @@ import { Tooltip } from 'react-tooltip';
 import { FacebookIcon, FacebookShareButton, LinkedinShareButton, LinkedinIcon, TwitterShareButton, TwitterIcon, EmailShareButton, EmailIcon } from 'react-share';
 import useAuth from '../hooks/useAuth';
 import { FaUserAlt } from "react-icons/fa";
+import { formatDistanceToNow } from 'date-fns';
+
 
 
 
@@ -19,7 +21,7 @@ const PostDetails = () => {
     
     
 
-    const{ data: postData } = useQuery({
+    const{ data: postData, isLoading } = useQuery({
         queryKey: ['specific-data'],
         queryFn: async () => {
             const res =await axiosSecure.get(`/post-details/${id}`)
@@ -27,9 +29,13 @@ const PostDetails = () => {
         }
     })
 
+    if(isLoading){
+        <p>loading.........</p>
+    }
+
 
     const onSubmit = data => console.log(data);
-
+    
 
 
     return (
@@ -50,7 +56,9 @@ const PostDetails = () => {
                             </div>
                         </div>
                         <h2 className='text-xl'>{postData?.AuthorName}</h2>
-                        <p>5h ago</p>
+                        {postData?.createdAt && (
+                            <p>{formatDistanceToNow(new Date(parseInt(postData.createdAt)), { addSuffix: true })}</p>
+                            )}
                         </div>
 
                         {/* Vote section */}

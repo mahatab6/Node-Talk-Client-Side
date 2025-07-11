@@ -32,6 +32,7 @@ const AuthProvider = ({children}) => {
             const userData = {
                 email: user.email,
                 role: "user",
+                
             }
             await axiosSecure.post('/users', userData);
         });
