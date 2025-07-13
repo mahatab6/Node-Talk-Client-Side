@@ -18,7 +18,7 @@ const PostDetails = () => {
     const {user} = useAuth();
     const axiosSecure = useAxiosSecure();
     const {id} = useParams();
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
 
     
     
@@ -36,7 +36,26 @@ const PostDetails = () => {
     }
 
 
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+        const userComment = {
+            ...data,
+            postId: postData?._id,
+            postTitle: postData?.PostTitle,
+            freebackUser: user?.email
+
+        }
+        axiosSecure.post('/comments', userComment)
+        .then(res => {
+            if(res.data.insertedId){
+                toast.success("Your comment added");
+                reset()
+            }
+        })
+       
+    }
+
+
+
 
     const handleVote =(id, voteType)=>{
         const votes = {
@@ -171,12 +190,12 @@ const PostDetails = () => {
 
                     <div className=''>
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            <textarea {...register("comment")} className=' border w-full md:w-100 lg:w-xl rounded-2xl block py-5 p-1' placeholder='Share your thoughts...' />
+                            <textarea name="comment" {...register("comment")} className=' border w-full md:w-100 lg:w-xl rounded-2xl block py-5 p-1' placeholder='Share your thoughts...' />
                             {
                                 (user)?(
                                     <button type='submit' className='bg-green-500 p-2 rounded-2xl hover:cursor-pointer mt-3'>Post Comment</button>
                                 ): (
-                                   <button disabled type='submit' className='bg-green-500 p-2 rounded-2xl mt-3 cursor-not-allowed opacity-50'> Post Comment </button>
+                                   <button disabled  className='bg-green-500 p-2 rounded-2xl mt-3 cursor-not-allowed opacity-50'> Post Comment </button>
                                 )
                             }
                         </form>
