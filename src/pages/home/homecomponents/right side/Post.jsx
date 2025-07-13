@@ -1,23 +1,28 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaAngleDown, FaAngleUp, FaRegComments } from "react-icons/fa";
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { Link } from 'react-router';
 import { formatDistanceToNow } from 'date-fns';
 
 
-const Post = () => {
+const Post = ({ sortType }) => {
 
     const axiosSecure = useAxiosSecure();
+    const [page, setPage] = useState(1);
+    const [limit] =useState(2);
 
     const {data, isLoading, error} = useQuery({
-            queryKey: ['user-post'],
+            queryKey: ['user-post', sortType, page, limit],
             queryFn: async () => {
-                const res = await axiosSecure.get('/public-post');
+                const res = await axiosSecure.get('/public-post', {
+                    params: { sort: sortType, page, limit }
+                });
                 return res.data;
             }
         })
 
+        console.log(data)
     if (isLoading) {
     return <p>Loading...</p>;
     }
@@ -29,7 +34,7 @@ const Post = () => {
     return (
         <div className=''>
             {
-                data.map((post)=>(
+                data.post.map((post)=>(
 
                     <div key={post._id} className='flex-col space-y-2  bg-secondary p-5 rounded-2xl mb-5'>
                         {/* author info */}
@@ -70,6 +75,36 @@ const Post = () => {
                     </div>
                 ))
             }
+            <div className="flex gap-2 justify-center mt-4">
+                    <button
+                        disabled={page === 1}
+                        onClick={() => setPage(page - 1)}
+                        className="px-2 bg-gray-300 rounded disabled:opacity-50"
+                    >
+                        Prev
+                    </button>
+
+                    {Array.from({ length: Math.ceil(data?.total / limit) }, (_, i) => (
+                        <button
+                        key={i}
+                        onClick={() => setPage(i + 1)}
+                        className={`px-2 rounded ${
+                            page === i + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200'
+                        }`}
+                        >
+                        {i + 1}
+                        </button>
+                    ))}
+
+                    <button
+                        disabled={page === Math.ceil(data?.total / limit)}
+                        onClick={() => setPage(page + 1)}
+                        className="px-2 bg-gray-300 rounded disabled:opacity-50"
+                    >
+                        Next
+                    </button>
+            </div>
+
         </div>
     );
 };

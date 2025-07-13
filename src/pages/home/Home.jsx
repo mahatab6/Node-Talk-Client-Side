@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Banner from './homecomponents/Banner';
 import TagsSection from './homecomponents/left side/TagsSection';
 import Post from './homecomponents/right side/Post';
@@ -6,6 +6,7 @@ import SortPosts from './homecomponents/left side/SortPosts';
 import Announcements from './homecomponents/left side/Announcements';
 
 const Home = () => {
+    const [sortType , setSortType] = useState();
     return (
         <div className='bg-background'>
             <Banner/>
@@ -15,12 +16,12 @@ const Home = () => {
                 <div className='lg:col-span-1 space-y-5'>
                     <Announcements/>
                     <TagsSection/>
-                    <SortPosts/>
+                    <SortPosts setSortType={setSortType}/>
                 </div>
 
                 {/* right side */}
                 <div className='lg:col-span-3'>
-                    <Post/>
+                    <Post sortType={sortType}/>
                 </div>
             </div>
         </div>
