@@ -10,8 +10,7 @@ const SortPosts = ({ setSortType }) => {
         <div className=' bg-secondary p-4 rounded-2xl justify-items-center flex-col space-y-2' >
             <h2 className='flex items-center text-2xl gap-1 justify-center pb-2 font-bold'><IoMdTrendingUp />Sort Posts</h2>
             <button onClick={()=> setSortType('popular')} className='text-xl btn flex items-center gap-1 hover:cursor-pointer hover:bg-blue-500 px-2 border-b-2'><TbChartBarPopular /> Most Popular</button>
-            <button onClick={()=> setSortType('oldest')} className='text-xl btn flex items-center gap-1 hover:cursor-pointer hover:bg-blue-500 px-2'><IoMdTime /> Oldest</button>
-            <button onClick={()=> setSortType('downVote')} className='text-xl btn flex items-center gap-1 hover:cursor-pointer hover:bg-blue-500 px-2'><IoMdTime /> Down-Vote</button>
+            <button onClick={()=> setSortType('downVote')} className='text-xl btn flex items-center gap-1 hover:cursor-pointer hover:bg-blue-500 px-2'><IoMdTime />  Down-Vote</button>
         </div>
     );
 };
