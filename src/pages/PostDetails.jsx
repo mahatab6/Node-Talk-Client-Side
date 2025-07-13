@@ -9,6 +9,7 @@ import { FacebookIcon, FacebookShareButton, LinkedinShareButton, LinkedinIcon, T
 import useAuth from '../hooks/useAuth';
 import { FaUserAlt } from "react-icons/fa";
 import { formatDistanceToNow } from 'date-fns';
+import toast from 'react-hot-toast';
 
 
 
@@ -18,10 +19,11 @@ const PostDetails = () => {
     const axiosSecure = useAxiosSecure();
     const {id} = useParams();
     const { register, handleSubmit } = useForm();
+
     
     
 
-    const{ data: postData, isLoading } = useQuery({
+    const{ data: postData, isLoading,refetch } = useQuery({
         queryKey: ['specific-data'],
         queryFn: async () => {
             const res =await axiosSecure.get(`/post-details/${id}`)
@@ -35,8 +37,22 @@ const PostDetails = () => {
 
 
     const onSubmit = data => console.log(data);
-    
 
+    const handleVote =(id, voteType)=>{
+        const votes = {
+            postId: id,
+            voterEmail: user?.email,
+            voteType: voteType
+        }
+        axiosSecure.post('/vote', votes)
+        .then(res => {
+            toast(res.data.message); 
+            refetch(); 
+        })
+
+        
+    }
+    
 
     return (
         <div className='bg-[#191B2F] min-h-screen'>
@@ -65,9 +81,9 @@ const PostDetails = () => {
                         {
                             (user)? (
                                 <div className='text-center space-y-1'>
-                                    <p data-tooltip-id="my-tooltip" data-tooltip-content="UpVote" className='btn rounded-full p-2 hover:bg-green-500'><FaAngleUp  size={25} /></p>
-                                    <p className=' font-bold text-xl'>25</p>
-                                    <p data-tooltip-id="my-tooltip" data-tooltip-content="DownVote" className='btn rounded-full p-2 hover:bg-red-500'><FaAngleDown size={25} /></p>
+                                    <p onClick={()=> handleVote(postData?._id, "up")} data-tooltip-id="my-tooltip" data-tooltip-content="UpVote" className='btn rounded-full p-2 hover:bg-green-500'><FaAngleUp  size={25} /></p>
+                                    <p className=' font-bold text-xl'>{postData?.upVote}</p>
+                                    <p onClick={()=> handleVote(postData?._id, "down")} data-tooltip-id="my-tooltip" data-tooltip-content="DownVote" className='btn rounded-full p-2 hover:bg-red-500'><FaAngleDown size={25} /></p>
                                     <Tooltip id='my-tooltip'/>
                                 </div>
                             ) : (
@@ -97,7 +113,11 @@ const PostDetails = () => {
                             ))}
                     </div>
 
-                    <p className='flex items-center gap-2 '><FaRegComments /> 8 comments</p>
+                    <div className='flex space-x-2 '>
+                        <p className='flex items-center gap-2 '><FaRegComments /> 8 comments</p>
+                        <p className='flex items-center'><FaAngleUp className='text-green-500' />{postData?.upVote}</p>
+                        <p className='flex items-center'><FaAngleDown className='text-red-500' />{postData?.downVote}</p>
+                    </div>
     
                     {/* total vote and comment section */}
                     {
@@ -116,13 +136,13 @@ const PostDetails = () => {
                             </div>
                         ) : (
                             <div className='flex space-x-2 pt-2'>
-                                <FacebookShareButton disabled cursor-not-allowed url={postData?._id} quote={postData?.PostTitle}>
+                                <FacebookShareButton  quote={postData?.PostTitle}>
                                     <FacebookIcon  size={32} round />
                                 </FacebookShareButton>
-                                <LinkedinShareButton disabled cursor-not-allowed url={postData?._id} quote={postData?.PostTitle}>
+                                <LinkedinShareButton  quote={postData?.PostTitle}>
                                     <LinkedinIcon size={32} round />
                                 </LinkedinShareButton>
-                                <TwitterShareButton disabled cursor-not-allowed url={postData?._id} quote={postData?.PostTitle}>
+                                <TwitterShareButton  quote={postData?.PostTitle}>
                                     <TwitterIcon size={32} round />
                                 </TwitterShareButton>
                                 

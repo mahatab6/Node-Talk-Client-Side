@@ -10,7 +10,7 @@ const Post = ({ sortType,search }) => {
 
     const axiosSecure = useAxiosSecure();
     const [page, setPage] = useState(1);
-    const [limit] =useState(2);
+    const [limit] =useState(5);
 
     const {data, isLoading, error} = useQuery({
             queryKey: ['user-post',search, sortType, page, limit],

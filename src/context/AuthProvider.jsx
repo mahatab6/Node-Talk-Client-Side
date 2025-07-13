@@ -30,7 +30,7 @@ const AuthProvider = ({children}) => {
             setUser(currentuser);
             setLoading(false);
             const userData = {
-                email: user.email,
+                email: user?.email,
                 role: "user",
                 
             }
