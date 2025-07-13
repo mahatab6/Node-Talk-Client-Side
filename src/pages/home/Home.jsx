@@ -7,9 +7,10 @@ import Announcements from './homecomponents/left side/Announcements';
 
 const Home = () => {
     const [sortType , setSortType] = useState();
+    const [search, setSearch] = useState('')
     return (
         <div className='bg-background'>
-            <Banner/>
+            <Banner setSearch={setSearch} />
             <div className='grid lg:grid-cols-4 gap-5 w-11/12 mx-auto py-10'>
 
                 {/* left-side */}
@@ -21,7 +22,7 @@ const Home = () => {
 
                 {/* right side */}
                 <div className='lg:col-span-3'>
-                    <Post sortType={sortType}/>
+                    <Post sortType={sortType} search={search}/>
                 </div>
             </div>
         </div>

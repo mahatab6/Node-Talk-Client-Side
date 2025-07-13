@@ -3,7 +3,7 @@ import Lottie from "lottie-react";
 import forumanimation from '../../../assets/lottie/Animation - 1751941734750.json'
 
 
-const Banner = () => {
+const Banner = ({setSearch}) => {
     return (
         <div>
             <div className="bg-[url('assets/banner.jpg')] h-full bg-cover bg-center">
@@ -24,7 +24,7 @@ const Banner = () => {
                                 <path d="m21 21-4.3-4.3"></path>
                                 </g>
                             </svg>
-                            <input  type="search" className="" placeholder="Search discussions by title or tag..." />
+                            <input onChange={(e) => setSearch(e.target.value)}  type="search" className="" placeholder="Search discussions by title or tag..." />
                         </label>
                    </div>
                     <Lottie className='w-60' animationData={forumanimation} loop={true} />

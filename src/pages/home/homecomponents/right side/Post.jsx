@@ -6,23 +6,22 @@ import { Link } from 'react-router';
 import { formatDistanceToNow } from 'date-fns';
 
 
-const Post = ({ sortType }) => {
+const Post = ({ sortType,search }) => {
 
     const axiosSecure = useAxiosSecure();
     const [page, setPage] = useState(1);
     const [limit] =useState(2);
 
     const {data, isLoading, error} = useQuery({
-            queryKey: ['user-post', sortType, page, limit],
+            queryKey: ['user-post',search, sortType, page, limit],
             queryFn: async () => {
                 const res = await axiosSecure.get('/public-post', {
-                    params: { sort: sortType, page, limit }
+                    params: {search, sort: sortType, page, limit }
                 });
                 return res.data;
             }
         })
 
-        console.log(data)
     if (isLoading) {
     return <p>Loading...</p>;
     }
