@@ -5,11 +5,12 @@ import { FaAngleDown, FaAngleUp, FaArrowLeft, FaRegComments } from 'react-icons/
 import { Link, useParams } from 'react-router';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import { Tooltip } from 'react-tooltip';
-import { FacebookIcon, FacebookShareButton, LinkedinShareButton, LinkedinIcon, TwitterShareButton, TwitterIcon, EmailShareButton, EmailIcon } from 'react-share';
+import { FacebookIcon, FacebookShareButton, LinkedinShareButton, LinkedinIcon, TwitterShareButton, TwitterIcon, } from 'react-share';
 import useAuth from '../hooks/useAuth';
 import { FaUserAlt } from "react-icons/fa";
 import { formatDistanceToNow } from 'date-fns';
 import toast from 'react-hot-toast';
+import Comment from './Comment';
 
 
 
@@ -41,7 +42,10 @@ const PostDetails = () => {
             ...data,
             postId: postData?._id,
             postTitle: postData?.PostTitle,
-            freebackUser: user?.email
+            freebackUser: user?.email,
+            freebackPhoto: user?.photoURL,
+            freebackName: user?.displayName,
+            commentTime: Date.now()
 
         }
         axiosSecure.post('/comments', userComment)
@@ -74,11 +78,11 @@ const PostDetails = () => {
     
 
     return (
-        <div className='bg-[#191B2F] min-h-screen'>
+        <div className='bg-background min-h-screen'>
             <div className='py-10 w-9/12 mx-auto'>
-            <Link to='/' className='flex items-center text-white gap-2 hover:text-blue-400 text-xl pb-10'><FaArrowLeft />Back to discussions</Link>
+            <Link to='/' className='flex items-center gap-2 hover:text-blue-400 text-xl pb-10'><FaArrowLeft />Back to discussions</Link>
 
-            <div className=' gap-3 bg-[#202237] text-white p-5 rounded-2xl mb-10'>
+            <div className=' gap-3 bg-secondary p-5 rounded-2xl mb-10'>
                 
     
                 <div className='flex-col space-y-2'>
@@ -126,7 +130,7 @@ const PostDetails = () => {
 
                     <div className="flex gap-2 flex-wrap pt-2"> <p className='text-xl'>Tags:</p>
                             {postData?.tags?.map((tag, index) => (
-                                <span key={index} className="text-white px-3 py-1 rounded-full bg-violet-700 text-sm">
+                                <span key={index} className="px-3 py-1 rounded-full bg-violet-700 text-sm">
                                 {tag.value}
                                 </span>
                             ))}
@@ -174,7 +178,7 @@ const PostDetails = () => {
             </div>
 
             {/* Comments section */}
-            <div className='bg-[#202237] text-white p-5 rounded-2xl space-y-3 '>
+            <div className='bg-secondary p-5 rounded-2xl space-y-3 '>
                 <h2 className='text-2xl font-bold'>Comments (0)</h2>
                 <div className='flex flex-col md:flex-row gap-5'>
                    <div >
@@ -188,24 +192,22 @@ const PostDetails = () => {
                         </div>
                    </div>
 
-                    <div className=''>
+
+                   {
+                    (user)?(
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            <textarea name="comment" {...register("comment")} className=' border w-full md:w-100 lg:w-xl rounded-2xl block py-5 p-1' placeholder='Share your thoughts...' />
-                            {
-                                (user)?(
-                                    <button type='submit' className='bg-green-500 p-2 rounded-2xl hover:cursor-pointer mt-3'>Post Comment</button>
-                                ): (
-                                   <button disabled  className='bg-green-500 p-2 rounded-2xl mt-3 cursor-not-allowed opacity-50'> Post Comment </button>
-                                )
-                            }
-                        </form>
-                    </div>
+                        <textarea name="comment" {...register("comment")} className=' border w-full md:w-100 lg:w-xl rounded-2xl block py-5 p-1' placeholder='Share your thoughts...' />
+                        <button type='submit' className='bg-green-500 p-2 rounded-2xl hover:cursor-pointer mt-3'>Post Comment</button>    
+                    </form>
+                    ):(
+                        <div>
+                            <h2 className='text-center font-bold text-2xl'>Login to join the discussion</h2>
+                        </div>
+                    )
+                   } 
                 </div>
 
-                <div className='text-center justify-items-center'>
-                    <FaRegComments size={50}/>
-                    <p className='text-xl'>No comments yet. Be the first to share your thoughts!</p>
-                </div>
+                <Comment id={postData?._id}/>
 
             </div>
         </div>
