@@ -4,16 +4,19 @@ import useAxiosSecure from '../hooks/useAxiosSecure';
 import { FaRegComments, FaUserAlt } from 'react-icons/fa';
 import { formatDistanceToNow } from 'date-fns';
 
-const Comment = ({ id }) => {
+const Comment = ({ id, uiload }) => {
   const axiosSecure = useAxiosSecure();
-
-  const { data: comments = [], isLoading } = useQuery({
+  const { data: comments = [], isLoading, refetch} = useQuery({
     queryKey: ['comments', id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/specific-post-comment/${id}`);
       return res.data;
     }
   });
+
+  if(uiload === true){
+    refetch()
+  }
 
   if (isLoading) return <p>Loading comments...</p>;
 

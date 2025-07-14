@@ -11,6 +11,8 @@ import { Link } from 'react-router';
 import { FaEye } from "react-icons/fa";
 import useUserRole from '../../hooks/useUserRole';
 import Gold from '../../assets/Gold.png'
+import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 
 
@@ -20,14 +22,25 @@ import Gold from '../../assets/Gold.png'
 
 const MyProfile = () => {
     const {user} = useAuth();
+    const axiosSecure = useAxiosSecure();
     const {role, isloading} = useUserRole();
-    
+
+
+    const {data:summary} = useQuery({
+        queryKey:["user-summary"],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/user-summary/${user?.email}`)
+            return res.data;
+        }
+    })
+
+
   
     if(isloading){
         <p>loading..............</p>
     }
 
-    console.log(role)
+   
     return (
         <div className='px-6 mb-10'>
             <DashboardText/>
@@ -81,7 +94,7 @@ const MyProfile = () => {
                     <div className=' flex items-center justify-between bg-[#202338] stats-card rounded-xl p-4 hover:bg-indigo-800'>
                         <div>
                             <p className='text-sm '>Total Posts</p>
-                            <h2 className='text-2xl font-bold'>0</h2>
+                            <h2 className='text-2xl font-bold'>{summary?.totalPost}</h2>
                         </div>
                         <BsFileEarmarkPostFill size={40} className='text-[#60A5FA]'/>
                     </div>
@@ -89,7 +102,7 @@ const MyProfile = () => {
                     <div className=' flex items-center justify-between bg-[#202338] stats-card rounded-xl p-4 hover:bg-indigo-800'>
                         <div>
                             <p className='text-sm '>Total Votes</p>
-                            <h2 className='text-2xl font-bold'>0</h2>
+                            <h2 className='text-2xl font-bold'>{summary?.totalUpVote}</h2>
                         </div>
                         <IoMdTrendingUp size={40} className='text-[#4ADE80]'/>
                     </div>
@@ -97,7 +110,7 @@ const MyProfile = () => {
                     <div className=' flex items-center justify-between bg-[#202338] stats-card rounded-xl p-4 hover:bg-indigo-800'>
                         <div>
                             <p className='text-sm '>Total Comments</p>
-                            <h2 className='text-2xl font-bold'>0</h2>
+                            <h2 className='text-2xl font-bold'>{summary?.totalComment}</h2>
                         </div>
                         <FaRegComment size={40} className='text-[#C084FC]'/>
                     </div>

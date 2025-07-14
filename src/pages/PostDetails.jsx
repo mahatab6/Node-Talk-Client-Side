@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaAngleDown, FaAngleUp, FaArrowLeft, FaRegComments } from 'react-icons/fa';
 import { Link, useParams } from 'react-router';
@@ -20,10 +20,8 @@ const PostDetails = () => {
     const axiosSecure = useAxiosSecure();
     const {id} = useParams();
     const { register, handleSubmit, reset } = useForm();
-
+    const [uiload, setUiload] = useState(false);
     
-    
-
     const{ data: postData, isLoading,refetch } = useQuery({
         queryKey: ['specific-data'],
         queryFn: async () => {
@@ -52,6 +50,7 @@ const PostDetails = () => {
         .then(res => {
             if(res.data.insertedId){
                 toast.success("Your comment added");
+                refetch()
                 reset()
             }
         })
@@ -74,6 +73,11 @@ const PostDetails = () => {
         })
 
         
+    }
+
+    const uiReload = () => {
+        refetch()
+        setUiload(true)
     }
     
 
@@ -197,7 +201,7 @@ const PostDetails = () => {
                     (user)?(
                         <form onSubmit={handleSubmit(onSubmit)}>
                         <textarea name="comment" {...register("comment")} className=' border w-full md:w-100 lg:w-xl rounded-2xl block py-5 p-1' placeholder='Share your thoughts...' />
-                        <button type='submit' className='bg-green-500 p-2 rounded-2xl hover:cursor-pointer mt-3'>Post Comment</button>    
+                        <button onClick={uiReload} type='submit' className='bg-green-500 p-2 rounded-2xl hover:cursor-pointer mt-3'>Post Comment</button>    
                     </form>
                     ):(
                         <div>
@@ -207,7 +211,7 @@ const PostDetails = () => {
                    } 
                 </div>
 
-                <Comment id={postData?._id}/>
+                <Comment id={postData?._id} uiload={uiload}/>
 
             </div>
         </div>
