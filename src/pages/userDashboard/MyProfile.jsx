@@ -35,6 +35,7 @@ const MyProfile = () => {
     })
 
 
+    console.log(summary)
   
     if(isloading){
         <p>loading..............</p>
@@ -120,20 +121,22 @@ const MyProfile = () => {
                 
             <div className='mt-10  rounded-xl p-6 bg-[#202338]'>
                 <h2 className='text-xl font-semibold mb-4'>Recent Posts</h2>
-                <div className='flex items-center justify-between p-4 bg-white/5 rounded-lg'>
-                    <div>
-                        <h3 className=' text-base font-bold mb-1'>The Future of AI in Web Development</h3>
-                        <div className='flex items-center space-x-4 text-sm '>
-                            <span>0 votes</span>
-                            <span>0 comments</span>
-                            <span>7/8/2025</span>
-                        </div>
-                    </div>
+                {
+                    summary?.recentPost.map((post) => (
+                        <div key={post._id} className='flex items-center justify-between p-4 bg-white/5 rounded-lg m-2'>
+                            <div>
+                                <h3 className=' text-base font-bold mb-1'>{post?.PostTitle}</h3>
+                                <div className='flex items-center space-x-4 text-sm '>
+                                    <span>Up-votes {post?.upVote}</span>
+                                </div>
+                            </div>
 
-                    <div>
-                        <Link><FaEye size={30}/></Link>
-                    </div>
-                </div>
+                            <div>
+                                <Link to={`/post-details/${post?._id}`} className='flex items-center gap-2 btn hover:bg-indigo-400'><FaEye size={30}/>View</Link>
+                            </div>
+                        </div>
+                    ) )
+                }
             </div>
         </div>
     );
