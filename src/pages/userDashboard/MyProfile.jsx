@@ -35,7 +35,6 @@ const MyProfile = () => {
     })
 
 
-    console.log(summary)
   
     if(isloading){
         <p>loading..............</p>
