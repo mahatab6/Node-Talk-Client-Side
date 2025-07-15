@@ -58,7 +58,7 @@ const AddPost = () => {
         
     }
 
-    const isLimitedPost = ((data?.result) <= 5 && (role?.role === "user"));
+    const isLimitedPost = ((data?.result) >= 5 && (role?.role === "user"));
 
     const handleBecomeMember = () => {
     navigate('/membership');
@@ -71,7 +71,7 @@ const AddPost = () => {
 
             {
                 (isLimitedPost)? (
-                    <div className="text-center space-y-4">
+                    <div className="text-center space-y-4 min-h-screen justify-items-center  content-center">
                         <p className="text-red-500 font-semibold">
                             You’ve reached your limit of 5 posts. To add more, become a member.
                         </p>

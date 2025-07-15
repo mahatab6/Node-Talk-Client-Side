@@ -67,7 +67,7 @@ const Post = ({ sortType,search }) => {
 
                         {/* total vote and comment section */}
                         <div className='flex space-x-2 '>
-                            <p className='flex items-center gap-2 '><FaRegComments /> 8 comments</p>
+                            <p className='flex items-center gap-2 '><FaRegComments /> {post?.commentCount} comments</p>
                             <p className='flex items-center'><FaAngleUp className='text-green-500' />{post?.upVote}</p>
                             <p className='flex items-center'><FaAngleDown className='text-red-500' />{post?.downVote}</p>
                         </div>

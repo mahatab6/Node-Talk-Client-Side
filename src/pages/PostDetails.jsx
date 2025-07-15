@@ -141,7 +141,7 @@ const PostDetails = () => {
                     </div>
 
                     <div className='flex space-x-2 '>
-                        <p className='flex items-center gap-2 '><FaRegComments /> 8 comments</p>
+                        <p className='flex items-center gap-2 '><FaRegComments /> {postData?.commentCount} comments</p>
                         <p className='flex items-center'><FaAngleUp className='text-green-500' />{postData?.upVote}</p>
                         <p className='flex items-center'><FaAngleDown className='text-red-500' />{postData?.downVote}</p>
                     </div>
@@ -183,7 +183,7 @@ const PostDetails = () => {
 
             {/* Comments section */}
             <div className='bg-secondary p-5 rounded-2xl space-y-3 '>
-                <h2 className='text-2xl font-bold'>Comments (0)</h2>
+                <h2 className='text-2xl font-bold'>Comments {postData?.commentCount}</h2>
                 <div className='flex flex-col md:flex-row gap-5'>
                    <div >
                         <div className=" avatar avatar-placeholder">
