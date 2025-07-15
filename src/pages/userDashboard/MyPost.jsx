@@ -63,7 +63,7 @@ const MyPost = () => {
             <DashboardText/>
 
             <div className='p-10 bg-[#202338] rounded-2xl mb-10'>
-                <h2 className='text-3xl font-bold mb-6'>My Posts {data.length}</h2>
+                <h2 className='text-3xl font-bold mb-6'>My Posts {data?.length}</h2>
                 <div>
                     <div className="overflow-x-auto ">
                         <table className="table">
@@ -84,13 +84,13 @@ const MyPost = () => {
                                         <tr className="hover:bg-white/5 font-bold">
                                             <th>{index + 1}</th>
                                             <td>
-                                                <Link to={`/post-details/${post._id}`} className='hover:text-blue-400'>
-                                                    {post.PostTitle}
+                                                <Link to={`/post-details/${post?._id}`} className='hover:text-blue-400'>
+                                                    {post?.PostTitle}
                                                 </Link>
                                             </td>
-                                            <td>{post.upVote}</td>
+                                            <td>{post?.upVote}</td>
                                             <td>
-                                                <Link to=''>
+                                                <Link to={`/dashboard/comments/${post?._id}`} className='flex items-center btn hover:bg-violet-500'> comment
                                                     <FaRegComments className='text-[#4ADE80]' size={30}/>
                                                 </Link>
                                             </td>

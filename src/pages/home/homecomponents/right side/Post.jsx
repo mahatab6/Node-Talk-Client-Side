@@ -45,14 +45,14 @@ const Post = ({ sortType,search }) => {
                             </div>
                             <h2 className='text-xl'>{post?.AuthorName}</h2>
                             {post?.createdAt && (
-                                <p>{formatDistanceToNow(new Date(parseInt(post.createdAt)), { addSuffix: true })}</p>
+                                <p>{formatDistanceToNow(new Date(parseInt(post?.createdAt)), { addSuffix: true })}</p>
                                 )}
                         </div>
 
                         {/* author-post-heading */}
                         <Link to={`post-details/${post?._id}`} className=' group hover:cursor-pointer'>
                             <h1 className='text-xl hover-grup font-semibold mb-2 group-hover:font-bold'>{post?.PostTitle}</h1>
-                            <p className='hover-grup'>{post?.PostDescription.length > 350 ? post.PostDescription.slice(0,350)+'...read more' : post.PostDescription}</p>
+                            <p className='hover-grup'>{post?.PostDescription.length > 350 ? post?.PostDescription.slice(0,350)+'...read more' : post.PostDescription}</p>
                         </Link>
 
                         {/* tags-section */}

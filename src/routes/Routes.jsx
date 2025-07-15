@@ -16,6 +16,7 @@ import ManageUsers from "../pages/adminDashboard/ManageUsers";
 import Announcement from "../pages/adminDashboard/Announcement";
 import ReportedActivities from "../pages/adminDashboard/ReportedActivities";
 import AdminProfile from "../pages/adminDashboard/AdminProfile";
+import CommentPage from "../pages/CommentPage";
 
 export const router = createBrowserRouter([
   {
@@ -85,6 +86,10 @@ export const router = createBrowserRouter([
       {
         path: 'admin-profile',
         element: <AdminProfile/>
+      },
+      {
+        path:'comments/:id',
+        element:<CommentPage/>
       }
     ]
   }

@@ -1,14 +1,20 @@
 import React from 'react';
 import useAuth from '../hooks/useAuth';
 import AminDashboardHome from './adminDashboard/AminDashboardHome';
+import useUserRole from '../hooks/useUserRole';
 
 const DashboardHome = () => {
-  const { user, role } = useAuth();
+  const { user } = useAuth();
+  const {role, isLoading} = useUserRole();
+
+  if(isLoading){
+    <p>Loading............</p>
+  }
 
   return (
     <div className="p-6">
 
-      {role === 'admin' ? (
+      {role?.role === 'admin' ? (
         <>
           <h1 className="text-3xl font-bold mb-4">Dashboard Overview</h1>
 
