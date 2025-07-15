@@ -18,7 +18,7 @@ const CommentPage = () => {
   const [selectedFeedbacks, setSelectedFeedbacks] = useState({});
 
 
-  const { data: comments = [], isLoading } = useQuery({
+  const { data: comments = [], isLoading,refetch } = useQuery({
     queryKey: ['comments', id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/specific-post-comment/${id}`);
@@ -42,6 +42,7 @@ const CommentPage = () => {
             
             if(res.data.insertedId){
                 toast.success('Your successfully sent to Admin');
+                refetch()
             }
         } )
     }
