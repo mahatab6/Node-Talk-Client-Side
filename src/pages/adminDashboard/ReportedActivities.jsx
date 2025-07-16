@@ -81,8 +81,8 @@ const ReportedActivities = () => {
             <div className='space-x-3'>
               <button className='btn bg-green-500'>Approve Report</button>
               <button className='btn'>Dismiss</button>
-              <button className='btn bg-red-500'>Ban User</button>
-              <button className='btn border-amber-300'>Send Warning</button>
+              <button className='btn bg-red-500'>Delete Comment</button>
+              
             </div>
           </div>
         );
