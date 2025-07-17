@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import { FiUserPlus } from "react-icons/fi";
 import useAxiosToken from '../../hooks/useAxiosToken';
 import toast from 'react-hot-toast';
@@ -8,12 +8,15 @@ import toast from 'react-hot-toast';
 const ManageUsers = () => {
 
     const axiosSecureJWT = useAxiosToken();
+    const [search, setSearch] = useState('');
  
 
     const {data,refetch} = useQuery({
-        queryKey: ["user-stats"],
+        queryKey: ["user-stats", search],
         queryFn: async ()=>{
-            const res = await axiosSecureJWT.get('/manage-user-stats');
+            const res = await axiosSecureJWT.get('/manage-user-stats',{
+                params: {search}
+            });
             return res.data
         }
     })
@@ -48,7 +51,7 @@ const ManageUsers = () => {
                             <path d="m21 21-4.3-4.3"></path>
                             </g>
                         </svg>
-                        <input  type="search" placeholder="Search users by name or email..." />
+                        <input onChange={(e)=> setSearch(e.target.value)} type="search" placeholder="Search users by email..." />
                     </label>
                 </div>
 
