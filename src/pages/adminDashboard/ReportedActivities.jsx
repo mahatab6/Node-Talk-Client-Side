@@ -1,11 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-import React from 'react';
-import { FaRegCommentAlt } from "react-icons/fa";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router';
 import useAxiosToken from '../../hooks/useAxiosToken';
+import Swal from 'sweetalert2';
 
 const ReportedActivities = () => {
   const axiosSecureJWT = useAxiosToken();
+  const queryClient = useQueryClient();
 
   const { data, isLoading } = useQuery({
     queryKey: ["report"],
@@ -15,7 +15,41 @@ const ReportedActivities = () => {
     }
   });
 
+  const {mutate} = useMutation({
+    mutationFn: async (id) => {
+      const res = axiosSecureJWT.delete(`/comment/${id}`);
+        return res.data;
+    },
+    onSuccess: () =>{
+      queryClient.invalidateQueries(['report']);
+      Swal.fire({
+          title: "Comment Deleted!",
+          text: "The comment has been successfully removed.",
+          icon: "success"
+      });
+    }
+
+  })
+
   if (isLoading) return <p className="text-center text-xl py-10">Loading...</p>;
+
+
+  const handleCommentDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This action cannot be undone!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        mutate(id); // Assuming mutate is a function from useMutation
+      }
+    });
+};
+
 
   return (
     <div className='py-10 px-6'>
@@ -81,8 +115,7 @@ const ReportedActivities = () => {
             <div className='space-x-3'>
               <button className='btn bg-green-500'>Approve Report</button>
               <button className='btn'>Dismiss</button>
-              <button className='btn bg-red-500'>Delete Comment</button>
-              
+              <button onClick={()=> handleCommentDelete (report?.commentId)}  className='btn bg-red-500'>Delete Comment</button>
             </div>
           </div>
         );
