@@ -58,22 +58,6 @@ const ReportedActivities = () => {
         <p className="text-lg mb-2">Review and take action on reported content and user behavior</p>
       </div>
 
-      {/* Summary Stats (Optional: make dynamic later) */}
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-6 py-10'>
-        <div className='text-center p-6 bg-[#202338] rounded-2xl'>
-          <span className='text-xl font-bold text-yellow-300'>5</span>
-          <p>Pending Reports</p>
-        </div>
-        <div className='text-center p-6 bg-[#202338] rounded-2xl'>
-          <span className='text-xl font-bold text-red-500'>1</span>
-          <p>High Priority</p>
-        </div>
-        <div className='text-center p-6 bg-[#202338] rounded-2xl'>
-          <span className='text-xl font-bold text-green-500'>4</span>
-          <p>Resolved</p>
-        </div>
-      </div>
-
       {/* Loop through comments and match with report */}
       {data?.comments?.map(comment => {
         const report = data.reports?.find(r => r.commentId === comment._id.toString());
@@ -113,8 +97,6 @@ const ReportedActivities = () => {
 
             {/* Action Buttons */}
             <div className='space-x-3'>
-              <button className='btn bg-green-500'>Approve Report</button>
-              <button className='btn'>Dismiss</button>
               <button onClick={()=> handleCommentDelete (report?.commentId)}  className='btn bg-red-500'>Delete Comment</button>
             </div>
           </div>

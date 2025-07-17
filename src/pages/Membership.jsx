@@ -4,21 +4,34 @@ import { MdOutlineDone } from "react-icons/md";
 import { ImPower } from "react-icons/im";
 import Bronze from '../assets/Bronze.png'
 import Gold from '../assets/Gold.png'
+import MembershipButton from './MembershipButton';
+import useUserRole from '../hooks/useUserRole';
 
 
 
 
 const Membership = () => {
+    const {role}  = useUserRole();
     return (
         <div className='bg-background'>
             <div className='w-11/12 mx-auto '>
             <div className='text-center py-10 space-y-2'>
                 <h1 className='text-3xl lg:text-5xl font-bold '>Choose Your Membership</h1>
                 <p className='text-xl '>Unlock the full potential of our forum community with premium features</p>
-                <p className='inline-flex  items-center border px-6 py-3 text-2xl rounded-full mt-6 space-x-3'>
+
+                {
+                    (role?.role === 'user') && <p className='inline-flex  items-center border px-6 py-3 text-2xl rounded-full mt-6 space-x-3'>
                         <GoDotFill />
                         <span>Current Status: <span className="font-bold text-orange-400">BRONZE Member</span></span>
-                </p>
+                        </p>
+                }
+                {
+                    (role?.role === 'paidmember') && <p className='inline-flex  items-center border px-6 py-3 text-2xl rounded-full mt-6 space-x-3'>
+                        <GoDotFill />
+                        <span>Current Status: <span className="font-bold text-orange-500">Gold Member</span></span>
+                        </p>
+                }
+
             </div>
 
 
@@ -94,8 +107,7 @@ const Membership = () => {
                         </li>
                     </ul>
 
-                   <button className='bg-yellow-400  w-2/3 hover:bg-yellow-500  px-4 py-2 rounded btn'>
-                    Upgrade Now</button>
+                   <MembershipButton/>
 
                 </div>
                 

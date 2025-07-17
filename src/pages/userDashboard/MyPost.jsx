@@ -77,9 +77,8 @@ const MyPost = () => {
                                     <th>Delete</th>
                                 </tr>
                             </thead>
-
                             {
-                                data.map((post, index) => (
+                                data?.map((post, index) => (
                                     <tbody key={post._id}>
                                         <tr className="hover:bg-white/5 font-bold">
                                             <th>{index + 1}</th>
@@ -95,7 +94,7 @@ const MyPost = () => {
                                                 </Link>
                                             </td>
                                             <td>
-                                                <Link onClick={()=>handleDelete(post._id)} className='flex items-center btn hover:bg-red-600'>Delete
+                                                <Link onClick={()=>handleDelete(post?._id)} className='flex items-center btn hover:bg-red-600'>Delete
                                                     <MdDelete className='text-[#C084FC]' size={30}/>
                                                 </Link>
                                             </td>
