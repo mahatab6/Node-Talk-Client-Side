@@ -1,8 +1,24 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { FiUserPlus } from "react-icons/fi";
+import useAxiosToken from '../../hooks/useAxiosToken';
 
 
 const ManageUsers = () => {
+
+    const axiosSecureJWT = useAxiosToken();
+
+    const {data} = useQuery({
+        queryKey: ["user-stats"],
+        queryFn: async ()=>{
+            const res = await axiosSecureJWT.get('/manage-user-stats');
+            return res.data
+        }
+    })
+
+    console.log(data)
+
+
     return (
         <div className='py-10 px-6'>
             <div>
@@ -43,7 +59,7 @@ const ManageUsers = () => {
                             {/* head */}
                             <thead>
                                 <tr className='text-white font-bold text-xl'>
-                                    <th>User</th>
+                                    
                                     <th>Email</th>
                                     <th>Role</th>
                                     <th>Subscription</th>
@@ -52,14 +68,22 @@ const ManageUsers = () => {
                             </thead>
 
                             <tbody>
+
+                            {
+                                data?.userStats.map((userInfo)=>(
+                                    <>
+                                    <tr key={userInfo?._id} className="hover:bg-white/5 font-bold bg-white/30">
+                                        <td>{userInfo?.email}</td>
+                                        <td>{userInfo?.role}</td>
+                                        <td>{userInfo?.role === "admin" ? "admin" : userInfo.role === "paidmember" ?"Gold Member" :"BRONZE Member" }</td>
+                                        <td><button className='p-2 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600'>Make Admin</button></td>
+                                    </tr>
+                                    </>
+                                )
+                                )
+                            }
                             
-                                <tr className="hover:bg-white/5 font-bold bg-white/30">
-                                    <th>John Doe</th>
-                                    <td>john.doe@email.com</td>
-                                    <td>User</td>
-                                    <td>Premium</td>
-                                    <td>Make Admin</td>
-                                </tr>
+                            
 
                             </tbody>
                         </table>

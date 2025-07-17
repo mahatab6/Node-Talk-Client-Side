@@ -19,6 +19,12 @@ const AuthProvider = ({children}) => {
         setLoading(false);
         return signInWithEmailAndPassword(auth, email, password);
     }
+
+    const userProfile = (name, image) => {
+        return updateProfile(auth.currentUser,{
+            displayName: name, photoURL:image
+        })
+    }
     
     const LogOut = () => {
         setLoading(false);
@@ -29,24 +35,21 @@ const AuthProvider = ({children}) => {
         const unsubscribe = onAuthStateChanged(auth, async (currentuser) =>{
             setUser(currentuser);
             setLoading(false);
-            const userData = {
-                name: user?.displayName,
+            if(user){
+                const userData = {
                 email: user?.email,
                 role: "user",
-                
             }
             await axiosSecure.post('/users', userData);
+            }
+            
         });
         return (()=>{
             unsubscribe();
         })
     })
 
-    const userProfile = (name, image) => {
-        return updateProfile(auth.currentUser,{
-            displayName: name, photoURL:image
-        })
-    }
+    
 
     const provider = new GoogleAuthProvider();
 
