@@ -10,7 +10,7 @@ const ManageUsers = () => {
     const axiosSecureJWT = useAxiosToken();
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
-    const [limit] =useState(8);
+    const [limit] =useState(10);
  
 
     const {data,refetch} = useQuery({
@@ -87,7 +87,7 @@ const ManageUsers = () => {
                                     <tr key={userInfo?._id} className="font-bold hover:bg-indigo-800">
                                         <td>{userInfo?.email}</td>
                                         <td>{userInfo?.role}</td>
-                                        <td>{userInfo?.role === "admin" ? "admin" : userInfo.role === "paidmember" ?"Gold Member" :"BRONZE Member" }</td>
+                                        <td>{userInfo?.role === "admin" ? <span className='bg-blue-600  p-2 rounded-2xl'>👑 admin</span> : userInfo.role === "paidmember" ?<span className='bg-yellow-400 p-2 rounded-2xl text-black'>🥇 Gold Member</span> :"BRONZE Member" }</td>
                                         <td>{userInfo.role === "admin" ? ( 
                                             <button onClick={()=> handleUserRole(userInfo._id, "user")} className='p-2 rounded-xl bg-red-600 hover:bg-red-700 cursor-pointer'>Remove Admin</button>
                                         ): (
