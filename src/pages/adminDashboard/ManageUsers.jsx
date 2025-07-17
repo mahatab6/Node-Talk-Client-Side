@@ -2,13 +2,15 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { FiUserPlus } from "react-icons/fi";
 import useAxiosToken from '../../hooks/useAxiosToken';
+import toast from 'react-hot-toast';
 
 
 const ManageUsers = () => {
 
     const axiosSecureJWT = useAxiosToken();
+ 
 
-    const {data} = useQuery({
+    const {data,refetch} = useQuery({
         queryKey: ["user-stats"],
         queryFn: async ()=>{
             const res = await axiosSecureJWT.get('/manage-user-stats');
@@ -16,8 +18,13 @@ const ManageUsers = () => {
         }
     })
 
-    console.log(data)
-
+    const handleUserRole =async (id, newRole) => {
+        const res =await axiosSecureJWT.patch(`/user-stats-change/${id}`, {role: newRole});
+         if (res.data.modifiedCount){
+            toast.success("Role updated successfully!");
+            refetch();
+         }
+    }
 
     return (
         <div className='py-10 px-6'>
@@ -45,8 +52,8 @@ const ManageUsers = () => {
                     </label>
                 </div>
 
-                <div className='text-center p-6 bg-[#202338] rounded-2xl'>
-                    <span className='text-xl font-bold'>5</span>
+                <div className='text-center p-6 hover:bg-indigo-800 bg-[#202338] rounded-2xl'>
+                    <span className='text-xl font-bold'>{data?.totalUser}</span>
                     <p>Users Found</p>
                 </div>
             </div>
@@ -72,11 +79,16 @@ const ManageUsers = () => {
                             {
                                 data?.userStats.map((userInfo)=>(
                                     <>
-                                    <tr key={userInfo?._id} className="hover:bg-white/5 font-bold bg-white/30">
+                                    <tr key={userInfo?._id} className="font-bold hover:bg-indigo-800">
                                         <td>{userInfo?.email}</td>
                                         <td>{userInfo?.role}</td>
                                         <td>{userInfo?.role === "admin" ? "admin" : userInfo.role === "paidmember" ?"Gold Member" :"BRONZE Member" }</td>
-                                        <td><button className='p-2 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600'>Make Admin</button></td>
+                                        <td>{userInfo.role === "admin" ? ( 
+                                            <button onClick={()=> handleUserRole(userInfo._id, "user")} className='p-2 rounded-xl bg-red-600 hover:bg-red-700 cursor-pointer'>Remove Admin</button>
+                                        ): (
+                                            <button onClick={()=> handleUserRole(userInfo?._id, "admin")} className='p-2 rounded-xl cursor-pointer bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600'>Make Admin</button>
+                                        )}
+                                        </td>
                                     </tr>
                                     </>
                                 )
@@ -92,18 +104,18 @@ const ManageUsers = () => {
             </div>
 
             <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-                <div className='text-center p-6 bg-[#202338] rounded-2xl'>
-                    <span className='text-xl font-bold'>5</span>
+                <div className='text-center hover:bg-indigo-800 p-6 bg-[#202338] rounded-2xl'>
+                    <span className='text-xl font-bold'>{data?.adminCount}</span>
                     <p>Admins</p>
                 </div>
 
-                <div className='text-center p-6 bg-[#202338] rounded-2xl'>
-                    <span className='text-xl font-bold'>5</span>
+                <div className='text-center hover:bg-indigo-800 p-6 bg-[#202338] rounded-2xl'>
+                    <span className='text-xl font-bold'>{data?.paidMemberCount}</span>
                     <p>Premium Users</p>
                 </div>
 
-                <div className='text-center p-6 bg-[#202338] rounded-2xl'>
-                    <span className='text-xl font-bold'>5</span>
+                <div className='text-center hover:bg-indigo-800 p-6 bg-[#202338] rounded-2xl'>
+                    <span className='text-xl font-bold'>{data?.onlyUserCount}</span>
                     <p>Free Users</p>
                 </div>
             </div>
