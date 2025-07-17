@@ -9,13 +9,15 @@ const ManageUsers = () => {
 
     const axiosSecureJWT = useAxiosToken();
     const [search, setSearch] = useState('');
+    const [page, setPage] = useState(1);
+    const [limit] =useState(8);
  
 
     const {data,refetch} = useQuery({
-        queryKey: ["user-stats", search],
+        queryKey: ["user-stats", search, limit, page],
         queryFn: async ()=>{
             const res = await axiosSecureJWT.get('/manage-user-stats',{
-                params: {search}
+                params: {search, limit, page }
             });
             return res.data
         }
@@ -98,10 +100,29 @@ const ManageUsers = () => {
                                 )
                             }
                             
-                            
-
                             </tbody>
+
                         </table>
+
+                        <div className="flex gap-2 justify-center mt-4">
+
+                            <button disabled={page === 1} onClick={() => setPage(page - 1)} className="px-2 rounded disabled:opacity-50">
+                                Prev
+                            </button>
+
+                            {Array.from({ length: Math.ceil(data?.totalUser / limit) }, (_, i) => (
+                                <button key={i} onClick={() => setPage(i + 1)} className={`px-2 rounded ${ page === i + 1 ? 'bg-blue-500 text-white' : ''}`}
+                                >
+                                {i + 1}
+                                </button>
+                            ))}
+
+                            <button disabled={page === Math.ceil(data?.totalUser / limit)} onClick={() => setPage(page + 1)} className="px-2 rounded disabled:opacity-50">
+                                Next
+                            </button>
+
+                        </div>
+
                     </div>
                 </div>
             </div>

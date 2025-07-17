@@ -74,34 +74,24 @@ const Post = ({ sortType,search }) => {
                     </div>
                 ))
             }
+            
             <div className="flex gap-2 justify-center mt-4">
-                    <button
-                        disabled={page === 1}
-                        onClick={() => setPage(page - 1)}
-                        className="px-2 bg-gray-300 rounded disabled:opacity-50"
-                    >
-                        Prev
-                    </button>
 
-                    {Array.from({ length: Math.ceil(data?.total / limit) }, (_, i) => (
-                        <button
-                        key={i}
-                        onClick={() => setPage(i + 1)}
-                        className={`px-2 rounded ${
-                            page === i + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200'
-                        }`}
-                        >
-                        {i + 1}
-                        </button>
-                    ))}
+                <button disabled={page === 1} onClick={() => setPage(page - 1)} className="px-2 bg-gray-300 rounded disabled:opacity-50">
+                    Prev
+                </button>
 
-                    <button
-                        disabled={page === Math.ceil(data?.total / limit)}
-                        onClick={() => setPage(page + 1)}
-                        className="px-2 bg-gray-300 rounded disabled:opacity-50"
+                {Array.from({ length: Math.ceil(data?.total / limit) }, (_, i) => (
+                    <button key={i} onClick={() => setPage(i + 1)} className={`px-2 rounded ${ page === i + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
                     >
-                        Next
+                    {i + 1}
                     </button>
+                ))}
+
+                <button disabled={page === Math.ceil(data?.total / limit)} onClick={() => setPage(page + 1)} className="px-2 bg-gray-300 rounded disabled:opacity-50">
+                    Next
+                </button>
+
             </div>
 
         </div>
