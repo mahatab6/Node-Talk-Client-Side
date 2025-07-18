@@ -5,12 +5,13 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosToken from '../../hooks/useAxiosToken';
 import { useForm } from 'react-hook-form';
 import { IoMdAdd } from "react-icons/io";
+import toast from 'react-hot-toast';
 
 
 const AdminProfile = () => {
 
     const axiosSecureJWT = useAxiosToken();
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit,reset } = useForm();
 
     const {data}=useQuery({
         queryKey: ["user-count"],
@@ -20,8 +21,13 @@ const AdminProfile = () => {
         }
     })
 
-    const onSubmit = data =>{
-        console.log(data);
+    const onSubmit = async(data) =>{
+        const res =await axiosSecureJWT.post('/added-tags',data);
+        console.log(res)
+        if(res.data.insertedId){
+            toast.success('Successfully tags added!');
+            reset();
+        }
     } 
 
     const {user} = useAuth();
