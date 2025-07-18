@@ -1,7 +1,7 @@
 import React from 'react';
 import useAuth from '../../hooks/useAuth';
 import StatPieCharts from './StatPieCharts';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import useAxiosToken from '../../hooks/useAxiosToken';
 import { useForm } from 'react-hook-form';
 import { IoMdAdd } from "react-icons/io";
@@ -12,6 +12,7 @@ const AdminProfile = () => {
 
     const axiosSecureJWT = useAxiosToken();
     const { register, handleSubmit,reset } = useForm();
+     const queryClient =useQueryClient();
 
     const {data,refetch}=useQuery({
         queryKey: ["user-count"],
@@ -21,11 +22,20 @@ const AdminProfile = () => {
         }
     })
 
-    console.log(data?.tags)
+    const {mutate} = useMutation({
+        mutationFn: async (id)=>{
+            const res = await axiosSecureJWT.delete(`/tags-delete/${id}`)
+            return res.data;
+        },
+        onSuccess: ()=>{
+            queryClient.invalidateQueries(["user-count"])
+            toast.success('Successfully deleted tag!');
+        }
+    })
+
 
     const onSubmit = async(data) =>{
         const res =await axiosSecureJWT.post('/added-tags', data);
-        console.log(res)
         if(res.data.insertedId){
             toast.success('Successfully tags added!');
             reset();
@@ -36,6 +46,10 @@ const AdminProfile = () => {
             toast.error('This tag is already added!');
         }
     } 
+
+    const handleDelete = (id)=>{
+        mutate(id)
+    }
 
     const {user} = useAuth();
     return (
@@ -94,11 +108,12 @@ const AdminProfile = () => {
                         <button className='p-2 bg-green-500 rounded-xl cursor-pointer' type="submit"><IoMdAdd size={30}/></button>
                     </form>
 
-                    <div className='grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 mt-4 gap-1'>
+                    <div className='flex flex-wrap w-full mt-2'>
                         {
                             data?.tags.map((tag) => (
-                                <div key={tag._id} className='m-1'>
+                                <div key={tag._id} className='relative group m-2 hover:cursor-pointer'>
                                     <span className='text-base font-black bg-indigo-600 px-3 py-1 m-1 rounded-2xl'>{tag.tags}</span>
+                                     <button onClick={() => handleDelete(tag._id)} className='absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-xs px-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:cursor-pointer'title='Delete Tag'>✕</button>
                                 </div>
                             ))
                         }
