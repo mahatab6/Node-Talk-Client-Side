@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { FaBullhorn } from 'react-icons/fa';
 import useAxiosToken from '../../hooks/useAxiosToken';
 import toast from 'react-hot-toast';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 
 const Announcement = () => {
@@ -13,6 +13,7 @@ const Announcement = () => {
     const {user} = useAuth();
     const { register, handleSubmit, reset } = useForm();
     const axiosSecureJWT = useAxiosToken();
+    const queryClient = useQueryClient();
 
 
     const { data, refetch } = useQuery({
@@ -23,7 +24,16 @@ const Announcement = () => {
         }
     })
 
-    const {mutate} = useMutation({})
+    const {mutate} = useMutation({
+        mutationFn: async (id) => {
+            const res = await axiosSecureJWT.delete(`/announcement-delete/${id}`)
+            return res.data
+        },
+        onSuccess: ()=>{
+            queryClient.invalidateQueries(['announcements'])
+            Swal.fire("Deleted!", "The announcement has been deleted.", "success");
+        }
+    })
 
     const onSubmit =async (data) => {
         const fullData = {

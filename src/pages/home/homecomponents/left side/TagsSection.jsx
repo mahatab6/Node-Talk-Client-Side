@@ -1,11 +1,37 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { FaFilter } from 'react-icons/fa';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 
-const TagsSection = () => {
+const TagsSection = ({setSearch}) => {
+
+    const axiosSecure = useAxiosSecure();
+
+    const { data } = useQuery({
+        queryKey:["tags-filter"],
+        queryFn: async ()=>{
+            const res = await axiosSecure.get('/tags-filter');
+            return res.data;
+        }
+    })
+    
+    const handleTagClick = (tag) =>{
+        setSearch(tag)
+    }
+
     return (
         <div className=' bg-secondary  p-4 rounded-2xl' >
             <h2 className='flex items-center text-2xl gap-1 justify-center pb-2 font-bold'><FaFilter />Filter by Tags</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, maiores labore, similique, recusandae possimus consectetur minima expedita commodi quia dolor assumenda perspiciatis laudantium saepe iste. Neque iste rerum optio? Cum.</p>
+            <div className="flex flex-wrap gap-2 justify-center mt-4">
+                {
+                    data?.map((tag) => (
+                    <button onClick={() => handleTagClick(tag?.tags)} key={tag?._id}  className="bg-indigo-600 cursor-pointer text-white px-3 py-1 rounded-2xl text-sm font-medium">
+                        #{tag?.tags}
+                    </button>
+                    
+                    ))
+                }
+            </div>
         </div>
     );
 };

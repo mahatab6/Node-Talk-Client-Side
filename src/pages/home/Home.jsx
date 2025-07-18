@@ -16,7 +16,7 @@ const Home = () => {
                 {/* left-side */}
                 <div className='lg:col-span-1 space-y-5'>
                     <Announcements/>
-                    <TagsSection/>
+                    <TagsSection setSearch={setSearch}/>
                     <SortPosts setSortType={setSortType}/>
                 </div>
 
