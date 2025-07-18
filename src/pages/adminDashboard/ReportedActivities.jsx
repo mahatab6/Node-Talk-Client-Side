@@ -17,7 +17,7 @@ const ReportedActivities = () => {
 
   const {mutate} = useMutation({
     mutationFn: async (id) => {
-      const res = axiosSecureJWT.delete(`/comment/${id}`);
+      const res =await axiosSecureJWT.delete(`/comment/${id}`);
         return res.data;
     },
     onSuccess: () =>{
@@ -25,6 +25,22 @@ const ReportedActivities = () => {
       Swal.fire({
           title: "Comment Deleted!",
           text: "The comment has been successfully removed.",
+          icon: "success"
+      });
+    }
+
+  })
+
+  const dismissReportMutation = useMutation({
+    mutationFn: async (id) => {
+      const res =await axiosSecureJWT.delete(`/comment-dismiss/${id}`);
+        return res.data;
+    },
+    onSuccess: () =>{
+      queryClient.invalidateQueries(['dismiss-comment']);
+      Swal.fire({
+          title: "Dismissed",
+          text: "The report has been ignored.",
           icon: "success"
       });
     }
@@ -48,62 +64,91 @@ const ReportedActivities = () => {
         mutate(id); // Assuming mutate is a function from useMutation
       }
     });
-};
-
+  };
+  const handleDismiss = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This report will be dismissed and no action will be taken.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, dismiss it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dismissReportMutation.mutate(id);
+      }
+    });
+  };
 
   return (
-    <div className='py-10 px-6'>
-      <div>
-        <h1 className='text-3xl font-bold mb-4'>Reported Activities</h1>
-        <p className="text-lg mb-2">Review and take action on reported content and user behavior</p>
-      </div>
+  <div className='py-10 px-6'>
+    <div>
+      <h1 className='text-3xl font-bold mb-4'>Reported Activities</h1>
+      <p className="text-lg mb-2">Review and take action on reported content and user behavior</p>
+    </div>
 
-      {/* Loop through comments and match with report */}
-      {data?.comments?.map(comment => {
-        const report = data.reports?.find(r => r.commentId === comment._id.toString());
-        return (
-          <div key={comment._id} className='p-6 bg-[#202338] rounded-2xl mb-6'>
-            <div className='grid grid-cols-1 md:grid-cols-2 items-center space-y-3 mb-3'>
-              <div>
-                <p className='pb-2'>commenter User</p>
-                <div className='inline-flex gap-3 items-center'>
-                  <div className="avatar">
-                    <div className="w-10 rounded-full">
-                      <img src={comment?.freebackPhoto} alt="avatar" />
+    {
+      data?.comments?.length > 0 ? (
+        data.comments.map(comment => {
+          const report = data.reports?.find(r => r.commentId === comment._id.toString());
+          return (
+            <div key={comment._id} className='p-6 bg-[#202338] rounded-2xl mb-6'>
+              <div className='grid grid-cols-1 md:grid-cols-2 items-center space-y-3 mb-3'>
+                <div>
+                  <p className='pb-2'>Commenter User</p>
+                  <div className='inline-flex gap-3 items-center'>
+                    <div className="avatar">
+                      <div className="w-10 rounded-full">
+                        <img src={comment?.freebackPhoto} alt="avatar" />
+                      </div>
                     </div>
+                    <h3 className='text-xl font-bold'>Name: {comment?.freebackName}</h3>
                   </div>
-                  <h3 className='text-xl font-bold'>Name: {comment?.freebackName}</h3>
+                </div>
+
+                <div>
+                  <p className='pb-2'>Report Reason</p>
+                  <span className='p-1 px-2 rounded-xl border'>
+                    {report?.feedback || 'No feedback'}
+                  </span>
                 </div>
               </div>
 
-              <div>
-                <p className='pb-2'>Report Reason</p>
-                <span className='p-1 px-2 rounded-xl border'>
-                  {report?.feedback || 'No feedback'}
-                </span>
+
+              <div className='pb-2'>
+                <p className='pb-2'>Reported Content</p>
+                <div className='flex justify-between items-center p-2 bg-slate-700/30 border-l-4 border-red-600 rounded-2xl'>
+                  <h3>{comment?.comment}</h3>
+                  <Link to={`/post-details/${comment?.postId}`} className='btn'>View Post</Link>
+                </div>
+              </div>
+
+              <hr className='my-4' />
+
+              {/* Action Buttons */}
+              <div className='space-x-3'>
+                <button onClick={() => handleCommentDelete(report?.commentId)} className='btn bg-red-500'>
+                  Delete Comment
+                </button>
+                <button onClick={() => handleDismiss(report?._id)} className='btn bg-black text-white'>
+                  Dismiss
+                </button>
               </div>
             </div>
+          );
+        })
+      ) : (
+        <div className="mt-20 text-center text-gray-400">
+          <h1 className="text-2xl font-bold">No Reports at the Moment</h1>
+          <p className="text-sm mt-2 text-gray-500">You're all caught up. Nothing needs your attention now.</p>
+        </div>
 
-            {/* Reported Comment Content */}
-            <div className='pb-2'>
-              <p className='pb-2'>Reported Content</p>
-              <div className='flex justify-between items-center p-2 bg-slate-700/30 border-l-4 border-red-600 rounded-2xl'>
-                <h3>{comment?.comment}</h3>
-                <Link to={`/post-details/${comment?.postId}`} className='btn'>View Post</Link>
-              </div>
-            </div>
+      )
+    }
+  </div>
+);
 
-            <hr className='my-4' />
-
-            {/* Action Buttons */}
-            <div className='space-x-3'>
-              <button onClick={()=> handleCommentDelete (report?.commentId)}  className='btn bg-red-500'>Delete Comment</button>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
 };
 
 export default ReportedActivities;

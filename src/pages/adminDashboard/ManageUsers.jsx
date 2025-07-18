@@ -13,7 +13,7 @@ const ManageUsers = () => {
     const [limit] =useState(10);
  
 
-    const {data,refetch} = useQuery({
+    const {data,isLoading, refetch} = useQuery({
         queryKey: ["user-stats", search, limit, page],
         queryFn: async ()=>{
             const res = await axiosSecureJWT.get('/manage-user-stats',{
@@ -22,6 +22,10 @@ const ManageUsers = () => {
             return res.data
         }
     })
+
+    if(isLoading){
+        <p>Loading...............</p>
+    }
 
     const handleUserRole =async (id, newRole) => {
         const res =await axiosSecureJWT.patch(`/user-stats-change/${id}`, {role: newRole});
