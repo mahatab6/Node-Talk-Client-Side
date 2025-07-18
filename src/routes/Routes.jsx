@@ -17,6 +17,7 @@ import Announcement from "../pages/adminDashboard/Announcement";
 import ReportedActivities from "../pages/adminDashboard/ReportedActivities";
 import AdminProfile from "../pages/adminDashboard/AdminProfile";
 import CommentPage from "../pages/CommentPage";
+import AnnouncementsPage from "../components/AnnouncementsPage";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
       {
         path: "membership",
         element:<Privaterouter><Membership/></Privaterouter>
+      },
+      {
+        path:'announcements',
+        element:<AnnouncementsPage/>
       }
     ]
   },

@@ -5,6 +5,7 @@ import { FaRegUserCircle } from 'react-icons/fa';
 import { IoNotifications } from "react-icons/io5";
 import toast from 'react-hot-toast';
 import NodeTalkLogo from './NodeTalkLogo';
+import Notification from './Notification';
 
 const Navbar = () => {
 
@@ -59,14 +60,9 @@ const Navbar = () => {
                     {
                         user?.email? 
                         <>
-                            <div className="dropdown dropdown-end">
-                                <div tabIndex={0} role="button" className="m-1 p-2 bg-base-300 rounded-full hover:cursor-pointer"><IoNotifications size={30} /></div>
-                                <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-                                    <li><a>Item 1</a></li>
-                                    <li><a>Item 2</a></li>
-                                </ul>
-                            </div>
                             
+                            <Notification/>
+    
                             <div className="dropdown dropdown-end ">
                                 <div tabIndex={0} role="button" className=" m-1">
                                     <div className="avatar avatar-placeholder hover:cursor-pointer">
