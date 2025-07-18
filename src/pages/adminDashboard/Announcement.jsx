@@ -2,23 +2,63 @@ import React from 'react';
 import useAuth from '../../hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import { FaBullhorn } from 'react-icons/fa';
+import useAxiosToken from '../../hooks/useAxiosToken';
+import toast from 'react-hot-toast';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import Swal from 'sweetalert2';
 
 const Announcement = () => {
 
 
     const {user} = useAuth();
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
+    const axiosSecureJWT = useAxiosToken();
 
 
-    const onSubmit = data => {
+    const { data, refetch } = useQuery({
+        queryKey:["announcements"],
+        queryFn: async ()=>{
+            const res = await axiosSecureJWT.get('/all-announcements');
+            return res.data;
+        }
+    })
+
+    const {mutate} = useMutation({})
+
+    const onSubmit =async (data) => {
         const fullData = {
             ...data,
+            createdAt: new Date().toISOString()
         };
 
-        console.log(fullData);
+        const res = await axiosSecureJWT.post('/announcement-public', fullData);
+        if(res.data.insertedId){
+            toast.success('Announcement is now public!');
+            reset();
+            refetch();
+        }
     }
 
+    const handleDelete = async (id) =>{
+        Swal.fire({
+            title: "Are you sure?",
+            text: "This announcement will be permanently deleted.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!"
+            })
+            .then((result) =>{
+                if (result.isConfirmed){
+                    mutate(id)
+                }
+            })
+           
+    }
 
+    
+    
 
     return (
         <div className='py-10 px-6'>
@@ -40,18 +80,18 @@ const Announcement = () => {
                             <label className=' block text-xl mb-2' htmlFor="">Author Image</label>
                             <div className='flex items-center gap-3'>    
                                 <img src={user?.photoURL} alt="" className='w-12 rounded-full'/>  
-                                <input className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" value={user?.photoURL} readOnly placeholder={user?.photoURL} {...register("Author Image", {required: true})} />
+                                <input className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" value={user?.photoURL} readOnly placeholder={user?.photoURL} {...register("AuthorImage", {required: true})} />
                             </div>
                         </div>
 
                         <div>
                             <label className=' block text-xl mb-2' htmlFor="">Author Name</label>
-                            <input className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" value={user?.displayName} readOnly placeholder={user?.displayName} {...register("Author Name", {required: true})} />
+                            <input className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" value={user?.displayName} readOnly placeholder={user?.displayName} {...register("AuthorName", {required: true})} />
                         </div>
 
                         <div>
                             <label className=' block text-xl mb-2' htmlFor="">Announcement Title </label>
-                            <input className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" placeholder="Enter Your Announcement Title" {...register("Announcement Title", {required: true})} />
+                            <input className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" placeholder="Enter Your Announcement Title" {...register("AnnouncementTitle", {required: true})} />
                         </div>
 
                         <div>
@@ -66,20 +106,26 @@ const Announcement = () => {
                 </div>
 
 
-                <div className='p-10 bg-[#202338] rounded-2xl'>
+                <div className='p-10 bg-[#202338] rounded-2xl max-h-80 md:max-h-164 overflow-y-auto'>
                     <h1 className='text-3xl font-bold mb-6 flex items-center gap-3'> Recent Announcements</h1>
 
-                    <div className=' space-y-2 bg-[#2C2D4A] p-5 rounded-2xl mb-2'>
-                        <div className='flex items-center gap-3 '>
-                            <img src={user?.photoURL} className=' rounded-full w-14' alt="" />
-                            <div>
-                                <h3 className='text-xl font-bold'>Name: Raju</h3>
-                                <span className='text-xl'>24/05/2005 12:00 am</span>
+                    {
+                        data?.map((recent)=>(
+                            <div key={recent._id} className=' space-y-2 bg-[#2C2D4A] p-5 rounded-2xl mb-2'>
+                                <div className='flex items-center gap-3 '>
+                                    <img src={recent?.AuthorImage} className=' rounded-full w-14' alt="" />
+                                    <div>
+                                        <h3 className='text-xl font-bold'>{recent?.AuthorName}</h3>
+                                        <span className='text-xl'> {new Date(recent?.createdAt).toLocaleString()}</span>
+                                    </div>
+                                </div>
+                                <h3 className='text-xl'>{recent?.AnnouncementTitle}</h3>
+                                <p>{recent?.Description}</p>
+                                <hr />
+                                <button onClick={() => handleDelete(recent?._id)} className="mt-3 bg-red-600 cursor-pointer hover:bg-red-700 text-white px-4 py-1 rounded"> Delete</button>
                             </div>
-                        </div>
-                        <h3>Platform Maintenance Scheduled</h3>
-                        <p>We will be performing scheduled maintenance on our platform this weekend from 2:00 AM to 6:00 AM EST...</p>
-                    </div>
+                        ))
+                    }
                 </div>
 
             </div>
