@@ -1,13 +1,16 @@
 import React from 'react';
 import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
 
-const siteStats = [
-  { label: 'Posts', value: 1234, color: '#1976d2' },
-  { label: 'Comments', value: 568, color: '#9c27b0' },
-  { label: 'Users', value: 2847, color: '#ff9800' },
-];
 
-export default function StatPieCharts() {
+export default function StatPieCharts({data}) {
+
+  const siteStats = [
+    { label: 'Posts', value:data?.postCount, color: '#1976d2' },
+    { label: 'Comments', value: data?.commentCount, color: '#9c27b0' },
+    { label: 'Users', value:data?.userCount, color: '#ff9800' },
+  ];
+
+
   return (
     <div style={{ width: 300, margin: 'auto' }}>
       <PieChart
@@ -25,28 +28,13 @@ export default function StatPieCharts() {
             fontWeight: 'bold',
             fill: '#fff',
           },
+          '& .MuiChartsLegend-root': {
+            color: '#fff',
+          },
         }}
         width={300}
         height={300}
       />
-      <div style={{ marginTop: 20, textAlign: 'center' }}>
-        {siteStats.map((item) => (
-          <div key={item.label} style={{ marginBottom: 6, fontWeight: 'bold', color: item.color }}>
-            <span
-              style={{
-                display: 'inline-block',
-                width: 12,
-                height: 12,
-                backgroundColor: item.color,
-                borderRadius: 4,
-                marginRight: 8,
-                verticalAlign: 'middle',
-              }}
-            />
-            {item.label}: {item.value.toLocaleString()}
-          </div>
-        ))}
-      </div>
     </div>
   );
 }
