@@ -13,7 +13,7 @@ const AdminProfile = () => {
     const axiosSecureJWT = useAxiosToken();
     const { register, handleSubmit,reset } = useForm();
 
-    const {data}=useQuery({
+    const {data,refetch}=useQuery({
         queryKey: ["user-count"],
         queryFn: async () =>{
             const res = await axiosSecureJWT.get('/total-user-info');
@@ -21,12 +21,19 @@ const AdminProfile = () => {
         }
     })
 
+    console.log(data?.tags)
+
     const onSubmit = async(data) =>{
-        const res =await axiosSecureJWT.post('/added-tags',data);
+        const res =await axiosSecureJWT.post('/added-tags', data);
         console.log(res)
         if(res.data.insertedId){
             toast.success('Successfully tags added!');
             reset();
+            refetch();
+
+        }
+        if (res.data?.message === "Tags already adding"){
+            toast.error('This tag is already added!');
         }
     } 
 
@@ -86,6 +93,16 @@ const AdminProfile = () => {
                         <input className='p-2 border w-full rounded-xl' type="text" placeholder="Add new tags........" {...register('tags')} />
                         <button className='p-2 bg-green-500 rounded-xl cursor-pointer' type="submit"><IoMdAdd size={30}/></button>
                     </form>
+
+                    <div className='grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 mt-4 gap-1'>
+                        {
+                            data?.tags.map((tag) => (
+                                <div key={tag._id} className='m-1'>
+                                    <span className='text-base font-black bg-indigo-600 px-3 py-1 m-1 rounded-2xl'>{tag.tags}</span>
+                                </div>
+                            ))
+                        }
+                    </div>
                 
                 </div>
             </div>
