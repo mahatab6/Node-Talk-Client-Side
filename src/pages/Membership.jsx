@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GoDotFill } from "react-icons/go";
 import { MdOutlineDone } from "react-icons/md";
 import { ImPower } from "react-icons/im";
@@ -14,7 +14,7 @@ import LoadingPage from './LoadingPage';
 const Membership = () => {
     const {role, isLoading}  = useUserRole();
 
-    if(isLoading){
+    if(isLoading ){
         return <LoadingPage/>
     }
     
@@ -113,7 +113,7 @@ const Membership = () => {
                         </li>
                     </ul>
 
-                   <MembershipButton/>
+                   <MembershipButton />
 
                 </div>
                 

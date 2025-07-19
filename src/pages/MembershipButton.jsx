@@ -27,7 +27,7 @@ const MembershipButton = () => {
             <DialogContent>
 
               <Elements stripe={stripePromise}>
-                <MemberPaymentForm/>
+                <MemberPaymentForm setIsOpen={setIsOpen} />
               </Elements>
 
             </DialogContent>

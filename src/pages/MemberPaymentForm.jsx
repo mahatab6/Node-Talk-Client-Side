@@ -3,8 +3,9 @@ import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import useAuth from '../hooks/useAuth';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router';
 
-const MemberPaymentForm = () => {
+const MemberPaymentForm = ({setIsOpen}) => {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
@@ -14,6 +15,7 @@ const MemberPaymentForm = () => {
   const axiosSecure = useAxiosSecure();
   const [ setMessage] = useState('');
   const {user} = useAuth();
+  const navigate = useNavigate();
 
 
   const handleSubmit = async (e) => {
@@ -73,13 +75,15 @@ const MemberPaymentForm = () => {
 
     else if (paymentIntent.status === 'succeeded') {
         setPaymentSuccess(true);
-        toast.success('🎉 Payment successful!')
+        toast.success('🎉 Payment successful!');
+        setIsOpen(false);
+        navigate('/dashboard/my-profile')
         await axiosSecure.post('/payments', {
             paymentIntent,
             userEmail: user?.email,
         });
         
-        console.log('PaymentIntent:', paymentIntent);
+        
       }
     
     else {
