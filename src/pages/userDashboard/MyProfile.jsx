@@ -56,18 +56,18 @@ const MyProfile = () => {
                                     role?.role === 'user' && 
                                     
                                     <span className="absolute right-16 w-10 h-10 p-1 bg-white border rounded-full ">
-                                        <img src={Bronze} className='w-12' alt="" />
+                                        <img src={Bronze} className='w-12' alt="" referrerPolicy='no-referrer' />
                                     </span>
                                 }
                                 {
                                     role?.role === 'paidmember' && 
 
                                     <span className="absolute right-16 w-10 h-10 p-1 bg-white border rounded-full ">
-                                        <img src={Gold} className='w-12' alt="" />
+                                        <img src={Gold} className='w-12' alt="" referrerPolicy='no-referrer' />
                                     </span>
                                 }
                                 {
-                                    user?.photoURL? <img src={user?.photoURL} alt="" className="w-20 h-20 border rounded-full dark:bg-gray-500 dark:border-gray-300" /> : <FaRegUserCircle size={35}/>
+                                    user?.photoURL? <img src={user?.photoURL} alt="" referrerPolicy='no-referrer' className="w-20 h-20 border rounded-full dark:bg-gray-500 dark:border-gray-300" /> : <FaRegUserCircle size={35}/>
                                 }
                             </div>
                         </div>

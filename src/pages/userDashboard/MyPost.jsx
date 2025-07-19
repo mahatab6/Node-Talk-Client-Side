@@ -7,6 +7,8 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import useAxiosToken from '../../hooks/useAxiosToken';
 import Swal from 'sweetalert2';
 import LoadingPage from '../LoadingPage';
+import useAuth from '../../hooks/useAuth';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 
 
@@ -16,6 +18,8 @@ const MyPost = () => {
     const queryClient =useQueryClient();
     const [page, setPage] = useState(1);
     const [limit] =useState(5);
+    const {user, loading} = useAuth();
+    const axiosSecure = useAxiosSecure();
 
     const {data, isLoading} = useQuery({
         queryKey: ['user-post',page,limit],
@@ -25,10 +29,10 @@ const MyPost = () => {
         }
     })
 
-    const {data:postCount} = useQuery({
-        queryKey: ['post-count'],
+    const {data:postCount } = useQuery({
+        queryKey:["user-summary"],
         queryFn: async () => {
-            const res = await axiosSecureJWT.get("/specific-post-count");
+            const res = await axiosSecure.get(`/specific-post-count/${user?.email}`)
             return res.data;
         }
     })
@@ -49,7 +53,9 @@ const MyPost = () => {
     });
 
 
-    if(isLoading){
+    
+
+    if(isLoading || loading){
         return <LoadingPage/>
     }
 
@@ -75,7 +81,7 @@ const MyPost = () => {
             <DashboardText/>
 
             <div className='p-10 bg-[#202338] rounded-2xl mb-10'>
-                <h2 className='text-3xl font-bold mb-6'>My Posts {postCount}</h2>
+                <h2 className='text-3xl font-bold mb-6'>My Posts {postCount?.count}</h2>
                 <div>
                     <div className="overflow-x-auto ">
                         <table className="table">
@@ -124,14 +130,14 @@ const MyPost = () => {
                             Prev
                         </button>
 
-                        {Array.from({ length: Math.ceil(postCount / limit) }, (_, i) => (
+                        {Array.from({ length: Math.ceil(postCount?.count / limit) }, (_, i) => (
                             <button key={i} onClick={() => setPage(i + 1)} className={`px-2 rounded ${ page === i + 1 ? 'bg-blue-500 ' : ''}`}
                             >
                             {i + 1}
                             </button>
                         ))}
 
-                        <button disabled={page === Math.ceil(postCount / limit)} onClick={() => setPage(page + 1)} className="px-2 rounded disabled:opacity-50">
+                        <button disabled={page === Math.ceil(postCount?.count / limit)} onClick={() => setPage(page + 1)} className="px-2 rounded disabled:opacity-50">
                             Next
                         </button>
 
