@@ -122,7 +122,7 @@ const MyProfile = () => {
             <div className='mt-10  rounded-xl p-6 bg-[#202338]'>
                 <h2 className='text-xl font-semibold mb-4'>Recent Posts</h2>
                 {
-                    summary?.recentPost.map((post) => (
+                    summary?.recentPost?.map((post) => (
                         <div key={post._id} className='flex items-center justify-between p-4 bg-white/5 rounded-lg m-2'>
                             <div>
                                 <h3 className=' text-base font-bold mb-1'>{post?.PostTitle}</h3>

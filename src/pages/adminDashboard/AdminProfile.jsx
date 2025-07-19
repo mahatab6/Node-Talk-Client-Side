@@ -71,7 +71,7 @@ const AdminProfile = () => {
 
                 <div className='grid grid-cols-1 space-y-4'>
                     <div className='flex space-x-4 '>
-                        <img src={user?.photoURL} alt="" className='w-20 rounded-full'/>
+                        <img src={user?.photoURL} alt="" referrerPolicy='no-referrer' className='w-20 rounded-full'/>
                         <div>
                             <h3 className='text-2xl font-bold'>{user?.displayName}</h3>
                             <p>{user?.email}</p>
