@@ -2,26 +2,36 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { Controller } from 'react-hook-form';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
 
 const TagDropdown = ({ control, name }) => {
     const [options, setOptions] = useState([]);
 
-    useEffect(() => {
-        // Fake data
-        const fakeTags = [
-            { _id: "1", name: "React" },
-            { _id: "2", name: "MongoDB" },
-            { _id: "3", name: "Express.js" }
-        ];
 
-        // Convert to react-select format
-        const formatted = fakeTags.map(tag => ({
-            value: tag.name,
-            label: tag.name
-        }));
+    const axiosSecure = useAxiosSecure();
+        
+    
+        
+        const { data: tagsData = [] } = useQuery({
+            queryKey:["tags-filter"],
+            queryFn: async ()=>{
+                const res = await axiosSecure.get('/suggestionslist-tags');
+                return res.data;
+            }
+        })
 
-        setOptions(formatted);
-    }, []);
+        
+        useEffect(() => {
+            const formatted = tagsData?.map(tag => ({
+                value: tag.tags,
+                label: tag.tags
+            }));
+
+            setOptions(formatted);
+
+            }, [tagsData]
+        );
 
     return (
         <Controller

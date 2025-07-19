@@ -4,9 +4,14 @@ import { Link, NavLink } from 'react-router';
 import AdminSidebarItems from './AdminSidebarItems';
 import { FaTachometerAlt } from 'react-icons/fa';
 import useUserRole from '../../hooks/useUserRole';
+import LoadingPage from '../../pages/LoadingPage';
 
 const Sidebar = () => {
-    const {role} = useUserRole();
+    const {role, isLoading} = useUserRole();
+
+    if(isLoading){
+        <LoadingPage/>
+    }
 
     return (
         <div className="drawer-side ">
