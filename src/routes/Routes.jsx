@@ -18,6 +18,7 @@ import ReportedActivities from "../pages/adminDashboard/ReportedActivities";
 import AdminProfile from "../pages/adminDashboard/AdminProfile";
 import CommentPage from "../pages/CommentPage";
 import AnnouncementsPage from "../components/AnnouncementsPage";
+import LoadingPage from "../pages/LoadingPage";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
       {
         path:'announcements',
         element:<AnnouncementsPage/>
+      },
+      {
+        path:'lodaing',
+        element:<LoadingPage/>
       }
     ]
   },
