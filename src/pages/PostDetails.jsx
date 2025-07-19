@@ -96,7 +96,7 @@ const PostDetails = () => {
                         <div className='flex items-center space-x-3'>
                             <div className="avatar avatar-placeholder">
                             <div className="bg-neutral text-neutral-content w-12 rounded-full">
-                                <img src={postData?.AuthorImage} alt="" />
+                                <img src={postData?.AuthorImage} alt="" referrerPolicy='no-referrer' />
                             </div>
                         </div>
                         <h2 className='text-xl'>{postData?.AuthorName}</h2>
@@ -190,7 +190,7 @@ const PostDetails = () => {
                         <div className=" avatar avatar-placeholder">
                             <div className="bg-neutral text-neutral-content w-14 rounded-full">
                                 {
-                                    (user)? <img src={user?.photoURL} alt="" /> : <FaUserAlt size={35} />
+                                    (user)? <img src={user?.photoURL} alt="" referrerPolicy='no-referrer' /> : <FaUserAlt size={35} />
                                 }
                                 
                             </div>

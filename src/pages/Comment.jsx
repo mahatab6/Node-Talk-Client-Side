@@ -41,7 +41,7 @@ const Comment = ({ id, uiload }) => {
             <div key={comment._id} className="md:flex gap-5 bg-secondary p-4 rounded-2xl border">
               <div className="avatar avatar-placeholder">
                 <div className="bg-neutral text-neutral-content w-14 rounded-full">
-                  <img src={comment.freebackPhoto} alt="avatar" />
+                  <img src={comment.freebackPhoto} alt="avatar" referrerPolicy='no-referrer' />
                 </div>
               </div>
 
