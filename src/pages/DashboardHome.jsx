@@ -8,7 +8,7 @@ const DashboardHome = () => {
   const { user, loading } = useAuth();
   const {role, isLoading} = useUserRole();
 
-  if(isLoading, loading){
+  if(isLoading || loading){
     <LoadingPage/>
   }
 

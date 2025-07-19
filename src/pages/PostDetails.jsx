@@ -11,12 +11,13 @@ import { FaUserAlt } from "react-icons/fa";
 import { formatDistanceToNow } from 'date-fns';
 import toast from 'react-hot-toast';
 import Comment from './Comment';
+import LoadingPage from './LoadingPage';
 
 
 
 
 const PostDetails = () => {
-    const {user} = useAuth();
+    const {user, loading} = useAuth();
     const axiosSecure = useAxiosSecure();
     const {id} = useParams();
     const { register, handleSubmit, reset } = useForm();
@@ -30,8 +31,8 @@ const PostDetails = () => {
         }
     })
 
-    if(isLoading){
-        <p>loading.........</p>
+    if(isLoading || loading){
+        return <LoadingPage/>
     }
 
 
@@ -134,16 +135,16 @@ const PostDetails = () => {
 
                     <div className="flex gap-2 flex-wrap pt-2"> <p className='text-xl'>Tags:</p>
                             {postData?.tags?.map((tag, index) => (
-                                <span key={index} className="px-3 py-1 rounded-full bg-violet-700 text-sm">
+                                <span key={index} className="px-3 py-1 rounded-full bg-violet-700 text-white text-sm">
                                 {tag.value}
                                 </span>
                             ))}
                     </div>
 
                     <div className='flex space-x-2 '>
-                        <p className='flex items-center gap-2 '><FaRegComments /> {postData?.commentCount} comments</p>
-                        <p className='flex items-center'><FaAngleUp className='text-green-500' />{postData?.upVote}</p>
-                        <p className='flex items-center'><FaAngleDown className='text-red-500' />{postData?.downVote}</p>
+                        <p className='flex items-center gap-2 '><FaRegComments size={25} /> {postData?.commentCount} comments</p>
+                        <p className='flex items-center'><FaAngleUp size={25} className='text-green-500' />{postData?.upVote}</p>
+                        <p className='flex items-center'><FaAngleDown size={25} className='text-red-500' />{postData?.downVote}</p>
                     </div>
     
                     {/* total vote and comment section */}

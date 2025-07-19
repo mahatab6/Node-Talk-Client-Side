@@ -16,10 +16,10 @@ const Navbar = () => {
     const link = (
         <>
         <li>
-            <NavLink to='/' className={({isActive}) => isActive?"font-semibold border-b-1":""}>Home</NavLink>
+            <NavLink to='/' className={({isActive}) => isActive?"font-semibold border-b-1 rounded-none ":""}>Home</NavLink>
         </li>
         <li>
-            <NavLink to="/membership" className={({isActive}) => isActive?" font-semibold border-b-1":""}>Membership</NavLink>
+            <NavLink to="/membership" className={({isActive}) => isActive?" font-semibold border-b-1 rounded-none":""}>Membership</NavLink>
         </li>
         </>
     )
@@ -35,7 +35,7 @@ const Navbar = () => {
     }
 
     return (
-        <div className='bg-background shadow-sm '>
+        <div className='bg-white shadow-sm '>
            <div className="navbar w-11/12 mx-auto ">
                 <div className="navbar-start ">
                     <div className="dropdown">
@@ -68,7 +68,7 @@ const Navbar = () => {
                                     <div className="avatar avatar-placeholder hover:cursor-pointer">
                                         <div className="bg-neutral text-neutral-content w-12 rounded-full">
                                             {
-                                                user?.photoURL? <img src={user?.photoURL} alt="" /> : <FaRegUserCircle size={35}/>
+                                                user?.photoURL? <img src={user?.photoURL} alt="" referrerPolicy='no-referrer' /> : <FaRegUserCircle size={35}/>
                                             }
                                         </div>
                                     </div>

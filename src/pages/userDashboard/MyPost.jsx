@@ -6,6 +6,7 @@ import { MdDelete } from "react-icons/md";
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import useAxiosToken from '../../hooks/useAxiosToken';
 import Swal from 'sweetalert2';
+import LoadingPage from '../LoadingPage';
 
 
 
@@ -38,7 +39,7 @@ const MyPost = () => {
     });
 
     if(isLoading){
-        return <p>Loading.........</p>
+        return <LoadingPage/>
     }
 
 

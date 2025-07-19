@@ -4,10 +4,18 @@ import { Outlet } from 'react-router';
 
 const MainLayout = () => {
     return (
-        <div>
-            <Navbar/>
-            <Outlet/>
-        </div>
+        <>
+            <header className='sticky top-0 z-50'>
+                <Navbar/>
+            </header>
+           <main>
+                <Outlet/>
+           </main>
+           <footer>
+            
+           </footer>
+            
+        </>
     );
 };
 

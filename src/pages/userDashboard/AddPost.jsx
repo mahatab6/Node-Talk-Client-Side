@@ -8,16 +8,18 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 import useUserRole from '../../hooks/useUserRole';
+import LoadingPage from '../LoadingPage';
 
 const AddPost = () => {
 
-    const {user} = useAuth();
+    const {user, loading} = useAuth();
     const { register, handleSubmit, control } = useForm();
     const [upVote] =useState(0);
     const [downVote ] =useState(0);
     const [commentCount ] =useState(0);
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
+    const {role, isLoading} = useUserRole();
   
 
 
@@ -31,10 +33,10 @@ const AddPost = () => {
         
     })
 
-    const {role, isLoading} = useUserRole();
+    
 
-    if(pageloading ||isLoading){
-        return<p>Loading...............</p>
+    if(pageloading ||isLoading || loading){
+        return<LoadingPage/>
     }
 
 

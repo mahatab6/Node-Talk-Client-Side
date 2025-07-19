@@ -6,17 +6,18 @@ import useAxiosToken from '../../hooks/useAxiosToken';
 import toast from 'react-hot-toast';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
+import LoadingPage from '../LoadingPage';
 
 const Announcement = () => {
 
 
-    const {user} = useAuth();
+    const {user, loading} = useAuth();
     const { register, handleSubmit, reset } = useForm();
     const axiosSecureJWT = useAxiosToken();
     const queryClient = useQueryClient();
 
 
-    const { data, refetch } = useQuery({
+    const { data, refetch, isLoading } = useQuery({
         queryKey:["announcements"],
         queryFn: async ()=>{
             const res = await axiosSecureJWT.get('/all-announcements');
@@ -35,6 +36,11 @@ const Announcement = () => {
         }
     })
 
+
+    if(isLoading || loading){
+        return <LoadingPage/>
+    }
+    
     const onSubmit =async (data) => {
         const fullData = {
             ...data,

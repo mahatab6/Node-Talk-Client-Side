@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { FiUserPlus } from "react-icons/fi";
 import useAxiosToken from '../../hooks/useAxiosToken';
 import toast from 'react-hot-toast';
+import LoadingPage from '../LoadingPage';
 
 
 const ManageUsers = () => {
@@ -24,7 +25,7 @@ const ManageUsers = () => {
     })
 
     if(isLoading){
-        <p>Loading...............</p>
+        return <LoadingPage/>
     }
 
     const handleUserRole =async (id, newRole) => {

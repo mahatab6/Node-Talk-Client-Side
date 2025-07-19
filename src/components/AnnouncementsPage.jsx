@@ -2,6 +2,7 @@ import React from 'react';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
+import LoadingPage from '../pages/LoadingPage';
 
 const AnnouncementsPage = () => {
     const axiosSecure = useAxiosSecure();
@@ -14,7 +15,9 @@ const AnnouncementsPage = () => {
         }
     });
 
-    if (isLoading) return <div className="text-center p-10">Loading announcements...</div>;
+    if (isLoading){
+        return <LoadingPage/>
+    }
 
     if (announcements.length === 0) {
         return <div className="text-center text-gray-500 p-10">No announcements available.</div>;

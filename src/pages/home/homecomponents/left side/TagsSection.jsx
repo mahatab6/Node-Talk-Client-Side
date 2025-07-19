@@ -2,18 +2,23 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { FaFilter } from 'react-icons/fa';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import LoadingPage from '../../../LoadingPage';
 
 const TagsSection = ({setSearch}) => {
 
     const axiosSecure = useAxiosSecure();
 
-    const { data } = useQuery({
+    const { data,isLoading } = useQuery({
         queryKey:["tags-filter"],
         queryFn: async ()=>{
             const res = await axiosSecure.get('/tags-filter');
             return res.data;
         }
     })
+
+    if(isLoading){
+        return <LoadingPage/>
+    }
     
     const handleTagClick = (tag) =>{
         setSearch(tag)

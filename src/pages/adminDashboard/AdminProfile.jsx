@@ -6,15 +6,17 @@ import useAxiosToken from '../../hooks/useAxiosToken';
 import { useForm } from 'react-hook-form';
 import { IoMdAdd } from "react-icons/io";
 import toast from 'react-hot-toast';
+import LoadingPage from '../LoadingPage';
 
 
 const AdminProfile = () => {
 
     const axiosSecureJWT = useAxiosToken();
     const { register, handleSubmit,reset } = useForm();
-     const queryClient =useQueryClient();
+    const queryClient =useQueryClient();
+    const {user, loading} = useAuth();
 
-    const {data,refetch}=useQuery({
+    const {data,refetch, isLoading}=useQuery({
         queryKey: ["user-count"],
         queryFn: async () =>{
             const res = await axiosSecureJWT.get('/total-user-info');
@@ -32,6 +34,10 @@ const AdminProfile = () => {
             toast.success('Successfully deleted tag!');
         }
     })
+
+    if(isLoading || loading){
+        return <LoadingPage/>
+    }
 
 
     const onSubmit = async(data) =>{
@@ -51,7 +57,7 @@ const AdminProfile = () => {
         mutate(id)
     }
 
-    const {user} = useAuth();
+    
     return (
         <div className='py-10 px-6'>
 

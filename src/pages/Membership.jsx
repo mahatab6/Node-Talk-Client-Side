@@ -6,12 +6,18 @@ import Bronze from '../assets/Bronze.png'
 import Gold from '../assets/Gold.png'
 import MembershipButton from './MembershipButton';
 import useUserRole from '../hooks/useUserRole';
+import LoadingPage from './LoadingPage';
 
 
 
 
 const Membership = () => {
-    const {role}  = useUserRole();
+    const {role, isLoading}  = useUserRole();
+
+    if(isLoading){
+        return <LoadingPage/>
+    }
+    
     return (
         <div className='bg-background'>
             <div className='w-11/12 mx-auto '>

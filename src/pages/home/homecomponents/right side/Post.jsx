@@ -4,6 +4,7 @@ import { FaAngleDown, FaAngleUp, FaRegComments } from "react-icons/fa";
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { Link } from 'react-router';
 import { formatDistanceToNow } from 'date-fns';
+import LoadingPage from '../../../LoadingPage';
 
 
 const Post = ({ sortType,search }) => {
@@ -23,7 +24,7 @@ const Post = ({ sortType,search }) => {
         })
 
     if (isLoading) {
-    return <p>Loading...</p>;
+    return <LoadingPage/>
     }
 
     if (error) {
@@ -35,7 +36,7 @@ const Post = ({ sortType,search }) => {
             {
                 data.post.map((post)=>(
 
-                    <div key={post._id} className='flex-col space-y-2  bg-secondary p-5 rounded-2xl mb-5'>
+                    <div key={post._id} className='flex-col space-y-2  bg-secondary p-5 rounded-2xl mb-5 shadow'>
                         {/* author info */}
                         <div className='flex items-center space-x-3 '>
                             <div className="avatar avatar-placeholder">
@@ -67,9 +68,9 @@ const Post = ({ sortType,search }) => {
 
                         {/* total vote and comment section */}
                         <div className='flex space-x-2 '>
-                            <p className='flex items-center gap-2 '><FaRegComments /> {post?.commentCount} comments</p>
-                            <p className='flex items-center'><FaAngleUp className='text-green-500' />{post?.upVote}</p>
-                            <p className='flex items-center'><FaAngleDown className='text-red-500' />{post?.downVote}</p>
+                            <p className='flex items-center gap-2 '><FaRegComments size={25}/> {post?.commentCount} comments</p>
+                            <p className='flex items-center'><FaAngleUp size={25} className='text-green-500' />{post?.upVote}</p>
+                            <p className='flex items-center'><FaAngleDown size={25} className='text-red-500' />{post?.downVote}</p>
                         </div>
                     </div>
                 ))

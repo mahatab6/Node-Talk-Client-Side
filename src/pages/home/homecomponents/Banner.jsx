@@ -3,6 +3,7 @@ import Lottie from "lottie-react";
 import forumanimation from '../../../assets/lottie/Animation - 1751941734750.json';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import LoadingPage from '../../LoadingPage';
 
 
 const Banner = ({ setSearch }) => {
@@ -12,13 +13,17 @@ const Banner = ({ setSearch }) => {
     
 
     
-    const { data: tagsData = [] } = useQuery({
+    const { data: tagsData = [], isLoading } = useQuery({
         queryKey:["tags-filter"],
         queryFn: async ()=>{
             const res = await axiosSecure.get('/suggestionslist-tags');
             return res.data;
         }
     })
+
+    if(isLoading){
+        return <LoadingPage/>
+    }
 
     const suggestionsList = tagsData.map(tag =>tag.tags);
     

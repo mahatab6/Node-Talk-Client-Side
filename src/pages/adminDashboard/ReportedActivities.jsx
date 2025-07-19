@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router';
 import useAxiosToken from '../../hooks/useAxiosToken';
 import Swal from 'sweetalert2';
+import LoadingPage from '../LoadingPage';
 
 const ReportedActivities = () => {
   const axiosSecureJWT = useAxiosToken();
@@ -47,7 +48,9 @@ const ReportedActivities = () => {
 
   })
 
-  if (isLoading) return <p className="text-center text-xl py-10">Loading...</p>;
+  if (isLoading){
+    return <LoadingPage/>
+  }
 
 
   const handleCommentDelete = (id) => {

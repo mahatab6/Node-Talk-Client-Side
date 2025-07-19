@@ -9,6 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
+import LoadingPage from './LoadingPage';
 
 const CommentPage = () => {
   const { id } = useParams();
@@ -28,7 +29,7 @@ const CommentPage = () => {
   });
 
    if (isLoading) {
-    return <p className="text-center">Loading comments...</p>
+    return <LoadingPage/>
   };
 
   const handleReport = async (commentId, feedback) => {

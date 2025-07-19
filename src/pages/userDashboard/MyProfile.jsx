@@ -13,6 +13,7 @@ import useUserRole from '../../hooks/useUserRole';
 import Gold from '../../assets/Gold.png'
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import LoadingPage from '../LoadingPage';
 
 
 
@@ -21,12 +22,12 @@ import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 
 const MyProfile = () => {
-    const {user} = useAuth();
+    const {user, loading} = useAuth();
     const axiosSecure = useAxiosSecure();
     const {role, isloading} = useUserRole();
 
 
-    const {data:summary} = useQuery({
+    const {data:summary, isloading: dataLoading} = useQuery({
         queryKey:["user-summary"],
         queryFn: async () => {
             const res = await axiosSecure.get(`/user-summary/${user?.email}`)
@@ -36,8 +37,8 @@ const MyProfile = () => {
 
 
   
-    if(isloading){
-        <p>loading..............</p>
+    if(isloading || loading || dataLoading){
+        return <LoadingPage/>
     }
 
    
