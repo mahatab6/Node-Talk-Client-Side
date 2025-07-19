@@ -13,7 +13,7 @@ const DashboardHome = () => {
   }
 
   return (
-    <div className=" max-h-screen bg-[#1A1B30]">
+    <div className=" mix-h-screen bg-[#1A1B30]">
 
       {role?.role === 'admin' ? (
         <>

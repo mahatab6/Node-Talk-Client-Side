@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DashboardText from '../../components/DashboardText';
 import { FaRegComments } from "react-icons/fa";
 import { Link } from 'react-router';
@@ -14,11 +14,21 @@ const MyPost = () => {
 
     const axiosSecureJWT = useAxiosToken();
     const queryClient =useQueryClient();
+    const [page, setPage] = useState(1);
+    const [limit] =useState(5);
 
     const {data, isLoading} = useQuery({
-        queryKey: ['user-post'],
+        queryKey: ['user-post',page,limit],
         queryFn: async () => {
-            const res = await axiosSecureJWT.get('/specific-post');
+            const res = await axiosSecureJWT.get(`/specific-post?page=${page}&limit=${limit}`);
+            return res.data;
+        }
+    })
+
+    const {data:postCount} = useQuery({
+        queryKey: ['post-count'],
+        queryFn: async () => {
+            const res = await axiosSecureJWT.get("/specific-post-count");
             return res.data;
         }
     })
@@ -37,6 +47,7 @@ const MyPost = () => {
             });
         },
     });
+
 
     if(isLoading){
         return <LoadingPage/>
@@ -64,14 +75,14 @@ const MyPost = () => {
             <DashboardText/>
 
             <div className='p-10 bg-[#202338] rounded-2xl mb-10'>
-                <h2 className='text-3xl font-bold mb-6'>My Posts {data?.length}</h2>
+                <h2 className='text-3xl font-bold mb-6'>My Posts {postCount}</h2>
                 <div>
                     <div className="overflow-x-auto ">
                         <table className="table">
                             {/* head */}
                             <thead>
                                 <tr className='text-white font-bold text-xl'>
-                                    <th></th>
+                                 
                                     <th>Title</th>
                                     <th>Votes</th>
                                     <th>Comments</th>
@@ -79,10 +90,10 @@ const MyPost = () => {
                                 </tr>
                             </thead>
                             {
-                                data?.map((post, index) => (
+                                data?.map((post) => (
                                     <tbody key={post._id}>
                                         <tr className="hover:bg-white/5 font-bold">
-                                            <th>{index + 1}</th>
+                                            
                                             <td>
                                                 <Link to={`/post-details/${post?._id}`} className='hover:text-blue-400'>
                                                     {post?.PostTitle}
@@ -105,6 +116,25 @@ const MyPost = () => {
                             }
                         
                         </table>
+                    </div>
+
+                    <div className="flex gap-2 justify-center mt-4">
+
+                        <button disabled={page === 1} onClick={() => setPage(page - 1)} className="px-2  rounded disabled:opacity-50">
+                            Prev
+                        </button>
+
+                        {Array.from({ length: Math.ceil(postCount / limit) }, (_, i) => (
+                            <button key={i} onClick={() => setPage(i + 1)} className={`px-2 rounded ${ page === i + 1 ? 'bg-blue-500 ' : ''}`}
+                            >
+                            {i + 1}
+                            </button>
+                        ))}
+
+                        <button disabled={page === Math.ceil(postCount / limit)} onClick={() => setPage(page + 1)} className="px-2 rounded disabled:opacity-50">
+                            Next
+                        </button>
+
                     </div>
                 </div>
             </div>

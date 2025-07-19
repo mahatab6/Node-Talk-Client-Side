@@ -5,12 +5,12 @@ import { Outlet } from 'react-router';
 
 const DashboardLayout = () => {
     return (
-        <div className="drawer lg:drawer-open bg-[#1A1B30] text-white">
-            <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col">
+        <div className="drawer lg:drawer-open min-h-screen bg-[#1A1B30] text-white">
+            <input id="my-drawer-2" type="checkbox" className="drawer-toggle " />
+            <div className="drawer-content flex flex-col ">
                 {/* Navbar */}
                 <div className="navbar bg-[#252538]  lg:hidden">
-                    <div className="flex-none lg:hidden">
+                    <div className="flex-none lg:hidden bg-[#1A1B30]">
                         <label htmlFor="my-drawer-2" aria-label="open sidebar" className="btn btn-square btn-ghost">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
