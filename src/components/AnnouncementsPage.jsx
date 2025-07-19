@@ -24,7 +24,7 @@ const AnnouncementsPage = () => {
     }
 
     return (
-        <div className='bg-background'>
+        <div className='bg-background min-h-screen'>
             <div className="max-w-5xl mx-auto px-4 py-6 ">
                 <h2 className="text-2xl font-bold mb-6">All Announcements</h2>
                 <div className="space-y-6">

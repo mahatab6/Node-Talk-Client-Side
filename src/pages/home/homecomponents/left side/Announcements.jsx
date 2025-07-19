@@ -36,12 +36,12 @@ const AllAnnouncements = () => {
       ) : (
         <div className="max-h-80 md:max-h-[656px] overflow-y-auto space-y-6 pr-2">
             {announcements?.map((announcement) => (
-                <div key={announcement._id} className="bg-[#1f2937] p-5 rounded-2xl shadow-md text-white">
+                <div key={announcement._id} className="bg-background p-5 rounded-2xl shadow-md ">
                     <div className="flex items-center gap-4 mb-2">
-                        <img src={announcement?.AuthorImage} alt="" className="w-12 h-12 rounded-full"/>
+                        <img src={announcement?.AuthorImage} alt="" referrerPolicy='no-referrer' className="w-12 h-12 rounded-full"/>
                         <div>
                             <h3 className="text-lg font-semibold">{announcement?.AuthorName}</h3>
-                            <span className="text-sm text-gray-400">
+                            <span className="text-sm ">
                                 {new Date(announcement.createdAt).toLocaleString()}
                             </span>
                         </div>
@@ -50,7 +50,7 @@ const AllAnnouncements = () => {
                     <h2 className="text-xl font-bold mt-2">
                         {announcement?.AnnouncementTitle}
                     </h2>
-                    <p className="mt-1 text-gray-300 whitespace-pre-line">
+                    <p className="mt-1 whitespace-pre-line">
                         {announcement?.Description}
                     </p>
                 </div>
