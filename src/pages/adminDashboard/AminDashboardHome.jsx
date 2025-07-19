@@ -10,7 +10,7 @@ import { Link } from 'react-router';
 
 const AminDashboardHome = () => {
     return (
-        <div>
+        <div className='bg-[#1A1B30] p-6'>
 
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
 

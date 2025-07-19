@@ -9,7 +9,7 @@ const DashboardLayout = () => {
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col">
                 {/* Navbar */}
-                <div className="navbar bg-[#252538] w-full lg:hidden">
+                <div className="navbar bg-[#252538]  lg:hidden">
                     <div className="flex-none lg:hidden">
                         <label htmlFor="my-drawer-2" aria-label="open sidebar" className="btn btn-square btn-ghost">
                             <svg
@@ -27,7 +27,7 @@ const DashboardLayout = () => {
                             </svg>
                         </label>
                     </div>
-                    <div className="mx-2 flex-1 px-2">Dashboard</div>
+                    <div className="mx-2 flex-1 px-2 ">Dashboard</div>
                 </div>
                 
                 {/* Page content here */}

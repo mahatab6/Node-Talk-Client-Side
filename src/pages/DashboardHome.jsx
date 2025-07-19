@@ -12,13 +12,13 @@ const DashboardHome = () => {
   }
 
   return (
-    <div className="p-6">
+    <div className=" max-h-screen bg-[#1A1B30]">
 
       {role?.role === 'admin' ? (
         <>
-          <h1 className="text-3xl font-bold mb-4">Dashboard Overview</h1>
+          <h1 className="text-3xl font-bold mb-4 p-6">Dashboard Overview</h1>
 
-          <p className="text-lg mb-2">
+          <p className="text-lg mb-2 p-6">
             Welcome back! Here's what's happening with your platform.
           </p>
           <AminDashboardHome/>
