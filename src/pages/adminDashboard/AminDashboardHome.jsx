@@ -15,7 +15,7 @@ const AminDashboardHome = () => {
 
     const axiosSecureJWT = useAxiosToken();
 
-    const {data, isLoading}=useQuery({
+    const {data}=useQuery({
         queryKey: ["user-count"],
         queryFn: async () =>{
             const res = await axiosSecureJWT.get('/total-user-info');
@@ -23,9 +23,7 @@ const AminDashboardHome = () => {
         }
     })
 
-    if(isLoading){
-        return<LoadingPage/>
-    }
+    
 
     return (
         <div className='bg-[#1A1B30] p-6'>
