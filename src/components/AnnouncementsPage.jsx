@@ -21,7 +21,7 @@ const AnnouncementsPage = () => {
     }
 
     if (announcements.length === 0) {
-        return <div className="text-center text-gray-500 p-10">No announcements available.</div>;
+        return <div className="text-center text-gray-500 p-10 min-h-screen">No announcements available.</div>;
     }
 
     return (

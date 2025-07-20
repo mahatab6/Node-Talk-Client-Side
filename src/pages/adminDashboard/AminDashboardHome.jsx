@@ -27,8 +27,6 @@ const AminDashboardHome = () => {
         return<LoadingPage/>
     }
 
-    console.log(data)
-
     return (
         <div className='bg-[#1A1B30] p-6'>
 

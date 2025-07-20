@@ -21,7 +21,7 @@ const Announcement = () => {
     const { data, refetch, isLoading } = useQuery({
         queryKey:["announcements"],
         queryFn: async ()=>{
-            const res = await axiosSecureJWT.get('/all-announcements');
+            const res = await axiosSecureJWT.get('/all-announcements-page');
             return res.data;
         }
     })
