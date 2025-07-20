@@ -34,7 +34,7 @@ const Post = ({ sortType,search }) => {
     return (
         <div className=''>
             {
-                data.post.map((post)=>(
+                data?.post?.map((post)=>(
 
                     <div key={post._id} className='flex-col space-y-2  bg-secondary p-5 rounded-2xl mb-5 shadow'>
                         {/* author info */}

@@ -71,7 +71,7 @@ const MyProfile = () => {
                                     </span>
                                 }
                                 {
-                                    user?.photoURL? <img src={user?.photoURL} alt="" referrerPolicy='no-referrer' className="w-20 h-20 border rounded-full dark:bg-gray-500 dark:border-gray-300" /> : <FaRegUserCircle size={35}/>
+                                    user?.photoURL? <img src={user?.photoURL} alt="" referrerPolicy='no-referrer' className="w-16 h-16 border rounded-full dark:bg-gray-500 dark:border-gray-300" /> : <FaRegUserCircle size={35}/>
                                 }
                             </div>
                         </div>

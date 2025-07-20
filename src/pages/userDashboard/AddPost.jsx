@@ -93,8 +93,8 @@ const AddPost = () => {
 
                             <div>
                                 <label className=' block text-xl mb-2' htmlFor="">Author Image</label>
-                                <div className='flex items-center gap-3'>    
-                                    <img src={user?.photoURL} alt="" referrerPolicy='no-referrer' className='w-12 rounded-full'/>  
+                                <div className='flex items-center justify-center gap-3'>    
+                                    <img src={user?.photoURL} alt="" referrerPolicy='no-referrer' className='w-16 h-16 rounded-full'/>  
                                     <input className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" value={user?.photoURL} readOnly placeholder={user?.photoURL} {...register("AuthorImage", {required: true})} />
                                 </div>
                             </div>

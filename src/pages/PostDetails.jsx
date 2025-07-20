@@ -121,7 +121,7 @@ const PostDetails = () => {
                             ) : (
                                <div className='text-center space-y-1'>
                                     <p data-tooltip-id="my-tooltip" data-tooltip-content="login again" disabled className='btn rounded-full p-2 hover:bg-green-500'><FaAngleUp  size={25} /></p>
-                                    <p className=' font-bold text-xl'>25</p>
+                                    <p className=' font-bold text-xl'>{postData?.upVote}</p>
                                     <p data-tooltip-id="my-tooltip" data-tooltip-content="login again" disabled className='btn rounded-full p-2 hover:bg-red-500'><FaAngleDown size={25} /></p>
                                     <Tooltip id='my-tooltip'/>
                                 </div>

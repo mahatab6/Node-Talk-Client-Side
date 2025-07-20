@@ -49,7 +49,7 @@ const TagDropdown = ({ control, name }) => {
                 styles={{
                     control: (base) => ({
                     ...base,
-                    backgroundColor: '#2C2D4A',
+                    backgroundColor: '#fff',
                     borderColor: 'white',
                     borderRadius: '0.5rem',
                     padding: '2px',
