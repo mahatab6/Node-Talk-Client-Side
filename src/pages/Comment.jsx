@@ -7,17 +7,18 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
-import useAxiosToken from '../hooks/useAxiosToken';
+import useAxiosSecure from '../hooks/useAxiosSecure';
+
 
 const Comment = ({ id, uiload }) => {
-  const axiosSecureJWT = useAxiosToken();
+  const axiosSecure = useAxiosSecure();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedComment, setSelectedComment] = useState('');
 
   const { data: comments = [], isLoading, refetch } = useQuery({
     queryKey: ['comments', id],
     queryFn: async () => {
-      const res = await axiosSecureJWT.get(`/specific-post-comment/${id}`);
+      const res = await axiosSecure.get(`/specific-post-comment/${id}`);
       return res.data;
     }
   });
