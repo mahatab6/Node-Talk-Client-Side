@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
-import useAxiosSecure from '../hooks/useAxiosSecure';
 import { FaRegComments } from 'react-icons/fa';
 import { formatDistanceToNow } from 'date-fns';
 import Dialog from '@mui/material/Dialog';
@@ -8,16 +7,17 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
+import useAxiosToken from '../hooks/useAxiosToken';
 
 const Comment = ({ id, uiload }) => {
-  const axiosSecure = useAxiosSecure();
+  const axiosSecureJWT = useAxiosToken();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedComment, setSelectedComment] = useState('');
 
   const { data: comments = [], isLoading, refetch } = useQuery({
     queryKey: ['comments', id],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/specific-post-comment/${id}`);
+      const res = await axiosSecureJWT.get(`/specific-post-comment/${id}`);
       return res.data;
     }
   });

@@ -1,12 +1,89 @@
-# React + Vite
+# 🌐 NodeTalk - Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**NodeTalk Client** is the frontend of a modern and scalable forum platform. Built with **React 19**, **TailwindCSS**, and **Material UI**, this single-page application delivers a fast, responsive, and engaging user experience.
 
-Currently, two official plugins are available:
+🔗 Live Demo: 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔧 Backend Repo: 
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Overview
+
+NodeTalk allows users to create and join discussions, upvote/downvote content, and interact in real-time with a modern UI. It includes features like role-based dashboards, post filtering by tags, real-time notifications (planned), and Stripe integration for premium services.
+
+
+🔐 Built for both **Users** and **Admins** with personalized access.
+
+---
+
+## 🖥️ Tech Stack
+
+**Core:**
+
+- React 19
+- Tailwind CSS 4
+- MUI (Material UI)
+- React Router v7
+- Firebase (Auth)
+- Stripe (Payment)
+
+**State & Data Handling:**
+
+- Axios
+- React Query v5
+- React Hook Form
+- React Hot Toast
+
+**UI & UX Enhancements:**
+
+- React Icons
+- SweetAlert2
+- React Helmet (SEO)
+- React Select & Tooltip
+- Date-fns
+- Minimal Pie Chart
+- Search Autocomplete
+
+
+### 🌟 Features
+
+✅ User Features:
+
+🔐 Register/Login via Firebase
+
+🗨️ Post questions, comment, upvote/downvote
+
+📊 View post analytics (views, shares)
+
+🏷️ Filter by tags, search topics
+
+💳 Premium membership via Stripe
+
+✅ Admin Features:
+
+📌 Announcement management
+
+🚨 View reported content
+
+🧹 Tag moderation
+
+🗂️ Admin activity logs (Coming soon)
+
+🔮 Future Roadmap
+
+📢 User Notifications
+
+-Upvotes/downvotes
+
+-Mentions and replies
+
+-New announcements
+
+🏷️ Tag-Based Post Pages
+
+-Topic-wise discussion boards
+
+📊 Post Analytics
+
+-View counts, share counts, growth charts
