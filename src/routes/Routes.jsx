@@ -20,6 +20,7 @@ import CommentPage from "../pages/CommentPage";
 import AnnouncementsPage from "../components/AnnouncementsPage";
 import LoadingPage from "../pages/LoadingPage";
 import NotFoundPage from "../pages/NotFoundPage";
+import Adminrouter from "./Adminrouter";
 
 export const router = createBrowserRouter([
   {
@@ -88,19 +89,19 @@ export const router = createBrowserRouter([
       },
       {
         path:'manage-users',
-        element:<ManageUsers/>
+        element:<Adminrouter><ManageUsers/></Adminrouter>
       },
       {
         path:'make-announcement',
-        element:<Announcement/>
+        element:<Adminrouter><Announcement/></Adminrouter>
       },
       {
         path: 'reported-activities',
-        element:<ReportedActivities/>
+        element:<Adminrouter><ReportedActivities/></Adminrouter>
       },
       {
         path: 'admin-profile',
-        element: <AdminProfile/>
+        element: <Adminrouter><AdminProfile/></Adminrouter>
       },
       {
         path:'comments/:id',

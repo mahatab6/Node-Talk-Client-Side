@@ -2,7 +2,7 @@
 
 **NodeTalk Client** is the frontend of a modern and scalable forum platform. Built with **React 19**, **TailwindCSS**, and **Material UI**, this single-page application delivers a fast, responsive, and engaging user experience.
 
-🔗 Live Demo: 
+🔗 Live Demo: https://nodetalk-12.netlify.app/
 
 🔧 Backend Repo: 
 
