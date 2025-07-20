@@ -4,12 +4,16 @@ import TagsSection from './homecomponents/left side/TagsSection';
 import Post from './homecomponents/right side/Post';
 import SortPosts from './homecomponents/left side/SortPosts';
 import Announcements from './homecomponents/left side/Announcements';
+import { Helmet } from 'react-helmet';
 
 const Home = () => {
     const [sortType , setSortType] = useState();
     const [search, setSearch] = useState('')
     return (
         <div className='bg-background'>
+            <Helmet>
+                <title>NodeTalk</title>
+            </Helmet>
             <Banner setSearch={setSearch} />
             <div className='grid lg:grid-cols-4 gap-5 w-11/12 mx-auto py-10'>
 

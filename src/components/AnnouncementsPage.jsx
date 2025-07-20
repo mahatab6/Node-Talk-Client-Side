@@ -3,6 +3,7 @@ import useAxiosSecure from '../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import LoadingPage from '../pages/LoadingPage';
+import { Helmet } from 'react-helmet';
 
 const AnnouncementsPage = () => {
     const axiosSecure = useAxiosSecure();
@@ -25,6 +26,9 @@ const AnnouncementsPage = () => {
 
     return (
         <div className='bg-background min-h-screen'>
+            <Helmet>
+                <title>NodeTalk - Announcements</title>
+            </Helmet>
             <div className="max-w-5xl mx-auto px-4 py-6 ">
                 <h2 className="text-2xl font-bold mb-6">All Announcements</h2>
                 <div className="space-y-6">

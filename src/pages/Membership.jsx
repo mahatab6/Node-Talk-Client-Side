@@ -7,6 +7,7 @@ import Gold from '../assets/Gold.png'
 import MembershipButton from './MembershipButton';
 import useUserRole from '../hooks/useUserRole';
 import LoadingPage from './LoadingPage';
+import { Helmet } from 'react-helmet';
 
 
 
@@ -20,6 +21,9 @@ const Membership = () => {
     
     return (
         <div className='bg-background'>
+            <Helmet>
+                <title>NodeTalk - Membership</title>
+            </Helmet>
             <div className='w-11/12 mx-auto '>
             <div className='text-center py-10 space-y-2'>
                 <h1 className='text-3xl lg:text-5xl font-bold '>Choose Your Membership</h1>

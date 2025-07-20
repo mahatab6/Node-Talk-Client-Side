@@ -12,6 +12,7 @@ import { formatDistanceToNow } from 'date-fns';
 import toast from 'react-hot-toast';
 import Comment from './Comment';
 import LoadingPage from './LoadingPage';
+import { Helmet } from 'react-helmet';
 
 
 
@@ -84,6 +85,9 @@ const PostDetails = () => {
 
     return (
         <div className='bg-background min-h-screen'>
+            <Helmet>
+                <title>NodeTalk - {postData?.PostTitle}</title>
+            </Helmet>
             <div className='py-10 w-9/12 mx-auto'>
             <Link to='/' className='flex items-center gap-2 hover:text-blue-400 text-xl pb-10'><FaArrowLeft />Back to discussions</Link>
 
