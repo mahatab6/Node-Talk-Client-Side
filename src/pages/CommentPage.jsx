@@ -10,6 +10,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
 import LoadingPage from './LoadingPage';
+import { Helmet } from 'react-helmet';
 
 const CommentPage = () => {
   const { id } = useParams();
@@ -65,6 +66,9 @@ const CommentPage = () => {
 
   return (
     <div className='px-6 '>
+        <Helmet>
+          <title>NodeTalk - Comments Page</title>
+        </Helmet>
         <DashboardText/>
         <div className='p-10 bg-[#202338] rounded-2xl mb-10'>
         <h2 className='text-3xl font-bold mb-6 text-white'>Comments ({comments.length})</h2>

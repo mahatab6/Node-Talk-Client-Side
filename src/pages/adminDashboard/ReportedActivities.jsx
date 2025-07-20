@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import useAxiosToken from '../../hooks/useAxiosToken';
 import Swal from 'sweetalert2';
 import LoadingPage from '../LoadingPage';
+import { Helmet } from 'react-helmet';
 
 const ReportedActivities = () => {
   const axiosSecureJWT = useAxiosToken();
@@ -86,6 +87,9 @@ const ReportedActivities = () => {
 
   return (
   <div className='py-10 px-6'>
+    <Helmet>
+      <title>NodeTalk - Reported Activities</title>
+    </Helmet>
     <div>
       <h1 className='text-3xl font-bold mb-4'>Reported Activities</h1>
       <p className="text-lg mb-2">Review and take action on reported content and user behavior</p>

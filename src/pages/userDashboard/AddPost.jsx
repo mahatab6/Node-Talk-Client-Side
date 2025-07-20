@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 import useUserRole from '../../hooks/useUserRole';
 import LoadingPage from '../LoadingPage';
+import { Helmet } from 'react-helmet';
 
 const AddPost = () => {
 
@@ -69,6 +70,9 @@ const AddPost = () => {
 
     return (
         <div className='px-6'>
+            <Helmet>
+                <title>NodeTalk - Add Post</title>
+            </Helmet>
             <DashboardText/>
 
             {

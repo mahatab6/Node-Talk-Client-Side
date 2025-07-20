@@ -4,6 +4,7 @@ import { FiUserPlus } from "react-icons/fi";
 import useAxiosToken from '../../hooks/useAxiosToken';
 import toast from 'react-hot-toast';
 import LoadingPage from '../LoadingPage';
+import { Helmet } from 'react-helmet';
 
 
 const ManageUsers = () => {
@@ -38,6 +39,9 @@ const ManageUsers = () => {
 
     return (
         <div className='py-10 px-6'>
+            <Helmet>
+                <title>NodeTalk - Manage Users</title>
+            </Helmet>
             <div>
                 <h1 className='text-3xl font-bold mb-4'>Manage Users</h1>
                 <p className="text-lg mb-2">View and manage all platform users</p>

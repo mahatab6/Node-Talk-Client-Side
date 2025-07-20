@@ -3,6 +3,7 @@ import useAuth from '../hooks/useAuth';
 import AminDashboardHome from './adminDashboard/AminDashboardHome';
 import useUserRole from '../hooks/useUserRole';
 import LoadingPage from './LoadingPage';
+import { Helmet } from 'react-helmet';
 
 const DashboardHome = () => {
   const { user, loading } = useAuth();
@@ -14,6 +15,9 @@ const DashboardHome = () => {
 
   return (
     <div className=" mix-h-screen bg-[#1A1B30]">
+      <Helmet>
+        <title>NodeTalk - Dashboard</title>
+      </Helmet>
 
       {role?.role === 'admin' ? (
         <>

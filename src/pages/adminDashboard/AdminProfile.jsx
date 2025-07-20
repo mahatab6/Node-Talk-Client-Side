@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { IoMdAdd } from "react-icons/io";
 import toast from 'react-hot-toast';
 import LoadingPage from '../LoadingPage';
+import { Helmet } from 'react-helmet';
 
 
 const AdminProfile = () => {
@@ -60,7 +61,9 @@ const AdminProfile = () => {
     
     return (
         <div className='py-10 px-6'>
-
+            <Helmet>
+                <title>NodeTalk - Admin Profile</title>
+            </Helmet>
             <div>
                 <h1 className='text-3xl font-bold mb-4'>Admin Profile</h1>
                 <p className="text-lg mb-4">Manage your profile and platform settings</p>

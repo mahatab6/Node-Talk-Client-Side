@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router';
 import useAuth from '../hooks/useAuth';
 import toast from 'react-hot-toast';
 import NodeTalkLogo from '../components/NodeTalkLogo';
+import { Helmet } from 'react-helmet';
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors },} = useForm();
@@ -49,6 +50,9 @@ const Login = () => {
 
   return (
     <div className="max-w-md mx-auto p-6 rounded-xl bg-[#9292AB]  ">
+        <Helmet>
+            <title>NodeTalk - Sign in</title>
+        </Helmet>
         <div className="text-center justify-items-center mb-6 space-y-2">
             <NodeTalkLogo/>
             <h1 className="text-3xl font-bold">Welcome Back!</h1>

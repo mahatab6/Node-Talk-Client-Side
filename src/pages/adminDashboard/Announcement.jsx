@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import LoadingPage from '../LoadingPage';
+import { Helmet } from 'react-helmet';
 
 const Announcement = () => {
 
@@ -78,6 +79,9 @@ const Announcement = () => {
 
     return (
         <div className='py-10 px-6'>
+             <Helmet>
+                <title>NodeTalk - Announcement</title>
+            </Helmet>
             <div>
                 <h1 className='text-3xl font-bold mb-4'>Make Announcement</h1>
                 <p className="text-lg mb-2">Create and publish announcements to all platform users</p>

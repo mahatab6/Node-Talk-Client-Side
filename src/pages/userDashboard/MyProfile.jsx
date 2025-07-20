@@ -14,6 +14,7 @@ import Gold from '../../assets/Gold.png'
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import LoadingPage from '../LoadingPage';
+import { Helmet } from 'react-helmet';
 
 
 
@@ -44,6 +45,9 @@ const MyProfile = () => {
    
     return (
         <div className='px-6 mb-10'>
+            <Helmet>
+                <title>NodeTalk - My profile</title>
+            </Helmet>
             <DashboardText/>
 
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>

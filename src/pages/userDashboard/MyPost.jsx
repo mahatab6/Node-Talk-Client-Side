@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import LoadingPage from '../LoadingPage';
 import useAuth from '../../hooks/useAuth';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet';
 
 
 
@@ -78,6 +79,9 @@ const MyPost = () => {
 
     return (
         <div className='px-6 '>
+            <Helmet>
+                <title>NodeTalk - My Post</title>
+            </Helmet>
             <DashboardText/>
 
             <div className='p-10 bg-[#202338] rounded-2xl mb-10'>
