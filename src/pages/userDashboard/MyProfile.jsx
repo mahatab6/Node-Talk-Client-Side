@@ -12,9 +12,9 @@ import { FaEye } from "react-icons/fa";
 import useUserRole from '../../hooks/useUserRole';
 import Gold from '../../assets/Gold.png'
 import { useQuery } from '@tanstack/react-query';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
 import LoadingPage from '../LoadingPage';
 import { Helmet } from 'react-helmet';
+import useAxiosToken from '../../hooks/useAxiosToken';
 
 
 
@@ -24,14 +24,14 @@ import { Helmet } from 'react-helmet';
 
 const MyProfile = () => {
     const {user, loading} = useAuth();
-    const axiosSecure = useAxiosSecure();
+    const axiosSecureJWT = useAxiosToken();
     const {role, isloading} = useUserRole();
 
 
     const {data:summary, isloading: dataLoading} = useQuery({
         queryKey:["user-summary"],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/user-summary/${user?.email}`)
+            const res = await axiosSecureJWT.get(`/user-summary/${user?.email}`)
             return res.data;
         }
     })

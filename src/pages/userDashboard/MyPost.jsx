@@ -8,7 +8,6 @@ import useAxiosToken from '../../hooks/useAxiosToken';
 import Swal from 'sweetalert2';
 import LoadingPage from '../LoadingPage';
 import useAuth from '../../hooks/useAuth';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { Helmet } from 'react-helmet';
 
 
@@ -20,7 +19,6 @@ const MyPost = () => {
     const [page, setPage] = useState(1);
     const [limit] =useState(5);
     const {user, loading} = useAuth();
-    const axiosSecure = useAxiosSecure();
 
     const {data, isLoading} = useQuery({
         queryKey: ['user-post',page,limit],
@@ -33,7 +31,7 @@ const MyPost = () => {
     const {data:postCount } = useQuery({
         queryKey:["user-summary"],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/specific-post-count/${user?.email}`)
+            const res = await axiosSecureJWT.get(`/specific-post-count/${user?.email}`)
             return res.data;
         }
     })

@@ -3,13 +3,13 @@ import DashboardText from '../../components/DashboardText';
 import useAuth from '../../hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import TagDropdown from './TagDropdown';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 import useUserRole from '../../hooks/useUserRole';
 import LoadingPage from '../LoadingPage';
 import { Helmet } from 'react-helmet';
+import useAxiosToken from '../../hooks/useAxiosToken';
 
 const AddPost = () => {
 
@@ -18,7 +18,7 @@ const AddPost = () => {
     const [upVote] =useState(0);
     const [downVote ] =useState(0);
     const [commentCount ] =useState(0);
-    const axiosSecure = useAxiosSecure();
+    const axiosSecureJWT = useAxiosToken();
     const navigate = useNavigate();
     const {role, isLoading} = useUserRole();
   
@@ -28,7 +28,7 @@ const AddPost = () => {
     const {data, isLoading:pageloading} = useQuery({
         queryKey:["post-count", user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/user-post-count/${user?.email}`)
+            const res = await axiosSecureJWT.get(`/user-post-count/${user?.email}`)
             return res.data;
         },
         
@@ -51,7 +51,7 @@ const AddPost = () => {
             createdAt: Date.now(),
         };
 
-        axiosSecure.post("/add-user-post", fullData)
+        axiosSecureJWT.post("/add-user-post", fullData)
             .then(res =>{
                 if(res.data.insertedId){
                     toast.success('Your post has been added successfully!');
@@ -94,7 +94,7 @@ const AddPost = () => {
                             <div>
                                 <label className=' block text-xl mb-2' htmlFor="">Author Image</label>
                                 <div className='flex items-center gap-3'>    
-                                    <img src={user?.photoURL} alt="" className='w-12 rounded-full'/>  
+                                    <img src={user?.photoURL} alt="" referrerPolicy='no-referrer' className='w-12 rounded-full'/>  
                                     <input className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" value={user?.photoURL} readOnly placeholder={user?.photoURL} {...register("AuthorImage", {required: true})} />
                                 </div>
                             </div>

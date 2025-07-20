@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import useAxiosSecure from '../hooks/useAxiosSecure';
 import DashboardText from '../components/DashboardText';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -11,10 +10,11 @@ import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
 import LoadingPage from './LoadingPage';
 import { Helmet } from 'react-helmet';
+import useAxiosToken from '../hooks/useAxiosToken';
 
 const CommentPage = () => {
   const { id } = useParams();
-  const axiosSecure = useAxiosSecure();
+  const axiosSecureJWT = useAxiosToken();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedComment, setSelectedComment] = useState('');
   const [selectedFeedbacks, setSelectedFeedbacks] = useState({});
@@ -23,7 +23,7 @@ const CommentPage = () => {
   const { data: comments = [], isLoading,refetch } = useQuery({
     queryKey: ['comments', id],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/specific-post-comment/${id}`);
+      const res = await axiosSecureJWT.get(`/specific-post-comment/${id}`);
       return res.data;
     }
 
@@ -39,7 +39,7 @@ const CommentPage = () => {
         feedback
     }
 
-    axiosSecure.post('/user-feedback-report',reportInfo)
+    axiosSecureJWT.post('/user-feedback-report',reportInfo)
         .then(res =>{
             
             if(res.data.insertedId){
