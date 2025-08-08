@@ -192,39 +192,6 @@ npm run build
 * Netlify or Vercel work well for SPA frontends. Connect your Git repository and set environment variables in the hosting dashboard.
 * For Netlify, ensure the build command matches your `package.json` and the publish directory is `dist` (vite) or `build` (CRA).
 
-**Tip:** Use branch previews for PRs and enable automatic redeploys for the `main` branch.
-
----
-
-## Project roadmap
-
-* Real-time notifications (mentions, replies)
-* Post analytics dashboard (views, growth charts)
-* Tag-based topic pages
-* Admin activity logs & audit trail
-* Improved moderation tools & reporting UI
-
----
-
-## Contributing
-
-1. Create an issue describing the feature or bug.
-2. Fork the repo, create a branch: `feature/your-feature-name`.
-3. Make changes, write tests where appropriate.
-4. Open a PR and reference the issue.
-
-Add a short `CONTRIBUTING.md` and `CODE_OF_CONDUCT.md` for clarity.
-
----
-
-## Helpful tips to make the README stand out
-
-* Add 1–2 GIFs showing the most important flows (post creation + payment flow).
-* Use a short demo video or Loom link.
-* Add badges (build, netlify, license, issues) at the top.
-* Show `npm` install & run command examples with copy-to-clipboard buttons (if you host README on a static site).
-* Add a short "How to test" section for QA steps (create user, create post, upgrade to premium, check admin panel).
-
 ---
 
 ## contact
