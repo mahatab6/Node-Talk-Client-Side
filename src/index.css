@@ -10,10 +10,11 @@ html[data-theme="light"] {
   --accent: #0600c2;
 }
 
-
+/* Page Background */
 .bg-background {
   background-color: var(--background);
 }
+
 .text-text {
   color: var(--text);
 }
@@ -23,9 +24,42 @@ html[data-theme="light"] {
 .text-primary {
   color: var(--primary);
 }
+
+/* Cards / Sections */
 .bg-secondary {
   background-color: var(--secondary);
 }
+
+Accent / Highlights
 .bg-accent {
   background-color: var(--accent);
+}
+
+/* Primary Button */
+
+.btn-primary {
+  background-color: var(--primary); 
+  color: var(--secondary); 
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #4f46e5; 
+}
+
+/* Secondary Button */
+
+.btn-secondary {
+  background-color: var(--secondary); /* white */
+  color: var(--primary); /* #3a31d8 */
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary);
+  color: var(--secondary);
 }

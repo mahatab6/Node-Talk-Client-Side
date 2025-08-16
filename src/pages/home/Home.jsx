@@ -16,20 +16,22 @@ const Home = () => {
                 <title>NodeTalk</title>
             </Helmet>
             <Banner />
-            <div className='grid lg:grid-cols-4 gap-5 w-11/12 mx-auto py-10'>
+            <div className='grid lg:grid-cols-4 gap-5 w-11/12 mx-auto'>
 
                 {/* left-side */}
-                <div className='lg:col-span-1 space-y-5'>
+                <div id='post'  className='lg:col-span-3 py-20'>
+                    <Post sortType={sortType} search={search}/>
+                </div>
+
+                {/* right side */}
+                <div className='lg:col-span-1 space-y-5 py-20'>
                     <Search setSearch={setSearch}/>
                     <Announcements/>
                     <TagsSection setSearch={setSearch}/>
                     <SortPosts setSortType={setSortType}/>
                 </div>
 
-                {/* right side */}
-                <div className='lg:col-span-3'>
-                    <Post sortType={sortType} search={search}/>
-                </div>
+                
             </div>
         </div>
     );

@@ -21,6 +21,7 @@ import AnnouncementsPage from "../components/AnnouncementsPage";
 import LoadingPage from "../pages/LoadingPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import Adminrouter from "./Adminrouter";
+import Contact from "../pages/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Home/>
+      },
+      {
+        path:"contact",
+        element: <Contact/>
       },
       {
         path: "post-details/:id",
