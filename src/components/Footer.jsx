@@ -1,5 +1,6 @@
 import React from 'react';
 import NodeTalkLogo from './NodeTalkLogo';
+import { Link } from 'react-router';
 
 const Footer = () => {
     return (
@@ -10,7 +11,18 @@ const Footer = () => {
                     NodeTalk is a modern forum platform, where people can connect, share ideas,
                     and engage in meaningful discussions. Designed for speed, simplicity, and scalability.
                 </p>
+
+                <div className='max-w-xl flex gap-2'>
+                    <Link to="/contact" >Contact</Link>
+                    <Link to="/privacy-policy">Privacy</Link>
+                    <Link to="/contact">Contact</Link>
+                    <Link to="/contact">Contact</Link>
+                    <Link to="/contact">Contact</Link>
+                    <Link to="/contact">Contact</Link>
+                </div>
+
             </div>
+            <div className="divider"></div>
             <p className="text-xs md:text-sm text-gray-500">
                 © {new Date().getFullYear()} NodeTalk. All rights reserved.
             </p>

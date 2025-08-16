@@ -22,6 +22,7 @@ import LoadingPage from "../pages/LoadingPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import Adminrouter from "./Adminrouter";
 import Contact from "../pages/Contact";
+import Privacy from "../pages/Privacy";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path:"contact",
         element: <Contact/>
+      },
+      {
+        path:"privacy-policy",
+        element: <Privacy/>
       },
       {
         path: "post-details/:id",

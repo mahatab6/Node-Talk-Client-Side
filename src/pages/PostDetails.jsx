@@ -88,10 +88,10 @@ const PostDetails = () => {
             <Helmet>
                 <title>NodeTalk - {postData?.PostTitle}</title>
             </Helmet>
-            <div className='py-10 w-11/12  md:w-8/12 mx-auto'>
+            <div className='py-10 w-11/12  mx-auto'>
             <Link to='/' className='flex items-center gap-2 hover:text-blue-400 text-xl pb-10'><FaArrowLeft />Back to discussions</Link>
 
-            <div className=' gap-3 bg-secondary p-5 rounded-2xl mb-10'>
+            <div className=' gap-3 bg-secondary p-5 rounded-2xl mb-10 max-w-5xl mx-auto'>
                 
     
                 <div className='flex-col space-y-2'>
@@ -195,7 +195,7 @@ const PostDetails = () => {
             </div>
 
             {/* Comments section */}
-            <div className='bg-secondary p-5 rounded-2xl space-y-3 '>
+            <div className='bg-secondary p-5 rounded-2xl max-w-5xl mx-auto space-y-3 '>
                 <h2 className='text-2xl font-bold'>Comments {postData?.commentCount}</h2>
                 <div className='flex flex-col md:flex-row gap-5'>
                    <div >

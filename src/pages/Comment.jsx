@@ -33,7 +33,7 @@ const Comment = ({ id, uiload }) => {
     setSelectedComment(fullComment);
     setIsOpen(true);
   };
-
+console.log(comments)
   return (
     <div>
       {comments.length > 0 ? (
@@ -49,7 +49,7 @@ const Comment = ({ id, uiload }) => {
               <div className="space-y-2">
 
                 <div className="flex gap-4 mt-2 text-sm">
-                  <h2>{comment?.freebackUser}</h2>
+                  <h2>{comment?.freebackName}</h2>
 
                   {comment?.commentTime && (
                     <p>{formatDistanceToNow(new Date(parseInt(comment.commentTime)), { addSuffix: true })}</p>
@@ -59,9 +59,9 @@ const Comment = ({ id, uiload }) => {
 
                 <p className="text-base">
 
-                  {comment?.comment?.length > 20 ? (
+                  {comment?.comment?.length > 40 ? (
                     <>
-                      {comment.comment.slice(0, 20)}...
+                      {comment.comment.slice(0, 40)}...
                       <button onClick={() => handleReadMore(comment.comment)} className="ml-1 text-blue-500 underline">
                         Read More
                       </button>
