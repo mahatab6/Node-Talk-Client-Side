@@ -30,49 +30,79 @@ const Post = ({ sortType,search }) => {
     if (error) {
     return <p>Error loading posts</p>;
     }
-
+    console.log(data)
     return (
         <div className=''>
             {
                 data?.post?.map((post)=>(
+                    <div key={post._id} className="flex flex-col md:flex-row-reverse items-start md:items-center bg-secondary p-5 rounded-2xl mb-5 shadow-lg gap-5 hover:shadow-xl transition-shadow duration-300">
 
-                    <div key={post._id} className='flex-col space-y-2  bg-secondary p-5 rounded-2xl mb-5 shadow'>
-                        {/* author info */}
-                        <div className='flex items-center space-x-3 '>
-                            <div className="avatar avatar-placeholder">
-                                <div className="bg-neutral text-neutral-content w-12 rounded-full">
-                                    <img src={post?.AuthorImage} alt="" />
-                                </div>
-                            </div>
-                            <h2 className='text-xl'>{post?.AuthorName}</h2>
-                            {post?.createdAt && (
-                                <p>{formatDistanceToNow(new Date(parseInt(post?.createdAt)), { addSuffix: true })}</p>
-                                )}
+                        {/* Image */}
+                        <div className="w-full md:w-1/3 flex-shrink-0">
+                            <img
+                            src={post?.postThumbnail}
+                            alt={post?.PostTitle}
+                            className="rounded-2xl w-full h-auto object-cover"
+                            />
                         </div>
 
-                        {/* author-post-heading */}
-                        <Link to={`post-details/${post?._id}`} className=' group hover:cursor-pointer'>
-                            <h1 className='text-xl hover-grup font-semibold mb-2 group-hover:font-bold'>{post?.PostTitle}</h1>
-                            <p className='hover-grup'>{post?.PostDescription.length > 350 ? post?.PostDescription.slice(0,350)+'...read more' : post.PostDescription}</p>
-                        </Link>
+                        {/* Content */}
+                        <div className="flex flex-col space-y-3 md:w-2/3">
+                            {/* Author Info */}
+                            <div className="flex items-center space-x-3">
+                            <div className="w-12 h-12 rounded-full overflow-hidden bg-neutral">
+                                <img src={post?.AuthorImage} alt={post?.AuthorName} className="w-full h-full object-cover"/>
+                            </div>
+                            <h2 className="text-lg md:text-xl font-medium">
+                                By <span className="font-semibold">{post?.AuthorName}</span>
+                            </h2>
+                            {post?.createdAt && (
+                                <p className="text-sm text-gray-400">
+                                {formatDistanceToNow(new Date(parseInt(post?.createdAt)), { addSuffix: true })}
+                                </p>
+                            )}
+                            </div>
 
-                        {/* tags-section */}
-                        <div className="flex gap-2 flex-wrap pt-2"> <p className='text-xl'>Tags:</p>
+                            {/* Post Title & Description */}
+                            <Link to={`post-details/${post?._id}`} className="group">
+                            <h1 className="text-xl md:text-2xl font-semibold mb-2 group-hover:font-bold transition-all">
+                                {post?.PostTitle}
+                            </h1>
+                            <p className="text-gray-700 text-sm md:text-base">
+                                {post?.PostDescription.length > 350
+                                ? post?.PostDescription.slice(0, 350) + '...read more'
+                                : post.PostDescription}
+                            </p>
+                            </Link>
+
+                            {/* Tags */}
+                            <div className="flex flex-wrap gap-2 pt-2">
+                            <p className="text-sm md:text-base font-medium mr-2">Tags:</p>
                             {post?.tags?.map((tag, index) => (
-                                <span key={index} className="text-white px-3 py-1 rounded-full bg-violet-700 text-sm">
+                                <span
+                                key={index}
+                                className="text-white px-3 py-1 rounded-full bg-violet-700 text-xs md:text-sm"
+                                >
                                 {tag.value}
                                 </span>
                             ))}
-                        </div>
-                 
+                            </div>
 
-                        {/* total vote and comment section */}
-                        <div className='flex space-x-2 '>
-                            <p className='flex items-center gap-2 '><FaRegComments size={25}/> {post?.commentCount} comments</p>
-                            <p className='flex items-center'><FaAngleUp size={25} className='text-green-500' />{post?.upVote}</p>
-                            <p className='flex items-center'><FaAngleDown size={25} className='text-red-500' />{post?.downVote}</p>
+                            {/* Votes & Comments */}
+                            <div className="flex flex-wrap gap-4 pt-2 items-center">
+                            <p className="flex items-center gap-2 text-gray-600">
+                                <FaRegComments size={20} /> {post?.commentCount} comments
+                            </p>
+                            <p className="flex items-center gap-1 text-green-500 font-medium">
+                                <FaAngleUp size={20} /> {post?.upVote}
+                            </p>
+                            <p className="flex items-center gap-1 text-red-500 font-medium">
+                                <FaAngleDown size={20} /> {post?.downVote}
+                            </p>
+                            </div>
                         </div>
                     </div>
+
                 ))
             }
             

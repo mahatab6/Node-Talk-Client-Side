@@ -25,7 +25,7 @@ const AllAnnouncements = () => {
     <div className=" max-w-4xl mx-auto bg-secondary p-5 rounded-2xl">
 
         <div className="flex justify-center mb-6">
-            <h1 className="text-3xl font-bold flex items-center gap-2">
+            <h1 className="text-2xl font-bold flex items-center gap-2">
                 <TfiAnnouncement className="text-indigo-500" />
                 All Announcements
             </h1>
