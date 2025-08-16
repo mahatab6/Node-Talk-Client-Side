@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "membership",
-        element:<Privaterouter><Membership/></Privaterouter>
+        element:<Membership/>
       },
       {
         path:'announcements',

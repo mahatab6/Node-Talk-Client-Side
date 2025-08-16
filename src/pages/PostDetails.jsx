@@ -88,13 +88,21 @@ const PostDetails = () => {
             <Helmet>
                 <title>NodeTalk - {postData?.PostTitle}</title>
             </Helmet>
-            <div className='py-10 w-9/12 mx-auto'>
+            <div className='py-10 w-11/12  md:w-8/12 mx-auto'>
             <Link to='/' className='flex items-center gap-2 hover:text-blue-400 text-xl pb-10'><FaArrowLeft />Back to discussions</Link>
 
             <div className=' gap-3 bg-secondary p-5 rounded-2xl mb-10'>
                 
     
                 <div className='flex-col space-y-2'>
+                    {/* Image */}
+                    <div className=" ">
+                        <img
+                        src={postData?.postThumbnail}
+                        alt={postData?.PostTitle}
+                        className="rounded-2xl w-full h-auto object-cover"
+                        />
+                    </div>
                     {/* author info */}
                     <div className='flex justify-between '>
                         <div className='flex items-center space-x-3'>
@@ -103,7 +111,7 @@ const PostDetails = () => {
                                 <img src={postData?.AuthorImage} alt="" referrerPolicy='no-referrer' />
                             </div>
                         </div>
-                        <h2 className='text-xl'>{postData?.AuthorName}</h2>
+                        <h2 className='text-xl'>By {postData?.AuthorName}</h2>
                         {postData?.createdAt && (
                             <p>{formatDistanceToNow(new Date(parseInt(postData.createdAt)), { addSuffix: true })}</p>
                             )}

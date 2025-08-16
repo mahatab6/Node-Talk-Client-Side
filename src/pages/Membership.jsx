@@ -5,20 +5,20 @@ import { ImPower } from "react-icons/im";
 import Bronze from '../assets/Bronze.png'
 import Gold from '../assets/Gold.png'
 import MembershipButton from './MembershipButton';
-import useUserRole from '../hooks/useUserRole';
-import LoadingPage from './LoadingPage';
 import { Helmet } from 'react-helmet';
+import useAuth from '../hooks/useAuth';
+import { Link } from 'react-router';
 
 
 
 
 const Membership = () => {
-    const {role, isLoading}  = useUserRole();
 
-    if(isLoading ){
-        return <LoadingPage/>
-    }
-    
+    const {user} = useAuth();
+
+
+
+   
     return (
         <div className='bg-background'>
             <Helmet>
@@ -28,20 +28,6 @@ const Membership = () => {
             <div className='text-center py-10 space-y-2'>
                 <h1 className='text-3xl lg:text-5xl font-bold '>Choose Your Membership</h1>
                 <p className='text-xl '>Unlock the full potential of our forum community with premium features</p>
-
-                {
-                    (role?.role === 'user') && <p className='inline-flex  items-center border px-6 py-3 text-2xl rounded-full mt-6 space-x-3'>
-                        <GoDotFill />
-                        <span>Current Status: <span className="font-bold text-orange-400">BRONZE Member</span></span>
-                        </p>
-                }
-                {
-                    (role?.role === 'paidmember') && <p className='inline-flex  items-center border px-6 py-3 text-2xl rounded-full mt-6 space-x-3'>
-                        <GoDotFill />
-                        <span>Current Status: <span className="font-bold text-orange-500">Gold Member</span></span>
-                        </p>
-                }
-
             </div>
 
 
@@ -73,7 +59,7 @@ const Membership = () => {
                         </li>
                     </ul>
 
-                    <button className='bg-amber-300  w-40 py-2 rounded disabled:bg-orange-300' disabled>
+                    <button className='bg-amber-300 hover:cursor-pointer w-40 py-2 rounded disabled:bg-orange-300' disabled>
                         Free Forever
                     </button>
 
@@ -116,8 +102,14 @@ const Membership = () => {
                             <p className="flex items-center gap-1 text-xl"><MdOutlineDone className='text-yellow-400' />Direct messaging</p>
                         </li>
                     </ul>
-
-                   <MembershipButton />
+                    {
+                        user?.email? (
+                            <MembershipButton />
+                        ) : (
+                            <Link to="/login" className='bg-yellow-400  w-2/3 hover:bg-yellow-500  px-4 py-2 rounded btn'>Join first</Link>
+                        )
+                    }
+                   
 
                 </div>
                 

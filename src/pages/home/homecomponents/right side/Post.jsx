@@ -30,7 +30,7 @@ const Post = ({ sortType,search }) => {
     if (error) {
     return <p>Error loading posts</p>;
     }
-    console.log(data)
+
     return (
         <div className=''>
             {
