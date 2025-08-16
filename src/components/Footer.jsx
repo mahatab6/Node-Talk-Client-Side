@@ -15,10 +15,7 @@ const Footer = () => {
                 <div className='max-w-xl flex gap-2'>
                     <Link to="/contact" >Contact</Link>
                     <Link to="/privacy-policy">Privacy</Link>
-                    <Link to="/contact">Contact</Link>
-                    <Link to="/contact">Contact</Link>
-                    <Link to="/contact">Contact</Link>
-                    <Link to="/contact">Contact</Link>
+                    <Link to="/rules">Rules</Link>
                 </div>
 
             </div>

@@ -1,8 +1,11 @@
 import React from 'react';
 import Studying from '../../../assets/Studying.gif'
+import useAuth from '../../../hooks/useAuth';
+import { Link } from 'react-router';
 
 
 const Banner = () => {
+    const {user} = useAuth();
    
     return (
 
@@ -18,7 +21,14 @@ const Banner = () => {
                     Join a community of writers & readers. Share your voice with the world.
                     </p>
                     <div className="mt-6 flex gap-4 mb-4">
-                        <button className="text-sm md:text-base lg:text-base px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 hover:text-white transition-colors duration-300 hover:cursor-pointer">Start Writing</button>
+                        {
+                            user?.email? (
+                                <Link to="/dashboard/add-post" className="text-sm md:text-base lg:text-base px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 hover:text-white transition-colors duration-300 hover:cursor-pointer">Start Writing</Link>
+
+                            ) : (
+                                <Link to="login" className="text-sm md:text-base lg:text-base px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 hover:text-white transition-colors duration-300 hover:cursor-pointer">Start Writing</Link>
+                            )
+                        }
                         <button onClick={()=>{
                             const element= document.getElementById("post");
                             element?.scrollIntoView({behavior:'smooth'})

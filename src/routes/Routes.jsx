@@ -23,6 +23,7 @@ import NotFoundPage from "../pages/NotFoundPage";
 import Adminrouter from "./Adminrouter";
 import Contact from "../pages/Contact";
 import Privacy from "../pages/Privacy";
+import Rules from "../pages/Rules";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path:"privacy-policy",
         element: <Privacy/>
+      },
+      {
+        path:"rules",
+        element: <Rules/>
       },
       {
         path: "post-details/:id",
