@@ -10,6 +10,7 @@ import CategoriesSection from './homecomponents/right side components/Categories
 import Newsletter from './homecomponents/downComponent/Newsletter';
 import FavoriteApps from './homecomponents/downComponent/favoriteApps';
 import Trends from './homecomponents/downComponent/Trends';
+import Advertisement from './homecomponents/downComponent/Advertisement';
 
 const Home = () => {
     const [sortType , setSortType] = useState();
@@ -42,6 +43,7 @@ const Home = () => {
             </div>
 
             <div className='w-11/12 mx-auto pb-20'>
+                <Advertisement/>
                 <FavoriteApps/>
                 <Trends/>
                 <Newsletter/>
