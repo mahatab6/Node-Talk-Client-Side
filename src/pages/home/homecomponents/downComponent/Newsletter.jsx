@@ -13,7 +13,7 @@ const Newsletter = () => {
   };
 
   return (
-    <div className="bg-secondary text-text py-12 rounded-2xl">
+    <div className="bg-secondary text-text py-12 rounded-2xl mb-10 md:my-20">
       <div className="w-11/12 md:w-8/12 mx-auto text-center">
         <h2 className="text-3xl font-bold mb-4">📬 Stay Updated!</h2>
         <p className="text-lg mb-8">

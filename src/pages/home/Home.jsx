@@ -11,6 +11,7 @@ import Newsletter from './homecomponents/downComponent/Newsletter';
 import FavoriteApps from './homecomponents/downComponent/favoriteApps';
 import Trends from './homecomponents/downComponent/Trends';
 import Advertisement from './homecomponents/downComponent/Advertisement';
+import FAQSection from './homecomponents/downComponent/FAQSection';
 
 const Home = () => {
     const [sortType , setSortType] = useState();
@@ -47,7 +48,7 @@ const Home = () => {
                 <FavoriteApps/>
                 <Trends/>
                 <Newsletter/>
-                
+                <FAQSection/>
             </div>
             
         </div>
