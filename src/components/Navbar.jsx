@@ -26,9 +26,14 @@ const Navbar = () => {
         </li>
         {
             user?.email?( 
+            <>
+                <li>
+                    <NavLink to="/dashboard" className={({isActive}) => isActive?" font-semibold border-b-1 rounded-none":""}>Dashboard</NavLink>
+                </li>
                 <li>
                     <NavLink to="/dashboard/add-post" className={({isActive}) => isActive?" font-semibold border-b-1 rounded-none":""}>Write</NavLink>
                 </li>
+            </>    
             ) : (
                 ""
             )
