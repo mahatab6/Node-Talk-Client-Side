@@ -43,7 +43,7 @@ const Post = ({ sortType,search }) => {
                             <img
                             src={post?.postThumbnail}
                             alt={post?.PostTitle}
-                            className="rounded-2xl w-full h-auto object-cover"
+                            className="rounded-2xl w-full h-auto object-cover transform transition duration-500 hover:scale-102"
                             />
                         </div>
 
@@ -65,7 +65,7 @@ const Post = ({ sortType,search }) => {
                             </div>
 
                             {/* Post Title & Description */}
-                            <h1 className="text-xl md:text-2xl font-semibold mb-2 font-bold transition-all">
+                            <h1 className="text-xl md:text-2xl font-semibold mb-2 transition-all">
                                 {post?.PostTitle}
                             </h1>
                             <p className="text-gray-700 text-sm md:text-base">

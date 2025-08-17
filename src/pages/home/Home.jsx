@@ -9,6 +9,7 @@ import Search from './homecomponents/right side components/Search';
 import CategoriesSection from './homecomponents/right side components/CategoriesSection';
 import Newsletter from './homecomponents/downComponent/Newsletter';
 import FavoriteApps from './homecomponents/downComponent/favoriteApps';
+import Trends from './homecomponents/downComponent/Trends';
 
 const Home = () => {
     const [sortType , setSortType] = useState();
@@ -42,7 +43,9 @@ const Home = () => {
 
             <div className='w-11/12 mx-auto pb-20'>
                 <FavoriteApps/>
+                <Trends/>
                 <Newsletter/>
+                
             </div>
             
         </div>
