@@ -24,7 +24,7 @@ const AddPost = () => {
     const axiosSecureJWT = useAxiosToken();
     const navigate = useNavigate();
     const {role, isLoading} = useUserRole();
-     const [thumbnail, setThumbnail] = useState();
+    const [thumbnail, setThumbnail] = useState();
   
 
 
