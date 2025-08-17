@@ -10,6 +10,9 @@ import useUserRole from '../../hooks/useUserRole';
 import LoadingPage from '../LoadingPage';
 import { Helmet } from 'react-helmet';
 import useAxiosToken from '../../hooks/useAxiosToken';
+import { IoMdCloudUpload } from 'react-icons/io';
+import axios from 'axios';
+import disthumbnail from '../../assets/thumbnail.png'
 
 const AddPost = () => {
 
@@ -21,6 +24,7 @@ const AddPost = () => {
     const axiosSecureJWT = useAxiosToken();
     const navigate = useNavigate();
     const {role, isLoading} = useUserRole();
+     const [thumbnail, setThumbnail] = useState();
   
 
 
@@ -47,7 +51,11 @@ const AddPost = () => {
             ...data,
             upVote,
             downVote,
+            AuthorImage:user?.photoURL,
+            AuthorName:user?.displayName,
+            AuthorEmail:user?.email,
             commentCount,
+            postThumbnail:thumbnail,
             createdAt: Date.now(),
         };
 
@@ -66,6 +74,14 @@ const AddPost = () => {
     const handleBecomeMember = () => {
     navigate('/membership');
     };
+
+    const handleImageChange = async(e) =>{
+            const image = e.target.files[0]
+            const formData = new FormData();
+            formData.append("image",image)
+            const res =await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_Image_Api_key}`,formData)
+            setThumbnail(res.data.data.url)
+        }
 
 
     return (
@@ -92,34 +108,41 @@ const AddPost = () => {
                         <form className='bg-[#2C2D4A] p-5 rounded-2xl' onSubmit={handleSubmit(onSubmit)}>
 
                             <div>
-                                <label className=' block text-xl mb-2' htmlFor="">Author Image</label>
-                                <div className='flex items-center justify-center gap-3'>    
-                                    <img src={user?.photoURL} alt="" referrerPolicy='no-referrer' className='w-16 h-16 rounded-full'/>  
-                                    <input className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" value={user?.photoURL} readOnly placeholder={user?.photoURL} {...register("AuthorImage", {required: true})} />
-                                </div>
-                            </div>
-
-                            <div>
-                                <label className=' block text-xl mb-2' htmlFor="">Author Name</label>
-                                <input className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" value={user?.displayName} readOnly placeholder={user?.displayName} {...register("AuthorName", {required: true})} />
-                            </div>
-
-                            <div>
-                                <label className=' block text-xl mb-2' htmlFor="">Author Email</label>
-                                <input className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" value={user?.email} readOnly placeholder={user?.email} {...register("AuthorEmail", {required: true})} />
-                            </div>
-
-                            <div>
                                 <label className=' block text-xl mb-2' htmlFor="">Post Title</label>
                                 <input required className=' border w-full h-10 px-3 py-2 rounded-xl mb-2' type="text" placeholder="Enter Your Post Title" {...register("PostTitle", {required: true})} />
                             </div>
+
+                            <div>
+                                <label className=' block text-xl mb-2' htmlFor="">Post Thumbnail</label>
+                                <div>
+                                    <div className='flex-1'>
+                                        <div className="dropdown dropdown-right">
+                                            <div tabIndex={0}>
+                                                <div className="avatar ">
+                                                    <div className="ring-primary w-12 rounded-full ">
+                                                        <IoMdCloudUpload size={35}/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <ul tabIndex={0} className="dropdown-content menu  rounded-box z-1 w-52 p-2 shadow-sm">
+                                                <input onChange={handleImageChange} name='image' type="file"  />  
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div className='flex-1'>
+                                        {
+                                            thumbnail? <img className='w-3xs' src={thumbnail} /> : <img className='w-40' src={disthumbnail} />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
 
                             <div>
                                 <label className=' block text-xl mb-2' htmlFor="">Post Description</label>
                                 <textarea required className='border w-full h-30 px-3 py-2 rounded-xl mb-2' placeholder='Enter Your Post Description' {...register("PostDescription", {required: true})} />
 
                             </div>
-
                             
                             <div>
                                 <label className='block text-xl mb-2'>Post Tags</label>
