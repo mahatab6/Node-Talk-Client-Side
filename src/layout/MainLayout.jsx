@@ -9,7 +9,7 @@ const MainLayout = () => {
             <header className='sticky top-0 z-50'>
             <Navbar/>
             </header>
-           <main className='min-h-screen bg-background'>
+           <main className='min-h-screen pt-[80px] bg-background'>
             <Outlet/>
            </main>
            <footer>

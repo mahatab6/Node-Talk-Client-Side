@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router';
 import useAuth from '../hooks/useAuth';
 import { FaRegUserCircle } from 'react-icons/fa';
@@ -10,7 +10,29 @@ import Notification from './Notification';
 const Navbar = () => {
 
     const { user, LogOut } = useAuth();
-      const navigate = useNavigate();
+    const navigate = useNavigate();
+
+
+    const [show, setShow] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const controlNavbar = () => {
+    if (window.scrollY > lastScrollY) {
+      // scroll down → hide
+      setShow(false);
+    } else {
+      // scroll up → show
+      setShow(true);
+    }
+    setLastScrollY(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", controlNavbar);
+    return () => {
+      window.removeEventListener("scroll", controlNavbar);
+    };
+  }, [lastScrollY]);
 
 
     const link = (
@@ -53,7 +75,9 @@ const Navbar = () => {
     }
 
     return (
-        <div className='bg-white shadow-sm '>
+        <div className={`fixed top-0 left-0 w-full bg-white shadow transition-transform duration-300 ${
+        show ? "translate-y-0" : "-translate-y-full"
+      }`}>
            <div className="navbar w-11/12 mx-auto ">
                 <div className="navbar-start ">
                     <div className="dropdown">

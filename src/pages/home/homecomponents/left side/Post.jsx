@@ -11,7 +11,7 @@ const Post = ({ sortType,search }) => {
 
     const axiosSecure = useAxiosSecure();
     const [page, setPage] = useState(1);
-    const [limit] =useState(5);
+    const [limit] =useState(10);
 
     const {data, isLoading, error} = useQuery({
             queryKey: ['user-post',search, sortType, page, limit],
@@ -35,8 +35,9 @@ const Post = ({ sortType,search }) => {
         <div className=''>
             {
                 data?.post?.map((post)=>(
+                    <> <Link to={`post-details/${post?._id}`} className="group">
+                   
                     <div key={post._id} className="flex flex-col md:flex-row-reverse items-start md:items-center bg-secondary p-5 rounded-2xl mb-5 shadow-lg gap-5 hover:shadow-xl transition-shadow duration-300">
-
                         {/* Image */}
                         <div className="w-full md:w-1/3 flex-shrink-0">
                             <img
@@ -64,8 +65,7 @@ const Post = ({ sortType,search }) => {
                             </div>
 
                             {/* Post Title & Description */}
-                            <Link to={`post-details/${post?._id}`} className="group">
-                            <h1 className="text-xl md:text-2xl font-semibold mb-2 group-hover:font-bold transition-all">
+                            <h1 className="text-xl md:text-2xl font-semibold mb-2 font-bold transition-all">
                                 {post?.PostTitle}
                             </h1>
                             <p className="text-gray-700 text-sm md:text-base">
@@ -73,7 +73,7 @@ const Post = ({ sortType,search }) => {
                                 ? post?.PostDescription.slice(0, 350) + '...read more'
                                 : post.PostDescription}
                             </p>
-                            </Link>
+                           
 
                             {/* Tags */}
                             <div className="flex flex-wrap gap-2 pt-2">
@@ -101,8 +101,10 @@ const Post = ({ sortType,search }) => {
                             </p>
                             </div>
                         </div>
+                         
                     </div>
-
+                    </Link>
+                </>
                 ))
             }
             

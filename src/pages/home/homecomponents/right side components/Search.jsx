@@ -48,7 +48,7 @@ const Search = ({ setSearch }) => {
 
   return (
     <div>
-      <label className="input bg-white text-black w-full rounded-xl">
+      <label className="input bg-white text-black w-full rounded-xl my-3">
         <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <g
             strokeLinejoin="round"
@@ -70,7 +70,7 @@ const Search = ({ setSearch }) => {
         />
 
         {suggestions.length > 0 && (
-            <ul className="absolute left-0 right-0 z-10 top-15  bg-white shadow rounded-md border overflow-y-auto">
+            <ul className="absolute left-0 right-0 z-100 top-10  bg-white shadow rounded-md border overflow-y-auto">
                 {suggestions.map((item, index) => (
                     <li
                         key={index}
