@@ -108,7 +108,7 @@ const Post = ({ sortType,search }) => {
                 ))
             }
             
-            <div className="flex gap-2 justify-center mt-4">
+            <div className="flex gap-2 justify-center my-4">
 
                 <button disabled={page === 1} onClick={() => setPage(page - 1)} className="px-2 bg-gray-300 rounded disabled:opacity-50">
                     Prev

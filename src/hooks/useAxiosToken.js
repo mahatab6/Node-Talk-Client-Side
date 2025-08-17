@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import useAuth from './useAuth';
 
 const axiosSecureJWT = axios.create({
-    baseURL: 'http://localhost:3000/',
+    baseURL: 'https://node-talk-server.vercel.app',
 });
 
 const useAxiosToken = () => {
