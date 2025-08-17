@@ -3,7 +3,7 @@ import membershipImage from '../../../../assets/Membership.jpg'
 
 const Advertisement = () => {
   return (
-    <section className="md:pb-20">
+    <section className="md:pb-20 my-4">
       <div className="relative bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl shadow-lg overflow-hidden">
         
         {/* Background Image with Overlay */}

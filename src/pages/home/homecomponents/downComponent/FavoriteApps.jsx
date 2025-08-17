@@ -8,10 +8,10 @@ import { Link } from 'react-router'
 
 const FavoriteApps = () => {
   return (
-    <div className='md:pb-20'>
+    <div className='md:pb-20 mb-4'>
         <h2 className="text-3xl font-bold mb-4">Connect with My Favorite Apps</h2>
         <p className="text-lg ">
-          Chosen by the editor.
+          With NodeTalk, you can easily connect with your favorite apps and tools.
         </p>
         <div className="divider"></div>
         <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5'>

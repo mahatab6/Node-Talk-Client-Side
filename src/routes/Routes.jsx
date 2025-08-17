@@ -24,6 +24,7 @@ import Adminrouter from "./Adminrouter";
 import Contact from "../pages/Contact";
 import Privacy from "../pages/Privacy";
 import Rules from "../pages/Rules";
+import Blog from "../pages/Blog";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
       {
         path:"privacy-policy",
         element: <Privacy/>
+      },
+      {
+        path:"blog",
+        element: <Blog/>
       },
       {
         path:"rules",
